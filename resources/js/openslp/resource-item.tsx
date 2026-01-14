@@ -1,7 +1,15 @@
+import LanguagePill from '@/components/language-pill';
 import PricingPill from '@/components/pricing-pill';
+import TargetAudiencePill from '@/components/target-audience-pill';
 import { Resource } from '@/types/openslp/resource';
+import { getDomainFromUrl } from '@/utils/string-utils';
 import React from 'react';
 import { LuDownload } from 'react-icons/lu';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 type Props = {
     className?: string;
@@ -11,21 +19,46 @@ type Props = {
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
         <div className={`group relative`}>
-            <div className={`ific`}>
-                <h3 className="mr-2 text-lg font-semibold">
-                    <a className={`underline`} href={resource.href}>
+            <div className={`ific gap-x-2`}>
+                <h3 className="text-lg leading-0 font-medium">
+                    <a className={`font-lora underline`} href={resource.href}>
                         {resource.name}
                     </a>
                 </h3>
+                {resource.has_downloadables && (
+                    <p className={`fc text-sm`}>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <LuDownload />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>This resource offers downloadables.</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </p>
+                )}
+
+                {
+                    <code>
+                        <pre className={`text-xs`}>
+                            {JSON.stringify(resource, null, 2)}
+                        </pre>
+                    </code>
+                }
+
                 <PricingPill pricingModel={resource.pricing_model} />
+
+                <span className={`text-sm text-neutral-500 italic`}>
+                    {getDomainFromUrl(resource.href)}
+
+                    {resource.author && <span> - {resource.author}</span>}
+                </span>
             </div>
 
-            {resource.author && <p className={`text-xs`}>{resource.author}</p>}
-            {resource.has_downloadables && (
-                <p className={`ific mx-1`}>
-                    <LuDownload />
-                </p>
-            )}
+            <div className={`fic gap-x-2 my-1`}>
+                <TargetAudiencePill resource={resource} />
+                <LanguagePill resource={resource} />
+            </div>
 
             {resource.notes && (
                 <div
@@ -34,6 +67,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     poop
                 </div>
             )}
+
         </div>
     );
 };

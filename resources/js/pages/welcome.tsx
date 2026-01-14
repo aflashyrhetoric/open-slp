@@ -54,10 +54,10 @@ export default function Welcome({
                     </nav>
                 </header>
                 <div
-                    className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
+                    className="flex w-full opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full flex-col">
                         <div className={`grid12 gap-4`}>
-                            <ResourceCategorySection category={'Templates'} resources={resources} />
+                            <ResourceCategorySection category={'Games'} resources={resources} />
                         </div>
                     </main>
                 </div>

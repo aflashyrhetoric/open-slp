@@ -1,5 +1,7 @@
 import { IdAndTimestamps } from '@/types/openslp/shared';
 
+export type PricingModel = 'free' | 'freemium' | 'paid' | 'paid_with_drops' | 'paid_trial' | 'mixed';
+
 export type Resource = IdAndTimestamps & {
     name: string;
     href: string;
@@ -13,7 +15,7 @@ export type Resource = IdAndTimestamps & {
 
     has_downloadables: boolean;
 
-    pricing_model: 'free' | 'freemium' | 'paid';
+    pricing_model: PricingModel
     target_audience: 'pediatric' | 'adult' | 'all';
 
     uses_ai: boolean;

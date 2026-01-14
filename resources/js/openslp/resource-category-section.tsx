@@ -9,7 +9,7 @@ type Props = {
 
 const ResourceCategorySection: React.FC<Props> = ({ category, resources }: Props) => {
     return (
-        <div className={`cs-4`}>
+        <div className={`cs-6 border`}>
             <div className={`mb-2 font-bold text-xl font-inter`}>
                 <h2>
                     {category}
@@ -23,17 +23,10 @@ const ResourceCategorySection: React.FC<Props> = ({ category, resources }: Props
                 {/*        We suggest starting with the following.*/}
                 {/*    </p>*/}
                 {/*</div>*/}
-                <div className="bg-neutral-100 p-5">
-                    {resources.map((resource) => (
-                       <ResourceItem key={`resource-item-${resource.id}`} resource={resource} />
+                <div className="p-5">
+                    {resources.filter(r => r.category.toLowerCase() === category.toLowerCase()).map((resource) => (
+                       <ResourceItem key={`resource-item-${category}-${resource.id}`} resource={resource} />
                     ))}
-                    {
-                        <code>
-                            <pre>
-                                {JSON.stringify(resources, null, 2)}
-                            </pre>
-                        </code>
-                    }
                 </div>
             </div>
         </div>
