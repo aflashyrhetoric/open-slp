@@ -14,11 +14,10 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Get;
 use Filament\Resources\Resource as ResourcesResource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -38,26 +37,31 @@ class ResourceResource extends ResourcesResource
                     ->required(),
                 TextInput::make('href')
                     ->required(),
+                Select::make('category')
+                    ->label('Category')
+                    // Build options from unique category values (value => label)
+                    ->options(function (): array {
+                        $r = Resource::query()
+                            ->whereNotNull('category')
+                            ->distinct()
+                            ->pluck('category', 'category')
+                            ->toArray();
 
-                Radio::make('category')
-                    ->options([
-                        'videos' => 'Videos',
-                        'planning' => 'Planning & Stationery',
-                        'articles' => 'Articles',
-                        'interactive_tools' => 'Interactive Tools',
-                        'games' => 'Games',
-                        'session_note_templates' => 'Session Note Templates',
-                        'other' => 'Other',
-                    ])
-                    ->required(),
+                        // Restructure $r to be value => label (capitalize words)
+                        $r = array_combine(array_keys($r), array_map(function ($item) {
+                            return ucwords($item);
+                        }, array_keys($r)));
+                        return $r;
+                    }),
 
+                TextInput::make('category'),
 
                 TextInput::make('author'),
 
                 TextInput::make('author_page_href'),
 
-//                TextInput::make('og_title'),
-//                TextInput::make('og_description'),
+                //                TextInput::make('og_title'),
+                //                TextInput::make('og_description'),
 
                 Checkbox::make('has_downloadables'),
 
@@ -66,14 +70,16 @@ class ResourceResource extends ResourcesResource
                         'free' => 'Free',
                         'freemium' => 'Freemium',
                         'paid' => 'Paid',
+                        'paid_with_trial' => 'Paid w/ Trial',
                         'paid_with_drops' => 'Paid w/ Drops',
+                        'mixed' => 'Mixed',
                     ])
                     ->required(),
 
                 Radio::make('target_audience')
                     ->options([
-                        'pediatric' => 'Students',
-                        'medical' => 'Educators',
+                        'pediatric' => 'Pediatric',
+                        'medical' => 'Medical',
                         'all' => 'All',
                     ])
                     ->required(),

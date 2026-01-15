@@ -37,6 +37,10 @@ textarea {
 
 /* Note: this file is imported and used in `resources/css/app.css` */
 @layer components {
+    .fade-in {
+        @apply opacity-100 transition-opacity duration-750 starting:opacity-0
+    }
+
     .fic {
         @apply flex items-center;
     }

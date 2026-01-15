@@ -11,7 +11,7 @@ const LanguagePill: React.FC<Props> = ({ resource }: Props) => {
 
     const targetAudienceToColor = {
         pediatric: 'bg-blue-100 text-blue-800',
-        adult: 'bg-green-100 text-green-800',
+        medical: 'bg-green-100 text-green-800',
         all: 'bg-purple-100 text-purple-800',
     };
 

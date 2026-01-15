@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resource;
+use App\Utilities\OpenSlp;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -35,6 +36,11 @@ class ResourceController extends Controller
             'category' => ['required'],
         ]);
 
+        $ogTags = OpenSlp::getOgTags($data['href']);
+        $data['og_image'] = $data['og_image'] ?? ($ogTags['og:image'] ?? null);
+        $data['og_title'] = $data['og_title'] ?? ($ogTags['og:title'] ?? null);
+        $data['og_description'] = $data['og_description'] ?? ($ogTags['og:description'] ?? null);
+
         return Resource::create($data);
     }
 
@@ -65,6 +71,11 @@ class ResourceController extends Controller
             'supports_spanish' => ['boolean'],
             'category' => ['required'],
         ]);
+
+        $ogTags = OpenSlp::getOgTags($data['href']);
+        $data['og_image'] = $data['og_image'] ?? ($ogTags['og:image'] ?? null);
+        $data['og_title'] = $data['og_title'] ?? ($ogTags['og:title'] ?? null);
+        $data['og_description'] = $data['og_description'] ?? ($ogTags['og:description'] ?? null);
 
         $resource->update($data);
 

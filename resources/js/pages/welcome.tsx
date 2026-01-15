@@ -1,16 +1,22 @@
 import AppLogo from '@/components/app-logo';
-import { type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
 import ResourceCategorySection from '@/openslp/resource-category-section';
+import { type SharedData } from '@/types';
+import { Resource } from '@/types/openslp/resource';
+import { Head, usePage } from '@inertiajs/react';
+import { unique } from 'radash';
 
 export default function Welcome({
-                                    canRegister = true,
-                                    resources
-                                }: {
+    canRegister = true,
+    resources,
+}: {
     canRegister?: boolean;
-    resources: never;
+    resources: Resource[];
 }) {
     const { auth } = usePage<SharedData>().props;
+
+    const allResourceCategories = resources.map((r) => r.category);
+
+    const uniqueArticleCategories = unique(allResourceCategories);
 
     return (
         <>
@@ -21,8 +27,8 @@ export default function Welcome({
                     rel="stylesheet"
                 />
             </Head>
-            <div
-                className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
+            {/*<div className="w-full max-w-full bg-[#FDFDFC] text-[#1b1b18]">*/}
+            <div className="p-4 ">
                 <header className="mb-6 w-full text-sm not-has-[nav]:hidden">
                     <nav className="flex items-center justify-start gap-4">
                         <AppLogo />
@@ -53,15 +59,19 @@ export default function Welcome({
                         {/*)}*/}
                     </nav>
                 </header>
-                <div
-                    className="flex w-full opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <main className="flex w-full flex-col">
-                        <div className={`grid12 gap-4`}>
-                            <ResourceCategorySection category={'Games'} resources={resources} />
-                        </div>
+                {/*<div className="w-full max-w-full opacity-100 transition-opacity duration-750 starting:opacity-0">*/}
+                <div className={``}>
+                    <main className="grid12 gap-5 w-full max-w-full">
+                        {uniqueArticleCategories.map((category, key) => (
+                            <ResourceCategorySection
+                                key={`category-${category}-${key}`}
+                                category={category}
+                                resources={resources}
+                            />
+                        ))}
                     </main>
                 </div>
-                <div className="hidden h-14.5 lg:block"></div>
+                {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
         </>
     );

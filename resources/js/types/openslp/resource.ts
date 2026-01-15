@@ -16,7 +16,7 @@ export type Resource = IdAndTimestamps & {
     has_downloadables: boolean;
 
     pricing_model: PricingModel
-    target_audience: 'pediatric' | 'adult' | 'all';
+    target_audience: 'pediatric' | 'medical' | 'all';
 
     uses_ai: boolean;
 
@@ -27,5 +27,5 @@ export type Resource = IdAndTimestamps & {
     supports_english: boolean;
     supports_spanish: boolean;
     supports_korean: boolean;
-    category: 'games' | string;
+    category: string;
 };

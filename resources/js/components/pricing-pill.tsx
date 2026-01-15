@@ -17,7 +17,7 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
         freemium: 'bg-yellow-100 text-yellow-800',
         paid_trial: 'bg-blue-100 text-blue-800',
         paid_with_drops: 'bg-blue-100 text-blue-800',
-        paid: 'bg-blue-100 text-blue-800',
+        paid: 'bg-cyan-100 text-cyan-800',
         mixed: 'bg-neutral-100 text-neutral-800',
     };
 
@@ -34,7 +34,7 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
         <Tooltip>
             <TooltipTrigger asChild>
                 <div
-                    className={`fc px-2 py-1 text-xs ${pricingModelToColor[pricingModel]}`}
+                    className={`fc tracking-tight font-lora px-2 py-1 text-xs ${pricingModelToColor[pricingModel]}`}
                 >
                     {humanize(pricingModel)}
                 </div>
