@@ -4,6 +4,12 @@ export function humanize(str: string): string {
         .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+// sentence case
+export function sentenceCase(str: string): string {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export function getDomainFromUrl(url: string): string | null {
     try {
         // Add protocol if missing to ensure URL constructor works

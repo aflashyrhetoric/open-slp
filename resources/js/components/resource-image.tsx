@@ -16,7 +16,7 @@ const ResourceImage: React.FC<Props> = ({ className = "", resource }: Props) => 
                 <div
                     className={` ${className}`}
                 >
-                    <img src={og_image} className={`h-6 w-6 rounded`} alt={hasValidOgDescription ? og_description : ""} />
+                    <img src={og_image} className={`min-w-6 h-6 w-6 rounded`} alt={hasValidOgDescription ? og_description : ""} />
                 </div>
             )}
             {!hasValidOgImage && (

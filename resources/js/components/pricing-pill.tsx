@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
     Tooltip,
     TooltipContent,
@@ -8,17 +9,17 @@ import { humanize } from '@/utils/string-utils';
 import React from 'react';
 
 type Props = {
-    pricingModel: PricingModel
+    pricingModel: PricingModel;
 };
 
 const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
     const pricingModelToColor: Record<PricingModel, string> = {
-        free: 'bg-green-100 text-green-800',
-        freemium: 'bg-yellow-100 text-yellow-800',
-        paid_trial: 'bg-blue-100 text-blue-800',
-        paid_with_drops: 'bg-blue-100 text-blue-800',
-        paid: 'bg-cyan-100 text-cyan-800',
-        mixed: 'bg-neutral-100 text-neutral-800',
+        free: 'bg-green-500 text-white',
+        freemium: 'bg-yellow-500 text-white',
+        paid_trial: 'bg-blue-500 text-white',
+        paid_with_drops: 'bg-blue-500 text-white',
+        paid: 'bg-cyan-500 text-white',
+        mixed: 'bg-neutral-500 text-white',
     };
 
     const pricingModelToExplanation: Record<PricingModel, string> = {
@@ -33,11 +34,9 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <div
-                    className={`fc tracking-tight font-lora px-2 py-1 text-xs ${pricingModelToColor[pricingModel]}`}
-                >
+                <Badge className={`${pricingModelToColor[pricingModel]}`}>
                     {humanize(pricingModel)}
-                </div>
+                </Badge>
             </TooltipTrigger>
             <TooltipContent>
                 <p>{pricingModelToExplanation[pricingModel]}</p>

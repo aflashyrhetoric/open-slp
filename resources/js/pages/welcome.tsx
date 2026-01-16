@@ -1,16 +1,23 @@
 import AppLogo from '@/components/app-logo';
+import Footer from '@/components/site/footer';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { type SharedData } from '@/types';
 import { Resource } from '@/types/openslp/resource';
 import { Head, usePage } from '@inertiajs/react';
 import { unique } from 'radash';
+import { LuCircleHelp } from 'react-icons/lu';
+import Header from '@/components/site/header';
+import HeadTag from '@/components/site/HeadTag';
 
 export default function Welcome({
     canRegister = true,
     resources,
+    resourceCount = 0,
 }: {
     canRegister?: boolean;
     resources: Resource[];
+    resourceCount: number;
 }) {
     const { auth } = usePage<SharedData>().props;
 
@@ -20,48 +27,21 @@ export default function Welcome({
 
     return (
         <>
-            <Head title="Welcome">
-                <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link
-                    href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
-                    rel="stylesheet"
-                />
-            </Head>
-            {/*<div className="w-full max-w-full bg-[#FDFDFC] text-[#1b1b18]">*/}
-            <div className="p-4 ">
-                <header className="mb-6 w-full text-sm not-has-[nav]:hidden">
-                    <nav className="flex items-center justify-start gap-4">
-                        <AppLogo />
-                        {/*{auth.user ? (*/}
-                        {/*    <Link*/}
-                        {/*        href={dashboard()}*/}
-                        {/*        className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"*/}
-                        {/*    >*/}
-                        {/*        Dashboard*/}
-                        {/*    </Link>*/}
-                        {/*) : (*/}
-                        {/*    <>*/}
-                        {/*        <Link*/}
-                        {/*            href={login()}*/}
-                        {/*            className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"*/}
-                        {/*        >*/}
-                        {/*            Log in*/}
-                        {/*        </Link>*/}
-                        {/*        {canRegister && (*/}
-                        {/*            <Link*/}
-                        {/*                href={register()}*/}
-                        {/*                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"*/}
-                        {/*            >*/}
-                        {/*                Register*/}
-                        {/*            </Link>*/}
-                        {/*        )}*/}
-                        {/*    </>*/}
-                        {/*)}*/}
-                    </nav>
-                </header>
-                {/*<div className="w-full max-w-full opacity-100 transition-opacity duration-750 starting:opacity-0">*/}
-                <div className={``}>
-                    <main className="grid12 gap-5 w-full max-w-full">
+            <HeadTag />
+            <div className="flex min-h-screen flex-col">
+                <Header />
+                <div className={`p-9`}>
+                    <main className="grid12 w-full max-w-full gap-5">
+                        <Alert className={`cs-12`}>
+                            <LuCircleHelp />
+                            <AlertTitle>What is OpenSLP?</AlertTitle>
+                            <AlertDescription>
+                                Started in 2026, we finds useful resources across the web for SLPs to use - from downloadable goodies to amazing apps.
+                            </AlertDescription>
+                        </Alert>
+
+
+
                         {uniqueArticleCategories.map((category, key) => (
                             <ResourceCategorySection
                                 key={`category-${category}-${key}`}
@@ -71,6 +51,8 @@ export default function Welcome({
                         ))}
                     </main>
                 </div>
+
+                <Footer className={`grow flex-1`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
         </>

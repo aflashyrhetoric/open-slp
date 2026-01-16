@@ -30,6 +30,17 @@ class OpenSlp
         ]);
 
         if ($response->failed()) {
+            $nonCriticalStatuses = [401, 403, 404, 410, 451];
+
+            if (in_array($response->status(), $nonCriticalStatuses)) {
+                Log::info('Skipping URL due to non-critical HTTP error', [
+                    'url' => $url,
+                    'status' => $response->status(),
+                ]);
+
+                return [];
+            }
+
             throw new \RuntimeException("Failed to fetch URL: HTTP {$response->status()}");
         }
 

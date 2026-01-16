@@ -78,54 +78,6 @@ textarea {
         @apply grid grid-cols-12;
     }
 
-    .cs-1 {
-        @apply col-span-1;
-    }
-
-    .cs-2 {
-        @apply col-span-2;
-    }
-
-    .cs-3 {
-        @apply col-span-3;
-    }
-
-    .cs-4 {
-        @apply col-span-4;
-    }
-
-    .cs-5 {
-        @apply col-span-5;
-    }
-
-    .cs-6 {
-        @apply col-span-6;
-    }
-
-    .cs-7 {
-        @apply col-span-7;
-    }
-
-    .cs-8 {
-        @apply col-span-8;
-    }
-
-    .cs-9 {
-        @apply col-span-9;
-    }
-
-    .cs-10 {
-        @apply col-span-10;
-    }
-
-    .cs-11 {
-        @apply col-span-11;
-    }
-
-    .cs-12 {
-        @apply col-span-12;
-    }
-
     .csr-12-6 {
         @apply col-span-12 md:col-span-6;
     }
@@ -133,7 +85,58 @@ textarea {
     .csr-12-6-4 {
         @apply col-span-12 md:col-span-6 lg:col-span-4;
     }
+}
 
+/* Utilities with variant support (md:cs-4, lg:cs-6, etc.) */
+@utility cs-1 {
+    @apply col-span-1;
+}
+
+@utility cs-2 {
+    @apply col-span-2;
+}
+
+@utility cs-3 {
+    @apply col-span-3;
+}
+
+@utility cs-4 {
+    @apply col-span-4;
+}
+
+@utility cs-5 {
+    @apply col-span-5;
+}
+
+@utility cs-6 {
+    @apply col-span-6;
+}
+
+@utility cs-7 {
+    @apply col-span-7;
+}
+
+@utility cs-8 {
+    @apply col-span-8;
+}
+
+@utility cs-9 {
+    @apply col-span-9;
+}
+
+@utility cs-10 {
+    @apply col-span-10;
+}
+
+@utility cs-11 {
+    @apply col-span-11;
+}
+
+@utility cs-12 {
+    @apply col-span-12;
+}
+
+@layer components {
     .clip-gradient-text {
         background-image: linear-gradient(
             137.56deg,
@@ -317,14 +320,22 @@ textarea {
         @apply bg-blue-200;
     }
 
-    .font-lora {
-        font-family: "Lora", serif;
+    .font-logo {
+        font-family: "instrument sans", serif;
+    }
+
+    .font-heading {
+        font-family: "instrument sans", serif;
+    }
+
+    .font-body {
+        font-family: "instrument sans", serif;
     }
 
     .logo {
-        font-family: "Lora", serif;
+        font-family: "instrument sans", serif;
         font-weight: 700;
-        letter-spacing: -0.02em;
+        /*letter-spacing: -0.02em;*/
     }
 
     .rounded-left {
@@ -341,6 +352,10 @@ textarea {
 
     .font-inter {
         font-family: "Inter", sans-serif;
+    }
+
+    .font-lora {
+        font-family: "Lora", serif;
     }
 
     .headingify {

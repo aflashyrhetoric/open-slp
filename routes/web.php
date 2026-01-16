@@ -7,9 +7,11 @@ use Laravel\Fortify\Features;
 
 Route::get('/', function () {
     $resources = Resource::all();
+    $resourceCount = $resources->count();
     return Inertia::render('welcome', [
         'canRegister' => Features::enabled(Features::registration()),
         'resources' => $resources,
+        'resourceCount' => $resourceCount,
     ]);
 })->name('home');
 

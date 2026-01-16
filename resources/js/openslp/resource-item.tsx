@@ -19,16 +19,20 @@ type Props = {
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
-        <div className={`group relative`}>
+        <div className={`group relative shadow p-2 rounded`}>
             <div className={`ific gap-x-2`}>
                 <div className={`ific`}>
-                    <ResourceImage resource={resource} className={`mr-1 `}/>
-                    <h3 className="text-base leading-0 font-medium">
+                    <ResourceImage resource={resource} className={`mr-1`} />
+                    <h3 className="text-base font-medium">
                         <a
-                            className={`font-lora underline`}
+                            className={`font-lora block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap`}
                             href={resource.href}
                         >
-                            {resource.name}
+                            <span
+                                className={`font-lora text-black underline opacity-100`}
+                            >
+                                {resource.name}
+                            </span>
                         </a>
                     </h3>
                 </div>
@@ -45,25 +49,40 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     </p>
                 )}
                 <PricingPill pricingModel={resource.pricing_model} />
-                <span className={`text-sm text-neutral-500 tracking-tight italic`}>
+                <span
+                    className={`text-xs tracking-tight text-neutral-500 italic`}
+                >
                     {getDomainFromUrl(resource.href)}
 
                     {resource.author && <span> - {resource.author}</span>}
                 </span>
             </div>
+            <p className={`font-body mt-1 mb-3 text-sm text-neutral-600`}>
+                {resource.notes}
+            </p>
 
-            <div className={`fic my-1 gap-x-2`}>
-                <TargetAudiencePill resource={resource} />
-                <LanguagePill resource={resource} />
+            <div className={`fic my-1 justify-between`}>
+                <span
+                    className={`text-xs tracking-tight text-neutral-500 italic`}
+                >
+                    {<span> via {resource.author}</span>}
+                </span>
+
+                <div className={`fic gap-x-2`}>
+                    <TargetAudiencePill resource={resource} />
+                    <LanguagePill resource={resource} />
+                </div>
             </div>
 
-            {resource.notes && (
-                <div
-                    className={`absolute -top-1/2 right-5 translate-y-2 bg-white p-2 opacity-0 shadow-lg transition-all group-hover:translate-y-0 group-hover:opacity-100`}
-                >
-                    poop
-                </div>
-            )}
+            {/*{resource.notes && (*/}
+            {/*    <div*/}
+            {/*        className={`absolute pointer-events-none left-full min-w-[275px] max-w-[500px] top-0 z-10 rounded-md translate-y-2 bg-black text-white p-3 border opacity-0 shadow-xl transition-all group-hover:translate-y-0 group-hover:opacity-100`}*/}
+            {/*    >*/}
+            {/*        <p className={`text-base leading-5`}>*/}
+            {/*            {resource.notes}*/}
+            {/*        </p>*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
     );
 };
