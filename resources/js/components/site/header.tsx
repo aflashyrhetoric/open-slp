@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
                 <AppLogo withVersion />
                 <div className="flex flex-col items-end font-body">
                     <span className={`text-sm ific text-neutral-600 font-medium`}>
-                        <CircleCheck className={`h-4`}  />
+                        {/*<CircleCheck className={`h-4`}  />*/}
                         Curated Resources For SLPs
                     </span>
                     <span className={`text-xs text-neutral-500 italic`}>

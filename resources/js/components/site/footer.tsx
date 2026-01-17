@@ -1,7 +1,9 @@
 import AppLogo from '@/components/app-logo';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { story } from '@/routes';
+import { Link } from '@inertiajs/react';
 import React from 'react';
-import { LuHandHelping, LuSmile } from 'react-icons/lu';
+import { LuExternalLink, LuHandHelping, LuSmile } from 'react-icons/lu';
 
 type Props = {
     className?: string;
@@ -14,17 +16,49 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                 <div className="cs-5">
                     <AppLogo light withVersion className={`mb-8`} />
 
-                    <div className={`flex flex-col font-lora gap-y-3 mb-8 text-white`}>
+                    <div
+                        className={`font-lora mb-8 flex flex-col gap-y-3 text-white`}
+                    >
                         <p className="text-lg">
                             <span className="mr-1 font-bold">Hello!</span>
-                            <span className={`ific`}>I&apos;m Kevin! <LuSmile  className={`ml-1 rounded-full inline`}/></span>
+                            <span className={`ific`}>
+                                I&apos;m Kevin!{' '}
+                                <LuSmile
+                                    className={`ml-1 inline rounded-full`}
+                                />
+                            </span>
                         </p>
                         <p className="text-base">
-                            I'm not an SLP. My partner is. I created
-                            OpenSLP to help her and other SLPs have easy access to quality resources.
+                            I'm not an SLP, but{' '}
+                            <a
+                                className={`underline`}
+                                href={'https://haerapark.com/'}
+                                target={'_blank'}
+                            >
+                                my partner is
+                            </a>
+                            . I created OpenSLP to help her and other SLPs have
+                            easy access to a variety of quality resources.
                         </p>
                         <p className="text-base">
-                            After an initial phase of gathering resources, OpenSLP will open up for community contributions.
+                            This is a curated,{' '}
+                            <span className="italic">opinionated</span>{' '}
+                            collection. These resources are currently ONLY for
+                            pediatric and school-based SLPs, but we plan to
+                            expand.
+                        </p>
+                        <p className="text-base">
+                            I also developed a website called{' '}
+                            <a
+                                className={`ific gap-x-1 font-semibold tracking-tight`}
+                                target={'_blank'}
+                                rel={'noopener'}
+                                href="https://plosive.app"
+                            >
+                                Plosive <LuExternalLink className={`inline`} />
+                            </a>{' '}
+                            to help SLPs manage their caseloads and paperwork
+                            more efficiently.
                         </p>
                     </div>
 
@@ -39,6 +73,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             OpenSLP is sponsored by{' '}
                             <a
                                 className={`clip-gradient-text-highlight font-semibold tracking-tight`}
+                                target={'_blank'}
+                                rel={'noopener'}
                                 href="https://plosive.app"
                             >
                                 Plosive
@@ -49,16 +85,48 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                 </div>
                 <div className="cs-1" />
                 <div className="grid12 cs-6">
-                    <div className="cs-6">
-                        <ul>
-                            <li className={`mb-2 text-neutral-500`}>About</li>
-                            <li>About</li>
+                    <div className="cs-12 md:cs-6">
+                        <ul className={`space-y-2`}>
+                            <li
+                                className={`font-bold tracking-tight text-neutral-200`}
+                            >
+                                About
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                <Link href={story()}>What is OpenSLP?</Link>
+                                <span
+                                    className={`text-sm font-light tracking-tight opacity-50`}
+                                >
+                                    - In Progress
+                                </span>
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                How do we pick resources?
+                                <span
+                                    className={`text-sm font-light tracking-tight opacity-50`}
+                                >
+                                    - In Progress
+                                </span>
+                            </li>
                         </ul>
                     </div>
-                    <div className="cs-6">
-                        <ul>
-                            <li className={`mb-2 text-neutral-500`}>About</li>
-                            <li>About</li>
+                    <div className="cs-12 md:cs-6">
+                        <ul className={`space-y-2`}>
+                            <li
+                                className={`font-bold tracking-tight text-neutral-200`}
+                            >
+                                Links
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                <a
+                                    className={`clip-gradient-text-highlight font-semibold tracking-tight`}
+                                    target={'_blank'}
+                                    rel={'noopener'}
+                                    href="https://plosive.app"
+                                >
+                                    Plosive - App For SLPs
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

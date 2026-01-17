@@ -9,11 +9,20 @@ Route::get('/', function () {
     $resources = Resource::all();
     $resourceCount = $resources->count();
     return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
+//        'canRegister' => Features::enabled(Features::registration()),
         'resources' => $resources,
         'resourceCount' => $resourceCount,
     ]);
 })->name('home');
+
+Route::get('/story', function () {
+    $resources = Resource::all();
+    $resourceCount = $resources->count();
+    return Inertia::render('story', [
+        'resources' => $resources,
+        'resourceCount' => $resourceCount,
+    ]);
+})->name('story');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
