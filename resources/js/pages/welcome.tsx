@@ -36,7 +36,7 @@ export default function Welcome({
                             <LuCircleHelp />
                             <AlertTitle>What is OpenSLP?</AlertTitle>
                             <AlertDescription>
-                                Started in 2026, we finds useful resources across the web for SLPs to use - from downloadable goodies to amazing apps.
+                                Started in 2026, we finds useful resources across the web for SLPs to use - from downloadable calendars to useful templates and more.
                             </AlertDescription>
                         </Alert>
 

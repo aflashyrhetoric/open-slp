@@ -19,7 +19,7 @@ type Props = {
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
-        <div className={`group relative shadow p-3 rounded-lg`}>
+        <div className={`group relative rounded-lg p-3 shadow`}>
             <div className={`ific gap-x-2`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
@@ -53,8 +53,6 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     className={`text-xs tracking-tight text-neutral-500 italic`}
                 >
                     {getDomainFromUrl(resource.href)}
-
-                    {resource.author && <span> - {resource.author}</span>}
                 </span>
             </div>
             <p className={`font-body mt-1 mb-3 text-sm text-neutral-600`}>
@@ -62,11 +60,13 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
             </p>
 
             <div className={`fic my-1 justify-between`}>
-                <span
-                    className={`text-xs tracking-tight text-neutral-500 italic`}
-                >
-                    {<span> via {resource.author}</span>}
-                </span>
+                {resource.author && (
+                    <span
+                        className={`text-xs tracking-tight text-neutral-500 italic`}
+                    >
+                        {<span> via {resource.author}</span>}
+                    </span>
+                )}
 
                 <div className={`fic gap-x-2`}>
                     <TargetAudiencePill resource={resource} />

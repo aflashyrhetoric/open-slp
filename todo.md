@@ -15,6 +15,7 @@
 - Flexible Games
 - Templates
 - Best of TPT
+- SLP News 
 
 
 ## Done
