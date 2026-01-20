@@ -4,6 +4,7 @@ import { story } from '@/routes';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 import { LuExternalLink, LuHandHelping, LuSmile } from 'react-icons/lu';
+import AppLogoIcon from '@/components/app-logo-icon';
 
 type Props = {
     className?: string;
@@ -14,8 +15,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
         <div className={`w-full bg-gray-900 px-12 py-12 lg:px-24 ${className}`}>
             <div className={`grid12`}>
                 <div className="cs-5">
+                    <AppLogoIcon className={`size-36 mb-8`}/>
                     <AppLogo light withVersion className={`mb-8`} />
-
                     <div
                         className={`font-lora mb-8 flex flex-col gap-y-3 text-white`}
                     >

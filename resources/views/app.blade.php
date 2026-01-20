@@ -4,6 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ config('app.name') }}">
+        <meta property="og:title" content="{{ config('app.name') }}">
+        <meta property="og:description" content="Curated resources for SLPs from across the web">
+        <meta property="og:image" content="{{ url('/logo.svg') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ config('app.name') }}">
+        <meta name="twitter:description" content="Curated resources for SLPs from across the web">
+        <meta name="twitter:image" content="{{ url('/logo.svg') }}">
+
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
             (function() {
