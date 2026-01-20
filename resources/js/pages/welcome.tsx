@@ -27,7 +27,7 @@ export default function Welcome({
 
     return (
         <>
-            <HeadTag />
+            <HeadTag title={"Welcome"} />
             <div className="flex min-h-screen flex-col">
                 <Header />
                 <div className={`p-9`}>
