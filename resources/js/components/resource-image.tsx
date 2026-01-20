@@ -19,14 +19,6 @@ const ResourceImage: React.FC<Props> = ({ className = "", resource }: Props) => 
                     <img src={og_image} className={`min-w-6 h-6 w-6 rounded`} alt={hasValidOgDescription ? og_description : ""} />
                 </div>
             )}
-            {!hasValidOgImage && (
-                <div
-                    className={` ${className}`}
-                >
-                    {/* Invisible square to fill up space*/}
-                    <div className={`h-6 bg-neutral-100 rounded w-6`} />
-                </div>
-            )}
         </>
     );
 };
