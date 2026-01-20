@@ -20,16 +20,18 @@ type Props = {
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
         <div className={`group relative rounded-lg p-3 shadow`}>
-            <div className={`ific gap-x-2`}>
+            <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="text-base font-medium">
+                    <h3 className="text-lg font-semibold">
                         <a
-                            className={`font-lora block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap`}
+                            className={`block max-w-full overflow-hidden text-ellipsis whitespace-nowrap`}
+                            target={'_blank'}
+                            rel={'noopener noreferrer'}
                             href={resource.href}
                         >
                             <span
-                                className={`font-lora text-black underline opacity-100`}
+                                className={`font-sans text-black underline opacity-100`}
                             >
                                 {resource.name}
                             </span>
@@ -49,22 +51,34 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     </p>
                 )}
                 <PricingPill pricingModel={resource.pricing_model} />
-                <span
-                    className={`text-xs tracking-tight text-neutral-500 italic`}
-                >
-                    {getDomainFromUrl(resource.href)}
-                </span>
             </div>
             <p className={`font-body mt-1 mb-3 text-sm text-neutral-600`}>
                 {resource.notes}
             </p>
 
             <div className={`fic my-1 justify-between`}>
+                <span
+                    className={`text-xs tracking-tight text-neutral-500 italic`}
+                >
+                    {getDomainFromUrl(resource.href)}
+                </span>
+                {!resource.author && <span />}
                 {resource.author && (
                     <span
                         className={`text-xs tracking-tight text-neutral-500 italic`}
                     >
-                        {<span> via {resource.author}</span>}
+                        {!resource.author_page_href && (
+                            <span> via {resource.author}</span>
+                        )}
+                        {resource.author_page_href && (
+                            <span>
+                                <a
+                                    target={`_blank`} rel={`noopener noreferrer`}
+                                    className={`underline`}href={resource.author_page_href}>
+                                    via {resource.author}
+                                </a>{' '}
+                            </span>
+                        )}
                     </span>
                 )}
 

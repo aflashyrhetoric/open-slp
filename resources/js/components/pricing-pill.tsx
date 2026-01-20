@@ -15,10 +15,10 @@ type Props = {
 const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
     const pricingModelToColor: Record<PricingModel, string> = {
         free: 'bg-green-500 text-white',
-        freemium: 'bg-yellow-500 text-white',
-        paid_trial: 'bg-blue-500 text-white',
-        paid_with_drops: 'bg-blue-500 text-white',
-        paid: 'bg-cyan-500 text-white',
+        freemium: 'bg-yellow-600 text-white',
+        paid_trial: 'bg-blue-600 text-white',
+        paid_with_drops: 'bg-blue-700 text-white',
+        paid: 'bg-cyan-600 text-white',
         mixed: 'bg-neutral-500 text-white',
     };
 

@@ -15,7 +15,7 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
     return (
         <header className="w-full px-5 pt-5 text-sm not-has-[nav]:hidden">
             <nav className="flex items-center justify-between gap-4 rounded-lg py-4 px-5 outline">
-                <AppLogo withVersion />
+                <AppLogo withVersion /> <span className={`hidden lg:inline text-sm text-neutral-500`}>Bookmark this page! 🤗</span>
                 <div className="flex flex-col items-end font-body">
                     <span className={`text-sm ific text-neutral-600 font-medium`}>
                         {/*<CircleCheck className={`h-4`}  />*/}
