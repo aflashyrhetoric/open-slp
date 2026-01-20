@@ -45,7 +45,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             <span className="italic">opinionated</span>{' '}
                             collection. These resources are currently ONLY for
                             pediatric and school-based SLPs, but we plan to
-                            expand.
+                            expand. We will also explore ways to open up curation to the broader community.
                         </p>
                         <p className="text-base">
                             I also developed a website called{' '}
@@ -92,8 +92,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             >
                                 About
                             </li>
-                            <li className={`ific gap-x-2 text-neutral-300`}>
-                                <Link href={story()}>What is OpenSLP?</Link>
+                            <li className={`ific gap-x-2 pointer-events-none text-neutral-300`}>
+                                <Link prefetch disabled href={story()}>What is OpenSLP?</Link>
                                 <span
                                     className={`text-sm font-light tracking-tight opacity-50`}
                                 >
