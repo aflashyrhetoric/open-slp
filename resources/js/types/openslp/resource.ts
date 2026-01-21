@@ -1,6 +1,21 @@
 import { IdAndTimestamps } from '@/types/openslp/shared';
 
-export type PricingModel = 'free' | 'freemium' | 'paid' | 'paid_with_drops' | 'paid_trial' | 'mixed';
+export type PricingModel =
+    | 'free'
+    | 'freemium'
+    | 'paid'
+    | 'paid_with_drops'
+    | 'paid_trial'
+    | 'mixed';
+
+export type ResourceCategory = IdAndTimestamps & {
+    name: string;
+    icon: string | null;
+    position: number;
+    parent_id: number | null;
+    bg_color: string | null;
+    description: string | null;
+};
 
 export type Resource = IdAndTimestamps & {
     name: string;
@@ -15,7 +30,7 @@ export type Resource = IdAndTimestamps & {
 
     has_downloadables: boolean;
 
-    pricing_model: PricingModel
+    pricing_model: PricingModel;
     target_audience: 'pediatric' | 'medical' | 'all';
 
     uses_ai: boolean;
@@ -27,5 +42,5 @@ export type Resource = IdAndTimestamps & {
     supports_english: boolean;
     supports_spanish: boolean;
     supports_korean: boolean;
-    category: string;
+    category: ResourceCategory;
 };

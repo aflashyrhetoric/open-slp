@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Resource extends Model
 {
     protected $fillable = [
         'name',
         'href',
+        'category_id',
         'author',
         'author_page_href',
         'og_image',
@@ -38,5 +40,11 @@ class Resource extends Model
             'supports_spanish' => 'boolean',
             'supports_korean' => 'boolean',
         ];
+    }
+
+    // Category
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(ResourceCategory::class);
     }
 }

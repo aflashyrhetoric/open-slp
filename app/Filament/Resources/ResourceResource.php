@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ResourceResource\Pages;
 use App\Models\Resource;
+use App\Models\ResourceCategory;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -31,28 +32,49 @@ class ResourceResource extends ResourcesResource
 
     public static function form(Schema $schema): Schema
     {
+
+        $categories = ResourceCategory::all();
+
         return $schema
             ->components([
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('href')
                     ->required(),
-                Select::make('category')
+//                Select::make('category')
+//                    ->label('Category')
+//                    // Build options from unique category values (value => label)
+//                    ->options(function (): array {
+////                        $r = Resource::query()
+////                            ->whereNotNull('category')
+////                            ->distinct()
+////                            ->pluck('category', 'category')
+////                            ->toArray();
+////
+////                        // Restructure $r to be value => label (capitalize words)
+////                        $r = array_combine(array_keys($r), array_map(function ($item) {
+////                            return ucwords($item);
+////                        }, array_keys($r)));
+//
+//                        $r = ResourceCategory::query()
+//                            ->orderBy('name', 'asc')
+//                            ->pluck('name', 'name')
+//                            ->toArray();
+//                        return $r;
+//                    }),
+                Select::make('category_id')
                     ->label('Category')
+                    ->disabled(
+                        fn () => $categories->isEmpty()
+                    )
                     // Build options from unique category values (value => label)
                     ->options(function (): array {
-                        $r = Resource::query()
-                            ->whereNotNull('category')
-                            ->distinct()
-                            ->pluck('category', 'category')
+                        return ResourceCategory::query()
+                            ->orderBy('name', 'asc')
+                            ->pluck('name', 'id')
                             ->toArray();
-
-                        // Restructure $r to be value => label (capitalize words)
-                        $r = array_combine(array_keys($r), array_map(function ($item) {
-                            return ucwords($item);
-                        }, array_keys($r)));
-                        return $r;
                     }),
+
 
                 TextInput::make('category'),
 

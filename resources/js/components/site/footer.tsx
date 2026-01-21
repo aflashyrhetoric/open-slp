@@ -118,7 +118,17 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             >
                                 Links
                             </li>
-                            <li className={`ific gap-x-2 text-neutral-300`}>
+                            <li className={`hidden lg:block ific gap-x-2 text-neutral-300`}>
+                                <a
+                                    className={`clip-gradient-text-highlight font-semibold tracking-tight`}
+                                    target={'_blank'}
+                                    rel={'noopener'}
+                                    href="https://plosive.app/discover"
+                                >
+                                    Plosive - App For SLPs
+                                </a>
+                            </li>
+                            <li className={`lg:hidden ific gap-x-2 text-neutral-300`}>
                                 <a
                                     className={`clip-gradient-text-highlight font-semibold tracking-tight`}
                                     target={'_blank'}

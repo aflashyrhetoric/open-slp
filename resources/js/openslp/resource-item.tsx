@@ -25,13 +25,13 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     <ResourceImage resource={resource} className={`mr-1`} />
                     <h3 className="text-lg font-semibold">
                         <a
-                            className={`block max-w-full overflow-hidden text-ellipsis whitespace-nowrap`}
+                            className={`hover:cursor-pointer block max-w-full overflow-hidden text-ellipsis whitespace-nowrap`}
                             target={'_blank'}
                             rel={'noopener noreferrer'}
                             href={resource.href}
                         >
                             <span
-                                className={`font-sans text-black underline opacity-100`}
+                                className={`font-lora text-black underline opacity-100`}
                             >
                                 {resource.name}
                             </span>

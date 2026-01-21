@@ -1,33 +1,48 @@
-import AppLogo from '@/components/app-logo';
 import Footer from '@/components/site/footer';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import ResourceCategorySection from '@/openslp/resource-category-section';
-import { type SharedData } from '@/types';
-import { Resource } from '@/types/openslp/resource';
-import { Head, usePage } from '@inertiajs/react';
-import { unique } from 'radash';
-import { LuCircleHelp } from 'react-icons/lu';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import ResourceCategorySection from '@/openslp/resource-category-section';
+import { Resource, ResourceCategory } from '@/types/openslp/resource';
+import { LuCircleHelp } from 'react-icons/lu';
+import Masonry from 'react-masonry-css';
+import { useState } from 'react';
 
 export default function Welcome({
-    canRegister = true,
+    categories,
+    // canRegister = true,
+                                    resourcesByCategory,
     resources,
     resourceCount = 0,
 }: {
-    canRegister?: boolean;
+    categories: ResourceCategory[];
+    // canRegister?: boolean;
     resources: Resource[];
+    resourcesByCategory: Record<string, Resource[]>;
     resourceCount: number;
 }) {
-    const { auth } = usePage<SharedData>().props;
+    // const { auth } = usePage<SharedData>().props;
 
-    const allResourceCategories = resources.map((r) => r.category);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    console.log({resourcesByCategory})
 
-    const uniqueArticleCategories = unique(allResourceCategories);
+    // const filteredCategories = categories
+    //     .map(category => {
+    //         let searchableText = category.name;
+    //         searchableText += ' ' + (category.description || '');
+    //         searchableText += ' ' + category.key;
+    //
+    //         const resourcesInCategory
+    //
+    //         return
+    //     })
+    //     .filter((category) => {
+    //
+    // }
 
     return (
         <>
-            <HeadTag title={"Welcome"} />
+            <HeadTag title={'Welcome'} />
             <div className="flex min-h-screen flex-col">
                 <Header />
                 <div className={`p-9`}>
@@ -36,23 +51,43 @@ export default function Welcome({
                             <LuCircleHelp />
                             <AlertTitle>What is OpenSLP?</AlertTitle>
                             <AlertDescription>
-                                Started in 2026, we finds useful resources across the web for SLPs to use - from downloadable calendars to useful templates and more.
+                                Started in 2026, we finds useful resources
+                                across the web for SLPs to use - from
+                                downloadable calendars to useful templates and
+                                more.
                             </AlertDescription>
                         </Alert>
-
-
-
-                        {uniqueArticleCategories.map((category, key) => (
-                            <ResourceCategorySection
-                                key={`category-${category}-${key}`}
-                                category={category}
-                                resources={resources}
-                            />
-                        ))}
+                        <Masonry
+                            breakpointCols={{
+                                default: 3,
+                                1280: 3,
+                                1024: 2,
+                                640: 1,
+                            }}
+                            className="cs-12 flex w-full gap-5"
+                            columnClassName="flex flex-col gap-5"
+                        >
+                            {Object.keys(resourcesByCategory)
+                                .map((categoryName, key) => {
+                                    const resourcesForCategory = resourcesByCategory[categoryName];
+                                    const category = categories.find(
+                                        (cat) => cat.name === categoryName,
+                                    );
+                                    if (!category) return null;
+                                    return (
+                                        <ResourceCategorySection
+                                            key={`category-${categoryName}-${key}`}
+                                            category={category}
+                                            categoryName={categoryName}
+                                            resources={resourcesForCategory}
+                                        />
+                                    );
+                                })}
+                        </Masonry>{' '}
                     </main>
                 </div>
 
-                <Footer className={`grow flex-1`} />
+                <Footer className={`flex-1 grow`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
         </>

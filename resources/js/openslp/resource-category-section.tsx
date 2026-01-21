@@ -1,30 +1,34 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import ResourceItem from '@/openslp/resource-item';
-import { Resource } from '@/types/openslp/resource';
+import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
 import { LuGhost } from 'react-icons/lu';
 
 type Props = {
-    category: string;
+    category: ResourceCategory
+    categoryName: string
     resources: Resource[];
+    className?: string;
 };
 
 const ResourceCategorySection: React.FC<Props> = ({
     category,
+    categoryName,
     resources,
+    className = '',
 }: Props) => {
     return (
-        <div className={`cs-12 bg-white md:cs-6 lg:cs-4`}>
-            <div className={`mb-2 text-xl font-bold`}>
-                <h2>{humanize(category)}</h2>
+        <div className={`cs-12 bg-white md:cs-6 lg:cs-4 ${className}`}>
+            <div
+                className={`tac rounded bg-neutral-900 py-4 text-xl font-bold text-white`}
+            >
+                <h2>{humanize(categoryName)}</h2>
             </div>
+            <p className={`text-neutral-500 text-base p-2`}>{category.description}</p>
             <div className="mb-4 flex flex-col">
-                <div className="flex flex-col gap-5 pt-5">
-                    {resources.filter(
-                        (r) =>
-                            r.category.toLowerCase() === category.toLowerCase(),
-                    ).length === 0 && (
+                <div className="flex flex-col gap-5">
+                    {resources.length === 0 && (
                         <Alert>
                             <LuGhost />
                             <AlertTitle>No resources found.</AlertTitle>
@@ -33,18 +37,12 @@ const ResourceCategorySection: React.FC<Props> = ({
                             </AlertDescription>
                         </Alert>
                     )}
-                    {resources
-                        .filter(
-                            (r) =>
-                                r.category.toLowerCase() ===
-                                category.toLowerCase(),
-                        )
-                        .map((resource) => (
-                            <ResourceItem
-                                key={`resource-item-${category}-${resource.id}`}
-                                resource={resource}
-                            />
-                        ))}
+                    {resources.map((resource) => (
+                        <ResourceItem
+                            key={`resource-item-${categoryName}-${resource.id}`}
+                            resource={resource}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
