@@ -41,7 +41,7 @@ class ResourceResource extends ResourcesResource
                     ->required(),
                 TextInput::make('href')
                     ->required(),
-                Select::make('category')
+                Select::make('category_id')
                     ->label('Category')
                     // Build options from unique category values (value => label)
                     ->options(function (): array {
