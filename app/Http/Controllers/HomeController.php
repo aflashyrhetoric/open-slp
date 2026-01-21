@@ -12,9 +12,7 @@ class HomeController extends Controller
     {
         $resources = Resource::with('category')->get();
         $flat = $resources;
-//        $groupedByCategory = $resources->groupBy('category.name');
         $groupedByCategory = $resources->groupBy(function ($resource) {
-            dump($resource->category);
             return $resource->category->name;
         });
 

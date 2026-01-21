@@ -41,42 +41,27 @@ class ResourceResource extends ResourcesResource
                     ->required(),
                 TextInput::make('href')
                     ->required(),
-//                Select::make('category')
-//                    ->label('Category')
-//                    // Build options from unique category values (value => label)
-//                    ->options(function (): array {
-////                        $r = Resource::query()
-////                            ->whereNotNull('category')
-////                            ->distinct()
-////                            ->pluck('category', 'category')
-////                            ->toArray();
-////
-////                        // Restructure $r to be value => label (capitalize words)
-////                        $r = array_combine(array_keys($r), array_map(function ($item) {
-////                            return ucwords($item);
-////                        }, array_keys($r)));
-//
-//                        $r = ResourceCategory::query()
-//                            ->orderBy('name', 'asc')
-//                            ->pluck('name', 'name')
-//                            ->toArray();
-//                        return $r;
-//                    }),
-                Select::make('category_id')
+                Select::make('category')
                     ->label('Category')
-                    ->disabled(
-                        fn () => $categories->isEmpty()
-                    )
                     // Build options from unique category values (value => label)
                     ->options(function (): array {
-                        return ResourceCategory::query()
+                        $r = ResourceCategory::query()
+                            ->pluck('name')
+                            ->toArray();
+//
+                        $r = ResourceCategory::query()
                             ->orderBy('name', 'asc')
                             ->pluck('name', 'id')
                             ->toArray();
+
+                        return $r;
                     }),
 
-
-                TextInput::make('category'),
+                Select::make('category_id')
+                    ->label('Category')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload(),
 
                 TextInput::make('author'),
 
@@ -161,3 +146,5 @@ class ResourceResource extends ResourcesResource
         return [];
     }
 }
+
+

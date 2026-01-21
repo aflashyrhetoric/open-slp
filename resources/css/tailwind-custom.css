@@ -5,36 +5,6 @@ textarea {
     --tw-ring-shadow: 0 0 #000 !important;
 }
 
-@font-face {
-    font-family: "Renogare";
-    src: url("/assets/Renogare.otf") format("opentype");
-}
-
-/*Register GeistSans font for all weights*/
-
-@font-face {
-    font-family: "GeistSans";
-    src: url("/assets/Geist-Regular.otf") format("opentype");
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: "GeistSans";
-    src: url("/assets/Geist-Medium.otf") format("opentype");
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: "GeistSans";
-    src: url("/assets/Geist-SemiBold.otf") format("opentype");
-    font-weight: 600;
-}
-@font-face {
-    font-family: "GeistSans";
-    src: url("/assets/Geist-Bold.otf") format("opentype");
-    font-weight: 700;
-}
-
 /* Note: this file is imported and used in `resources/css/app.css` */
 @layer components {
     .fade-in {
