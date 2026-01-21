@@ -8,6 +8,7 @@ use Laravel\Fortify\Features;
 
 // Proper named route using controller syntax
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/resource/{id}/increment-clicked-count', [HomeController::class, 'incrementClickedCount'])->name('incrementClickedCount');
 
 //Route::get('/', function () {
 //    $resources = Resource::all();

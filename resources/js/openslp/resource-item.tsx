@@ -18,24 +18,36 @@ type Props = {
 };
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
+    const route = 'incrementClickedCount';
+
+    function incrementClickedCount() {
+        fetch(
+            route('incrementClickedCount', {
+                id: resource.id,
+            }),
+        );
+    }
+
     return (
-        <div className={`group relative p-3`}>
+        <div className={`group relative px-3 py-1`}>
             <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
                     <h3 className="text-lg font-semibold">
-                        <a
-                            className={`hover:cursor-pointer block max-w-full overflow-hidden text-ellipsis whitespace-nowrap`}
-                            target={'_blank'}
-                            rel={'noopener noreferrer'}
-                            href={resource.href}
-                        >
-                            <span
-                                className={`font-lora text-black underline opacity-100`}
+                        <button onClick={() => incrementClickedCount()}>
+                            <a
+                                className={`block max-w-full overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
+                                target={'_blank'}
+                                rel={'noopener noreferrer'}
+                                href={resource.href}
                             >
-                                {resource.name}
-                            </span>
-                        </a>
+                                <span
+                                    className={`font-lora text-black underline opacity-100`}
+                                >
+                                    {resource.name}
+                                </span>
+                            </a>
+                        </button>
                     </h3>
                 </div>
                 {resource.has_downloadables && (
@@ -50,15 +62,11 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                         </Tooltip>
                     </p>
                 )}
-                <PricingPill pricingModel={resource.pricing_model} />
             </div>
-            <p className={`font-body mt-1 mb-3 text-sm text-neutral-600`}>
-                {resource.notes}
-            </p>
-
-            <div className={`fic my-1 justify-between`}>
+            <div className={`fic space-x-1`}>
+                <PricingPill pricingModel={resource.pricing_model} />
                 <span
-                    className={`text-xs tracking-tight text-neutral-500 italic`}
+                    className={`hidden lg:inline text-xs tracking-tight text-neutral-500 italic`}
                 >
                     {getDomainFromUrl(resource.href)}
                 </span>
@@ -73,8 +81,11 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                         {resource.author_page_href && (
                             <span>
                                 <a
-                                    target={`_blank`} rel={`noopener noreferrer`}
-                                    className={`underline`}href={resource.author_page_href}>
+                                    target={`_blank`}
+                                    rel={`noopener noreferrer`}
+                                    className={`underline`}
+                                    href={resource.author_page_href}
+                                >
                                     via {resource.author}
                                 </a>{' '}
                             </span>
@@ -87,6 +98,9 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     <LanguagePill resource={resource} />
                 </div>
             </div>
+            <p className={`font-body mt-1 text-sm text-neutral-600`}>
+                {resource.notes}
+            </p>
 
             {/*{resource.notes && (*/}
             {/*    <div*/}

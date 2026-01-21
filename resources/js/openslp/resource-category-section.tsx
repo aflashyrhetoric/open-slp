@@ -47,7 +47,7 @@ const ResourceCategorySection: React.FC<Props> = ({
             </div>
 
             <div className="mb-4 flex flex-col">
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-1">
                     {resources.length === 0 && (
                         <Alert>
                             <LuGhost />

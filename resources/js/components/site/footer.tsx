@@ -13,8 +13,8 @@ type Props = {
 const Footer: React.FC<Props> = ({ className = '' }: Props) => {
     return (
         <div className={`w-full bg-gray-900 px-12 py-12 lg:px-24 ${className}`}>
-            <div className={`grid12`}>
-                <div className="cs-5">
+            <div className={`grid12 gap-y-5 md:gap-y-0`}>
+                <div className="cs-12 md:cs-5">
                     <AppLogoIcon className={`size-36 mb-8`}/>
                     <AppLogo light withVersion className={`mb-8`} />
                     <div
@@ -73,7 +73,15 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                         >
                             OpenSLP is sponsored by{' '}
                             <a
-                                className={`clip-gradient-text-highlight font-semibold tracking-tight`}
+                                className={`hidden lg:inline clip-gradient-text-highlight font-semibold tracking-tight`}
+                                target={'_blank'}
+                                rel={'noopener'}
+                                href="https://plosive.app/discover"
+                            >
+                                Plosive
+                            </a>
+                            <a
+                                className={`lg:hidden clip-gradient-text-highlight font-semibold tracking-tight`}
                                 target={'_blank'}
                                 rel={'noopener'}
                                 href="https://plosive.app"
@@ -84,8 +92,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                         </AlertDescription>
                     </Alert>
                 </div>
-                <div className="cs-1" />
-                <div className="grid12 cs-6">
+                <div className="cs-12 md:cs-1" />
+                <div className="grid12 cs-12 md:cs-6">
                     <div className="cs-12 md:cs-6">
                         <ul className={`space-y-2`}>
                             <li

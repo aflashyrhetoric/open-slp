@@ -1,11 +1,12 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(vendor/bin/pint:*)",
+      "WebSearch"
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "laravel-boost"
-  ],
-  "permissions": {
-    "allow": [
-      "Bash(vendor/bin/pint:*)"
-    ]
-  }
+  ]
 }

@@ -7,20 +7,21 @@ import {
 import { PricingModel } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
+import { LuDot, LuSlash } from 'react-icons/lu';
 
 type Props = {
     pricingModel: PricingModel;
 };
 
 const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
-    const pricingModelToColor: Record<PricingModel, string> = {
-        free: 'bg-green-500 text-white',
-        freemium: 'bg-yellow-600 text-white',
-        paid_trial: 'bg-blue-600 text-white',
-        paid_with_drops: 'bg-blue-700 text-white',
-        paid: 'bg-cyan-600 text-white',
-        mixed: 'bg-neutral-500 text-white',
-    };
+    function getTextColor(pricingModel: PricingModel): string {
+        switch(pricingModel) {
+            case 'paid':
+                return 'text-cyan-600';
+            default:
+                return 'text-neutral-500';
+        }
+    }
 
     const pricingModelToExplanation: Record<PricingModel, string> = {
         free: 'Completely free to use!',
@@ -34,9 +35,9 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <Badge className={`${pricingModelToColor[pricingModel]}`}>
-                    {humanize(pricingModel)}
-                </Badge>
+                <span className={`tracking-tight italic ific text-xs font-light ${getTextColor(pricingModel)}`}>
+                    {humanize(pricingModel)}<LuDot className={`text-neutral-300 text-xs inline`} />
+                </span>
             </TooltipTrigger>
             <TooltipContent>
                 <p>{pricingModelToExplanation[pricingModel]}</p>

@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $resources = Resource::with('category')->get();
+        $resources = Resource::with('category')->where('published', 1)->get();
         $flat = $resources;
         $groupedByCategory = $resources->groupBy(function ($resource) {
             return $resource->category->name;
@@ -26,5 +26,15 @@ class HomeController extends Controller
             'resourcesByCategory' => $groupedByCategory,
             'resourceCount' => $resourceCount,
         ]);
+    }
+
+    public function incrementClickedCount($id)
+    {
+        $resource = Resource::find($id);
+        if ($resource) {
+            $resource->increment('clicked_count');
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
     }
 }

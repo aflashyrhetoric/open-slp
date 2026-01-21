@@ -15,6 +15,7 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Resources\Resource as ResourcesResource;
 use Filament\Schemas\Schema;
@@ -36,9 +37,14 @@ class ResourceResource extends ResourcesResource
         $categories = ResourceCategory::all();
 
         return $schema
+            ->columns(1)
             ->components([
                 TextInput::make('name')
                     ->required(),
+                Toggle::make('published')
+                    ->default(true)
+                    ->onIcon(Heroicon::Bolt)
+                    ->offIcon(Heroicon::User),
                 TextInput::make('href')
                     ->required(),
                 Select::make('category_id')
@@ -57,11 +63,11 @@ class ResourceResource extends ResourcesResource
                         return $r;
                     }),
 
-                Select::make('category_id')
-                    ->label('Category')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload(),
+//                Select::make('category_id')
+//                    ->label('Category')
+//                    ->relationship('category', 'name')
+//                    ->searchable()
+//                    ->preload(),
 
                 TextInput::make('author'),
 
@@ -103,7 +109,6 @@ class ResourceResource extends ResourcesResource
                 Checkbox::make('supports_english')->default(true),
                 Checkbox::make('supports_spanish'),
                 Checkbox::make('supports_korean'),
-
             ]);
     }
 

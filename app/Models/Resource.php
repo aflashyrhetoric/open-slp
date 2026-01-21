@@ -27,12 +27,13 @@ class Resource extends Model
         'supports_english',
         'supports_spanish',
         'supports_korean',
-        'category',
+        'published',
     ];
 
     protected function casts(): array
     {
         return [
+            'published' => 'boolean',
             'has_downloadables' => 'boolean',
             'uses_ai' => 'boolean',
             'updates_regularly' => 'boolean',
