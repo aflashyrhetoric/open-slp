@@ -2,16 +2,21 @@ import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
+import autoAnimate from '@formkit/auto-animate';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { LuCircleHelp } from 'react-icons/lu';
 import Masonry from 'react-masonry-css';
-import { useState } from 'react';
 
 export default function Welcome({
     categories,
     // canRegister = true,
-                                    resourcesByCategory,
+    resourcesByCategory,
     resources,
     resourceCount = 0,
 }: {
@@ -24,21 +29,66 @@ export default function Welcome({
     // const { auth } = usePage<SharedData>().props;
 
     const [searchQuery, setSearchQuery] = useState<string>('');
-    console.log({resourcesByCategory})
 
-    // const filteredCategories = categories
-    //     .map(category => {
-    //         let searchableText = category.name;
-    //         searchableText += ' ' + (category.description || '');
-    //         searchableText += ' ' + category.key;
-    //
-    //         const resourcesInCategory
-    //
-    //         return
-    //     })
-    //     .filter((category) => {
-    //
-    // }
+    const [onlyDownloadables, setOnlyDownloadables] = useState<boolean>(false);
+
+    const filteredResourcesByCategory = useMemo(() => {
+        // if (!searchQuery.trim()) {
+        //     return resourcesByCategory;
+        // }
+        //
+        const query = searchQuery.toLowerCase();
+        const result: Record<string, Resource[]> = {};
+
+        for (const [categoryName, categoryResources] of Object.entries(
+            resourcesByCategory,
+        )) {
+            const filtered = categoryResources.filter((resource) => {
+                const searchable = [
+                    resource.name,
+                    resource.author,
+                    resource.keywords,
+                    resource.target_audience,
+                    resource.notes,
+                ]
+                    .filter(Boolean)
+                    .join(' ')
+                    .toLowerCase();
+
+                const includesQuery = searchable.includes(query);
+
+                function checkIfSatisfiesFilters(): boolean {
+                    if (onlyDownloadables) {
+                        return resource.has_downloadables;
+                    }
+
+                    return true;
+                }
+
+                const satisfiesAdditionalFilters = checkIfSatisfiesFilters();
+
+                if (searchQuery.length === 0) {
+                    return satisfiesAdditionalFilters;
+                }
+
+                return includesQuery && satisfiesAdditionalFilters;
+            });
+
+            if (filtered.length > 0) {
+                result[categoryName] = filtered;
+            }
+        }
+
+        return result;
+    }, [searchQuery, resourcesByCategory, onlyDownloadables]);
+
+    const parent = useRef(null);
+
+    useEffect(() => {
+        if (parent.current) {
+            autoAnimate(parent.current);
+        }
+    }, [parent]);
 
     return (
         <>
@@ -57,6 +107,35 @@ export default function Welcome({
                                 more.
                             </AlertDescription>
                         </Alert>
+                        <div className={`cs-12`}>
+                            <FieldGroup>
+                                <Field orientation={"vertical"}>
+                                    <FieldLabel htmlFor="search-query-input">
+                                        Search Resources
+                                    </FieldLabel>
+                                    <Input
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        placeholder="Calendar..."
+                                        id="search-query-input"
+                                    />
+                                </Field>
+                                <Field orientation={'horizontal'}>
+                                    <Checkbox
+                                        id="only-downloadables"
+                                        checked={onlyDownloadables}
+                                        onCheckedChange={(checked) =>
+                                            setOnlyDownloadables(
+                                                Boolean(checked),
+                                            )
+                                        }
+                                    />
+                                    <Label htmlFor="only-downloadables">
+                                        Only show resources with downloadables
+                                    </Label>
+                                </Field>
+                            </FieldGroup>
+                        </div>
                         <Masonry
                             breakpointCols={{
                                 default: 3,
@@ -67,12 +146,37 @@ export default function Welcome({
                             className="cs-12 flex w-full gap-5"
                             columnClassName="flex flex-col gap-5"
                         >
-                            {Object.keys(resourcesByCategory)
-                                .map((categoryName, key) => {
-                                    const resourcesForCategory = resourcesByCategory[categoryName];
+                            {Object.keys(filteredResourcesByCategory)
+                                .map((categoryName) => {
+                                    const resourcesForCategory =
+                                        filteredResourcesByCategory[
+                                            categoryName
+                                        ];
+
                                     const category = categories.find(
                                         (cat) => cat.name === categoryName,
                                     );
+
+                                    return {
+                                        categoryName,
+                                        category,
+                                        resourcesForCategory,
+                                    };
+                                })
+                                .sort((a, b) => {
+                                    const { category: categoryA } = a;
+                                    const { category: categoryB } = b;
+                                    if (!categoryA || !categoryB) return 0;
+                                    return (
+                                        categoryA.position - categoryB.position
+                                    );
+                                })
+                                .map((categoryBlob, key) => {
+                                    const {
+                                        category,
+                                        categoryName,
+                                        resourcesForCategory,
+                                    } = categoryBlob;
                                     if (!category) return null;
                                     return (
                                         <ResourceCategorySection

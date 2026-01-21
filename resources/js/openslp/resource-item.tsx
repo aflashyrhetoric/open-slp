@@ -19,7 +19,7 @@ type Props = {
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
-        <div className={`group relative rounded-lg p-3 shadow`}>
+        <div className={`group relative p-3`}>
             <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />

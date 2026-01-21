@@ -6,8 +6,8 @@ import React from 'react';
 import { LuGhost } from 'react-icons/lu';
 
 type Props = {
-    category: ResourceCategory
-    categoryName: string
+    category: ResourceCategory;
+    categoryName: string;
     resources: Resource[];
     className?: string;
 };
@@ -19,13 +19,33 @@ const ResourceCategorySection: React.FC<Props> = ({
     className = '',
 }: Props) => {
     return (
-        <div className={`cs-12 bg-white md:cs-6 lg:cs-4 ${className}`}>
+        <div className={`cs-12 bg-white outline rounded-xl fade-in ${className}`}>
             <div
-                className={`tac rounded bg-neutral-900 py-4 text-xl font-bold text-white`}
+                className={`tac bg-neutral-800 py-4 text-2xl rounded-t-xl font-medium text-white`}
+                // style={{
+                //     background: category.bg_color ?? '#374151',
+                // }}
             >
-                <h2>{humanize(categoryName)}</h2>
+                <h2 className={`font-lora`}>
+                    <span className={`mr-2`}>{category.icon}</span>
+                    {humanize(categoryName)}
+                    {/*<span className={`ml-2`}>{category.icon}</span>*/}
+                </h2>
             </div>
-            <p className={`text-neutral-500 text-base p-2`}>{category.description}</p>
+            {/*<p className={`text-neutral-800 text-lg rounded-b mb-2 p-4`}>{category.description}</p>*/}
+
+            <div className="p-4">
+                <Alert className={`bg-neutral-700`}>
+                    {/*<LuCircleHelp />*/}
+                    {/*<AlertTitle>What is OpenSLP?</AlertTitle>*/}
+                    <AlertDescription
+                        className={`text-base text-pretty text-white`}
+                    >
+                        {category.description}
+                    </AlertDescription>
+                </Alert>
+            </div>
+
             <div className="mb-4 flex flex-col">
                 <div className="flex flex-col gap-5">
                     {resources.length === 0 && (

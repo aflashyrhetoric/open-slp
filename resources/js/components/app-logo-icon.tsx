@@ -14,7 +14,7 @@ export default function AppLogoIcon(props: SVGAttributes<SVGElement>) {
                 <rect x="381" y="245" width="0.0001" height="0.0001" rx="5e-05" fill="#FDFFC9"/>
             </g>
             <g filter="url(#filter1_d_4_39)">
-                <rect x="358" y="205" width="74" height="123" rx="11" stroke="black" stroke-width="4" shape-rendering="crispEdges"/>
+                <rect x="358" y="205" width="74" height="123" rx="11" stroke="black" strokeWidth="4" shapeRendering="crispEdges"/>
             </g>
             <path d="M348 337L310 750H480.5L445.5 337H348Z" fill="#131313"/>
             <rect x="390" y="181" width="9" height="28" rx="4.5" fill="#212121"/>
@@ -22,21 +22,21 @@ export default function AppLogoIcon(props: SVGAttributes<SVGElement>) {
                 <rect width="1024" height="1024" rx="512" fill="url(#paint1_linear_4_39)"/>
             </mask>
             <g mask="url(#mask1_4_39)">
-                <path d="M-592 170.5L346.5 236H395.5L394.5 321.5L346.5 322.5L-592 360.5V170.5Z" fill="url(#paint2_linear_4_39)" fill-opacity="0.5"/>
+                <path d="M-592 170.5L346.5 236H395.5L394.5 321.5L346.5 322.5L-592 360.5V170.5Z" fill="url(#paint2_linear_4_39)" fillOpacity="0.5"/>
             </g>
             <mask id="mask2_4_39" style={{maskType: "alpha"}} maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
                 <rect width="1024" height="1024" rx="512" fill="url(#paint3_linear_4_39)"/>
             </mask>
             <g mask="url(#mask2_4_39)">
                 <g filter="url(#filter2_d_4_39)">
-                    <path d="M1421 388L451.5 323H396V237.5L1421 198V388Z" fill="url(#paint4_linear_4_39)" fill-opacity="0.5" shape-rendering="crispEdges"/>
+                    <path d="M1421 388L451.5 323H396V237.5L1421 198V388Z" fill="url(#paint4_linear_4_39)" fillOpacity="0.5" shapeRendering="crispEdges"/>
                 </g>
             </g>
             <rect x="334" y="322" width="122" height="15" rx="4" fill="#212121"/>
             <path d="M347.093 236H442.907C443.494 236 443.95 235.501 443.868 234.92C442.909 228.073 435.83 191 395 191C354.17 191 347.091 228.073 346.132 234.92C346.05 235.501 346.506 236 347.093 236Z" fill="#212121"/>
             <defs>
-                <filter id="filter0_d_4_39" x="179" y="43" width="404" height="404" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <filter id="filter0_d_4_39" x="179" y="43" width="404" height="404" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                     <feMorphology radius="88" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_4_39"/>
                     <feOffset/>
@@ -46,8 +46,8 @@ export default function AppLogoIcon(props: SVGAttributes<SVGElement>) {
                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4_39"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4_39" result="shape"/>
                 </filter>
-                <filter id="filter1_d_4_39" x="164" y="11" width="462" height="511" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <filter id="filter1_d_4_39" x="164" y="11" width="462" height="511" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                     <feMorphology radius="78" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_4_39"/>
                     <feOffset/>
@@ -57,8 +57,8 @@ export default function AppLogoIcon(props: SVGAttributes<SVGElement>) {
                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4_39"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4_39" result="shape"/>
                 </filter>
-                <filter id="filter2_d_4_39" x="386" y="188" width="1045" height="210" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <filter id="filter2_d_4_39" x="386" y="188" width="1045" height="210" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                     <feOffset/>
                     <feGaussianBlur stdDeviation="5"/>
@@ -68,27 +68,27 @@ export default function AppLogoIcon(props: SVGAttributes<SVGElement>) {
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4_39" result="shape"/>
                 </filter>
                 <linearGradient id="paint0_linear_4_39" x1="769.5" y1="89" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFEBBE"/>
-                    <stop offset="0.365385" stop-color="#E1A165"/>
-                    <stop offset="1" stop-color="#8261AD"/>
+                    <stop stopColor="#FFEBBE"/>
+                    <stop offset="0.365385" stopColor="#E1A165"/>
+                    <stop offset="1" stopColor="#8261AD"/>
                 </linearGradient>
                 <linearGradient id="paint1_linear_4_39" x1="512" y1="0" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFE19A"/>
-                    <stop offset="0.365385" stop-color="#C27935"/>
-                    <stop offset="1" stop-color="#4F208C"/>
+                    <stop stopColor="#FFE19A"/>
+                    <stop offset="0.365385" stopColor="#C27935"/>
+                    <stop offset="1" stopColor="#4F208C"/>
                 </linearGradient>
                 <linearGradient id="paint2_linear_4_39" x1="-592" y1="265.5" x2="433" y2="265.5" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#E4AB75"/>
-                    <stop offset="1" stop-color="white"/>
+                    <stop stopColor="#E4AB75"/>
+                    <stop offset="1" stopColor="white"/>
                 </linearGradient>
                 <linearGradient id="paint3_linear_4_39" x1="512" y1="0" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFE19A"/>
-                    <stop offset="0.365385" stop-color="#C27935"/>
-                    <stop offset="1" stop-color="#4F208C"/>
+                    <stop stopColor="#FFE19A"/>
+                    <stop offset="0.365385" stopColor="#C27935"/>
+                    <stop offset="1" stopColor="#4F208C"/>
                 </linearGradient>
                 <linearGradient id="paint4_linear_4_39" x1="396" y1="293" x2="1421" y2="293" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="white"/>
-                    <stop offset="1" stop-color="#F1C79D"/>
+                    <stop stopColor="white"/>
+                    <stop offset="1" stopColor="#F1C79D"/>
                 </linearGradient>
             </defs>
         </svg>
