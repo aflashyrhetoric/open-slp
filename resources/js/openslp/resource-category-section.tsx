@@ -4,6 +4,7 @@ import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
 import { LuDiamond, LuGhost } from 'react-icons/lu';
+import Divider from '@/openslp/divider';
 
 type Props = {
     category: ResourceCategory;
@@ -40,19 +41,7 @@ const ResourceCategorySection: React.FC<Props> = ({
                             <span className={`tac mb-4`}>
                                 {category.description}
                             </span>
-                            <div
-                                className={`fic h-[1px] w-full justify-between gap-x-2 md:w-2/3`}
-                            >
-                                <div
-                                    className={`h-full rounded-full bg-neutral-500 md:w-[200px]`}
-                                />
-                                <LuDiamond
-                                    className={`inline text-xs text-neutral-500`}
-                                />
-                                <div
-                                    className={`h-full rounded-full bg-neutral-500 md:w-[200px]`}
-                                />
-                            </div>
+                            <Divider />
                         </div>
                     </div>
 

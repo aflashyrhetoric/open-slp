@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SlideController;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -8,6 +9,7 @@ use Laravel\Fortify\Features;
 
 // Proper named route using controller syntax
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/resource/{resource}/slide', [SlideController::class, 'renderSlide'])->name('slide.index');
 Route::post('/resource/{id}/increment-clicked-count', [HomeController::class, 'incrementClickedCount'])->name('incrementClickedCount');
 
 //Route::get('/', function () {
