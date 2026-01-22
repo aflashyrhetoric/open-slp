@@ -3,7 +3,7 @@ import ResourceItem from '@/openslp/resource-item';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
-import { LuCircleHelp, LuGhost } from 'react-icons/lu';
+import { LuDiamond, LuGhost } from 'react-icons/lu';
 
 type Props = {
     category: ResourceCategory;
@@ -31,17 +31,29 @@ const ResourceCategorySection: React.FC<Props> = ({
                     {humanize(categoryName)}
                 </h2>
             </div>
-            <div className={`rounded-xl pb-[0px] bg-white outline fade-in`}>
+            <div
+                className={`gradient-highlight-lightest rounded-xl pb-[1px] outline fade-in`}
+            >
                 <div>
-                    <div className="p-4">
-                        <Alert>
-                            <LuCircleHelp />
-                            {/*<AlertTitle>What is OpenSLP?</AlertTitle>*/}
-                            <AlertDescription
-                            >
+                    <div className="p-4 mb-1">
+                        <div className={`fc font-lora flex-col`}>
+                            <span className={`tac mb-4`}>
                                 {category.description}
-                            </AlertDescription>
-                        </Alert>
+                            </span>
+                            <div
+                                className={`fic h-[1px] w-full justify-between gap-x-2 md:w-2/3`}
+                            >
+                                <div
+                                    className={`h-full rounded-full bg-neutral-500 md:w-[200px]`}
+                                />
+                                <LuDiamond
+                                    className={`inline text-xs text-neutral-500`}
+                                />
+                                <div
+                                    className={`h-full rounded-full bg-neutral-500 md:w-[200px]`}
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <div className="mb-4 flex flex-col">
