@@ -1,7 +1,9 @@
 # Todo
 
-- [ ] Add contribution guidelines at the bottom
 - [ ] Add story
+- [ ] Add photos
+- [ ] Add contribution guidelines at the bottom
+- [ ] Update search algorithm to use word-by-word levenstein distance matching rather than simple inclusion
 
 ## Resource Types
 

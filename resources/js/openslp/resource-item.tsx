@@ -22,6 +22,8 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
 
     function incrementClickedCount() {
         fetch(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             route('incrementClickedCount', {
                 id: resource.id,
             }),
@@ -33,16 +35,19 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
             <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="text-lg font-semibold">
-                        <button onClick={() => incrementClickedCount()}>
+                    <h3 className="text-sm sm:text-base md:text-lg leading-5 max-w-[230px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[400px] font-semibold">
+                        <button
+                            onClick={() => incrementClickedCount()}
+                            className={`w-full max-w-full`}
+                        >
                             <a
-                                className={`block max-w-full overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
+                                className={`block overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
                                 target={'_blank'}
                                 rel={'noopener noreferrer'}
                                 href={resource.href}
                             >
                                 <span
-                                    className={`font-lora text-black underline opacity-100`}
+                                    className={`font-sans text-black underline opacity-100`}
                                 >
                                     {resource.name}
                                 </span>
@@ -66,7 +71,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
             <div className={`fic space-x-1`}>
                 <PricingPill pricingModel={resource.pricing_model} />
                 <span
-                    className={`hidden lg:inline text-xs tracking-tight text-neutral-500 italic`}
+                    className={`hidden text-xs tracking-tight text-neutral-500 italic lg:inline`}
                 >
                     {getDomainFromUrl(resource.href)}
                 </span>
@@ -78,18 +83,18 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                         {!resource.author_page_href && (
                             <span> via {resource.author}</span>
                         )}
-                        {resource.author_page_href && (
-                            <span>
-                                <a
-                                    target={`_blank`}
-                                    rel={`noopener noreferrer`}
-                                    className={`underline`}
-                                    href={resource.author_page_href}
-                                >
-                                    via {resource.author}
-                                </a>{' '}
-                            </span>
-                        )}
+                        {/*{resource.author_page_href && (*/}
+                        {/*    <span>*/}
+                        {/*        <a*/}
+                        {/*            target={`_blank`}*/}
+                        {/*            rel={`noopener noreferrer`}*/}
+                        {/*            className={`underline`}*/}
+                        {/*            href={resource.author_page_href}*/}
+                        {/*        >*/}
+                        {/*            via {resource.author}*/}
+                        {/*        </a>{' '}*/}
+                        {/*    </span>*/}
+                        {/*)}*/}
                     </span>
                 )}
 

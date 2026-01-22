@@ -3,7 +3,7 @@ import ResourceItem from '@/openslp/resource-item';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
-import { LuGhost } from 'react-icons/lu';
+import { LuCircleHelp, LuGhost } from 'react-icons/lu';
 
 type Props = {
     category: ResourceCategory;
@@ -19,9 +19,9 @@ const ResourceCategorySection: React.FC<Props> = ({
     className = '',
 }: Props) => {
     return (
-        <div className={`cs-12 bg-white outline rounded-xl fade-in ${className}`}>
+        <div className={`cs-12 fade-in ${className}`}>
             <div
-                className={`tac bg-neutral-800 py-4 text-2xl rounded-t-xl font-medium text-white`}
+                className={`py-4 text-2xl font-medium text-neutral-800`}
                 // style={{
                 //     background: category.bg_color ?? '#374151',
                 // }}
@@ -29,40 +29,40 @@ const ResourceCategorySection: React.FC<Props> = ({
                 <h2 className={`font-lora`}>
                     <span className={`mr-2`}>{category.icon}</span>
                     {humanize(categoryName)}
-                    {/*<span className={`ml-2`}>{category.icon}</span>*/}
                 </h2>
             </div>
-            {/*<p className={`text-neutral-800 text-lg rounded-b mb-2 p-4`}>{category.description}</p>*/}
-
-            <div className="p-4">
-                <Alert className={`bg-neutral-700`}>
-                    {/*<LuCircleHelp />*/}
-                    {/*<AlertTitle>What is OpenSLP?</AlertTitle>*/}
-                    <AlertDescription
-                        className={`text-base text-pretty text-white`}
-                    >
-                        {category.description}
-                    </AlertDescription>
-                </Alert>
-            </div>
-
-            <div className="mb-4 flex flex-col">
-                <div className="flex flex-col gap-1">
-                    {resources.length === 0 && (
+            <div className={`rounded-xl pb-[0px] bg-white outline fade-in`}>
+                <div>
+                    <div className="p-4">
                         <Alert>
-                            <LuGhost />
-                            <AlertTitle>No resources found.</AlertTitle>
-                            <AlertDescription>
-                                Try adjusting your filters.
+                            <LuCircleHelp />
+                            {/*<AlertTitle>What is OpenSLP?</AlertTitle>*/}
+                            <AlertDescription
+                            >
+                                {category.description}
                             </AlertDescription>
                         </Alert>
-                    )}
-                    {resources.map((resource) => (
-                        <ResourceItem
-                            key={`resource-item-${categoryName}-${resource.id}`}
-                            resource={resource}
-                        />
-                    ))}
+                    </div>
+
+                    <div className="mb-4 flex flex-col">
+                        <div className="flex flex-col gap-1">
+                            {resources.length === 0 && (
+                                <Alert>
+                                    <LuGhost />
+                                    <AlertTitle>No resources found.</AlertTitle>
+                                    <AlertDescription>
+                                        Try adjusting your filters.
+                                    </AlertDescription>
+                                </Alert>
+                            )}
+                            {resources.map((resource) => (
+                                <ResourceItem
+                                    key={`resource-item-${categoryName}-${resource.id}`}
+                                    resource={resource}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
