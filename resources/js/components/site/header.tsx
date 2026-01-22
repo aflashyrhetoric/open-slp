@@ -17,12 +17,12 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
             <nav className="flex items-center justify-between gap-4 rounded-lg py-4 px-5 outline">
                 <AppLogo withVersion /> <span className={`hidden lg:inline text-sm text-neutral-500`}>Bookmark this page! 🤗</span>
                 <div className="flex flex-col items-end font-body">
-                    <span className={`text-sm ific text-neutral-600 font-medium`}>
+                    <span className={`text-sm font-lora ific text-neutral-600 font-medium`}>
                         {/*<CircleCheck className={`h-4`}  />*/}
                         Curated Resources For SLPs
                     </span>
                     <span className={`text-xs text-neutral-500 italic`}>
-                        {resourceCount} resources and counting
+                        {resourceCount} total resources
                     </span>
                 </div>{' '}
                 {/*{auth.user ? (*/}

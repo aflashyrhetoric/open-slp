@@ -1,3 +1,4 @@
+import { incrementClickedCount as incrementClickedCountRoute } from '@/actions/App/Http/Controllers/HomeController';
 import LanguagePill from '@/components/language-pill';
 import PricingPill from '@/components/pricing-pill';
 import ResourceImage from '@/components/resource-image';
@@ -9,6 +10,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Resource } from '@/types/openslp/resource';
 import { getDomainFromUrl } from '@/utils/string-utils';
+import axios from 'axios';
 import React from 'react';
 import { LuDownload } from 'react-icons/lu';
 
@@ -18,16 +20,9 @@ type Props = {
 };
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
-    const route = 'incrementClickedCount';
-
-    function incrementClickedCount() {
-        fetch(
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            route('incrementClickedCount', {
-                id: resource.id,
-            }),
-        );
+    async function incrementClickedCount() {
+        const route = incrementClickedCountRoute(resource.id);
+        await axios.post(route.url);
     }
 
     return (
@@ -35,24 +30,20 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
             <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="text-sm sm:text-base md:text-lg leading-5 max-w-[230px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[400px] font-semibold">
-                        <button
-                            onClick={() => incrementClickedCount()}
-                            className={`w-full max-w-full`}
+                    <h3 className="max-w-[230px] text-sm leading-5 font-semibold sm:max-w-[220px] sm:text-base md:max-w-[300px] md:text-lg lg:max-w-[400px]">
+                        <a
+                            className={`block overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
+                            onClick={incrementClickedCount}
+                            target={'_blank'}
+                            rel={'noopener noreferrer'}
+                            href={resource.href}
                         >
-                            <a
-                                className={`block overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
-                                target={'_blank'}
-                                rel={'noopener noreferrer'}
-                                href={resource.href}
+                            <span
+                                className={`font-sans text-black underline opacity-100`}
                             >
-                                <span
-                                    className={`font-sans text-black underline opacity-100`}
-                                >
-                                    {resource.name}
-                                </span>
-                            </a>
-                        </button>
+                                {resource.name}
+                            </span>
+                        </a>
                     </h3>
                 </div>
                 {resource.has_downloadables && (

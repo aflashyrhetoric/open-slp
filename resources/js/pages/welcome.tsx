@@ -101,21 +101,22 @@ export default function Welcome({
                             <LuCircleHelp />
                             <AlertTitle>What is OpenSLP?</AlertTitle>
                             <AlertDescription>
-                                Started in 2026, we finds useful resources
-                                across the web for SLPs to use - from
+                                We curate useful stuff for SLPs to use. From
                                 downloadable calendars to useful templates and
                                 more.
                             </AlertDescription>
                         </Alert>
                         <div className={`cs-12`}>
                             <FieldGroup>
-                                <Field orientation={"vertical"}>
+                                <Field orientation={'vertical'}>
                                     <FieldLabel htmlFor="search-query-input">
                                         Search Resources
                                     </FieldLabel>
                                     <Input
                                         value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onChange={(e) =>
+                                            setSearchQuery(e.target.value)
+                                        }
                                         placeholder="Calendar..."
                                         id="search-query-input"
                                     />
