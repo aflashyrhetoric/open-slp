@@ -33,7 +33,7 @@ const ResourceCategorySection: React.FC<Props> = ({
                 </h2>
             </div>
             <div
-                className={`gradient-highlight-lightest rounded-xl pb-[1px] outline fade-in`}
+                className={`gradient-highlight-lightest rounded-xl pb-[1px] border border-neutral-500 fade-in`}
             >
                 <div>
                     <div className="p-4 mb-1">

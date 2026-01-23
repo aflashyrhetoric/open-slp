@@ -1,16 +1,17 @@
 import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AnimatedBeamMultipleOutputDemo } from '@/components/site/home-animated-beam';
+import { AuroraText } from '@/components/ui/aurora-text';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import autoAnimate from '@formkit/auto-animate';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { LuCircleHelp } from 'react-icons/lu';
 import Masonry from 'react-masonry-css';
 
 export default function Welcome({
@@ -90,23 +91,57 @@ export default function Welcome({
         }
     }, [parent]);
 
+    const allOgImages = resources.map((resource) => {
+        if (resource !== null && resource.og_image) {
+            return resource.og_image;
+        }
+    });
+
+    const images =
+        allOgImages.length > 0
+            ? [...allOgImages, ...allOgImages, ...allOgImages].filter(
+                  (ogImage) => ogImage !== null && ogImage !== undefined,
+              )
+            : [];
+
     return (
         <>
             <HeadTag title={'Welcome'} />
             <div className="flex min-h-screen flex-col">
-                <Header />
-                <div className={`p-9`}>
+                <div className={``}>
                     <main className="grid12 w-full max-w-full gap-5">
-                        <Alert className={`cs-12`}>
-                            <LuCircleHelp />
-                            <AlertTitle>What is OpenSLP?</AlertTitle>
-                            <AlertDescription>
-                                We curate useful stuff for SLPs to use. From
-                                downloadable calendars to useful templates and
-                                more.
-                            </AlertDescription>
-                        </Alert>
-                        <div className={`cs-12`}>
+                        <div className="grid12 relative cs-12">
+                            <FlickeringGrid
+                                maxOpacity={0.05}
+                                squareSize={4}
+                                gridGap={8}
+                                className={`absolute inset-0 z-0 size-full`}
+                            />
+                            <Header className={`cs-12 z-10`} />
+                            <div
+                                className={`grid12 cs-12 px-10 relative border-b`}
+                            >
+                                <div
+                                    className={`grid12 font-heading relative cs-10 min-h-[200px] col-start-2 px-10`}
+                                >
+                                    <p
+                                        className={`font-heading fc cs-12 lg:cs-6 h-full text-3xl md:text-4xl flex-col items-center lg:items-start font-bold lg:text-5xl xl:text-6xl`}
+                                    >
+                                        <AuroraText className={`mr-4`}>
+                                            Curated
+                                        </AuroraText>
+                                        resources for SLPs
+                                    </p>
+                                    <div className={`relative hidden lg:block lg:cs-6`}>
+                                        {/*<IconCloud images={images} />*/}
+                                        <AnimatedBeamMultipleOutputDemo
+                                            circleImages={[images]}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`cs-12 px-9`}>
                             <FieldGroup>
                                 <Field orientation={'vertical'}>
                                     <FieldLabel htmlFor="search-query-input">
@@ -144,7 +179,7 @@ export default function Welcome({
                                 1024: 2,
                                 640: 1,
                             }}
-                            className="cs-12 flex w-full gap-5"
+                            className="cs-12 flex w-full gap-5 px-9"
                             columnClassName="flex flex-col gap-5"
                         >
                             {Object.keys(filteredResourcesByCategory)

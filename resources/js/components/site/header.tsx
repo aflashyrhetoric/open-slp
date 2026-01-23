@@ -13,8 +13,14 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
         .props;
 
     return (
-        <header className="w-full px-5 pt-5 text-sm not-has-[nav]:hidden">
-            <nav className="flex items-center justify-between gap-4 rounded-lg py-4 px-5 outline">
+        <header className={`w-full px-5 pt-5 text-sm not-has-[nav]:hidden ${className}`}>
+            <nav className="flex z-10 items-center justify-between gap-4 rounded-lg py-4 px-5 outline"
+                 style={{
+                     background: 'rgba(255, 255, 255, 0.3)',
+                     backdropFilter: 'blur(1px)',
+
+                 }}
+            >
                 <AppLogo withVersion /> <span className={`hidden lg:inline text-sm text-neutral-500`}>Bookmark this page! 🤗</span>
                 <div className="flex flex-col items-end font-body">
                     <span className={`text-sm font-lora ific text-neutral-600 font-medium`}>

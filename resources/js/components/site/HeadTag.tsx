@@ -12,7 +12,7 @@ const HeadTag: React.FC<Props> = ({ title="OpenSLP", className = '' }: Props) =>
         <Head title={title}>
             <link rel="preconnect" href="https://fonts.bunny.net" />
             <link
-                href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700|inter:100,300,300i,500,700,900|lora:400,500,600,700"
+                href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700|inter:100,300,300i,500,700,900|lora:400,400i,500,500i,600,600i,700,700i|black-han-sans:400"
                 rel="stylesheet"
             />
         </Head>
