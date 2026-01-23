@@ -117,22 +117,32 @@ export default function Welcome({
                                 gridGap={8}
                                 className={`absolute inset-0 z-0 size-full`}
                             />
-                            <Header className={`cs-12 z-10`} />
+                            <Header className={`z-10 cs-12`} />
                             <div
-                                className={`grid12 cs-12 px-10 relative border-b`}
+                                className={`grid12 relative cs-12 border-b px-10`}
                             >
                                 <div
-                                    className={`grid12 font-heading relative cs-10 min-h-[200px] col-start-2 px-10`}
+                                    className={`grid12 font-heading relative cs-10 col-start-2 min-h-[200px] px-10`}
                                 >
                                     <p
-                                        className={`font-heading fc cs-12 lg:cs-6 h-full text-3xl md:text-4xl flex-col items-center lg:items-start font-bold lg:text-5xl xl:text-6xl`}
+                                        className={`font-heading fc cs-12 h-full flex-col items-center text-2xl sm:text-3xl font-bold md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
                                     >
-                                        <AuroraText className={`mr-4`}>
+                                        <AuroraText
+                                            className={`mr-4`}
+                                            // less-saturated, sunset-esque colors
+                                            colors={[
+                                                '#FF6F91',
+                                                '#FF9671',
+                                                '#FFC75F',
+                                            ]}
+                                        >
                                             Curated
                                         </AuroraText>
                                         resources for SLPs
                                     </p>
-                                    <div className={`relative hidden lg:block lg:cs-6`}>
+                                    <div
+                                        className={`relative hidden lg:cs-6 lg:block`}
+                                    >
                                         {/*<IconCloud images={images} />*/}
                                         <AnimatedBeamMultipleOutputDemo
                                             circleImages={[images]}
