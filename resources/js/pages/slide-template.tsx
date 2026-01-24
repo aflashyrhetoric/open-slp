@@ -16,7 +16,7 @@ export default function SlideTemplate({
     return (
         <>
             <div
-                className={`relative gradient-highlight-lightest fc flex-col ${dimensionClasses}`}
+                className={`relative gradient-highlight-lightest flex p-24 items-center flex-col overflow-hidden ${dimensionClasses}`}
             >
                 <div className={`absolute size-full noisy z-0`}/>
                 {children}

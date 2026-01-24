@@ -28,11 +28,11 @@ export default function Slide({ resource, page }: { resource: Resource }) {
                 {page === 1 && <SlideHook isDev={isDev} resource={resource} />}
                 {page === 2 && <SlideBrand isDev={isDev} resource={resource} />}
                 {/*<iframe src={resource.href} className={`mt-16 h-[300px] w-[80%] rounded-xl border-4 border-neutral-200 shadow-lg`} />*/}
-                {
-                    <code>
-                        <pre>{JSON.stringify(resource, null, 2)}</pre>
-                    </code>
-                }
+                {/*{*/}
+                {/*    <code>*/}
+                {/*        <pre>{JSON.stringify(resource, null, 2)}</pre>*/}
+                {/*    </code>*/}
+                {/*}*/}
             </div>
         </>
     );

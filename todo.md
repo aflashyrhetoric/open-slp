@@ -1,5 +1,7 @@
 # Todo
 
+- [ ] Add newsletter signup to buttondown?
+- [ ] Finish slides system and start posting
 - [ ] Add story
 - [ ] Add photos
 - [ ] Add contribution guidelines at the bottom

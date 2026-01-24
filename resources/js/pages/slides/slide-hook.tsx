@@ -17,7 +17,7 @@ const SlideHook: React.FC<Props> = ({
     return (
         <SlideTemplate
             isDev={isDev}
-            className={`gradient-highlight-lightest fc flex-col`}
+            className={`gradient-highlight-lightest flex flex-col`}
         >
             <p className={`font-heading mb-10 slide-text-xl font-bold`}>
                 Hey SLPs.
@@ -26,12 +26,12 @@ const SlideHook: React.FC<Props> = ({
                 We share resources you can use.
                 <br /> Every week. For free.
             </p>
-            <p className={`slide-text-xs italic text-neutral-500`}>There is literally no way for you to pay us for this.</p>
+            {/*<p className={`slide-text-xs italic text-neutral-500`}>There is literally no way for you to pay us for this.</p>*/}
 
             <p className={`tac mb-10 slide-text-md`}>
                 Swipe left to see this week's resource.
             </p>
-            <p className={`tac slide-text-md`}>→ → → → → → →</p>
+            <img className={`absolute top-[500px]`}src={'/img/screenshot.png'} />
             {/*<p className={`tac slide-text-xl`}>👉 👉 👉 👉 👉 👉 👉</p>*/}
         </SlideTemplate>
     );

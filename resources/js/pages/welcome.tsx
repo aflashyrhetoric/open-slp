@@ -122,10 +122,10 @@ export default function Welcome({
                                 className={`grid12 relative cs-12 border-b px-10`}
                             >
                                 <div
-                                    className={`grid12 font-heading relative cs-10 col-start-2 min-h-[200px] px-10`}
+                                    className={`grid12 font-heading relative cs-12 md:cs-10 md:col-start-2 min-h-[200px] px-10`}
                                 >
                                     <p
-                                        className={`font-heading fc cs-12 h-full flex-col items-center text-2xl sm:text-3xl font-bold md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
+                                        className={`font-heading fc cs-12 h-full flex-col items-start md:items-center text-2xl sm:text-3xl font-bold md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
                                     >
                                         <AuroraText
                                             className={`mr-4`}
