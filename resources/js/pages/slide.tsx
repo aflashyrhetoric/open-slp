@@ -5,6 +5,7 @@ import { Resource } from '@/types/openslp/resource';
 import { useState } from 'react';
 import SlideHook from '@/pages/slides/slide-hook';
 import SlideBrand from '@/pages/slides/slide-brand';
+import SlideMain from '@/pages/slides/slide-main';
 
 export default function Slide({ resource, page }: { resource: Resource }) {
     const [isDev, setIsDev] = useState(true);
@@ -26,7 +27,9 @@ export default function Slide({ resource, page }: { resource: Resource }) {
                     </div>
                 )}
                 {page === 1 && <SlideHook isDev={isDev} resource={resource} />}
-                {page === 2 && <SlideBrand isDev={isDev} resource={resource} />}
+                {page === 2 && <SlideMain isDev={isDev} resource={resource} />}
+                {/*{page === 3 && <SlideHook isDev={isDev} resource={resource} />}*/}
+                {page === 3 && <SlideBrand isDev={isDev} resource={resource} />}
                 {/*<iframe src={resource.href} className={`mt-16 h-[300px] w-[80%] rounded-xl border-4 border-neutral-200 shadow-lg`} />*/}
                 {/*{*/}
                 {/*    <code>*/}

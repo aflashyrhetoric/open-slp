@@ -1,5 +1,7 @@
 # Todo
 
+- [ ] Add resource show page
+- [ ] Add iframe on hover
 - [ ] Add newsletter signup to buttondown?
 - [ ] Finish slides system and start posting
 - [ ] Add story

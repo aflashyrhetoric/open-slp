@@ -15,21 +15,21 @@ export default function SlideBrand({ isDev, resource, className = '' }: Props) {
             isDev={isDev}
             className={`gradient-highlight-lightest fc flex-col`}
         >
-            <div className={`flex flex-col items-center`}>
+            <div className={`h-full flex flex-col justify-center items-center`}>
                 <AppLogoIcon className={`mb-5 h-[150px]`} />
                 <span className={`logo mb-5 slide-text-lg`}>OpenSLP.com</span>
                 <span
-                    className={`font-lora mb-6 slide-text-sm text-neutral-800 italic`}
+                    className={`font-lora mb-6 slide-text-lg text-neutral-800 italic`}
                 >
-                    We post free stuff every week.
+                    We share useful resources every week.
                 </span>
                 <span
-                    className={`mb-12 font-sans slide-text-xs text-neutral-600`}
+                    className={`mb-12 mt-12 font-sans slide-text-xs text-neutral-600`}
                 >
-                    Link in the description!
+                    Links are in the description.
                 </span>
+                <Divider className={`my-12`} />
             </div>
-            <Divider className={`my-12`} />
         </SlideTemplate>
     );
 }
