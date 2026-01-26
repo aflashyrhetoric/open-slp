@@ -5,6 +5,7 @@ import { Link } from '@inertiajs/react';
 import React from 'react';
 import { LuExternalLink, LuHandHelping, LuSmile } from 'react-icons/lu';
 import AppLogoIcon from '@/components/app-logo-icon';
+import NewsletterSignup from '@/components/site/newsletter-signup';
 
 type Props = {
     className?: string;

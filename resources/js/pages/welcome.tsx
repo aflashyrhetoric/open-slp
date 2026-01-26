@@ -3,6 +3,7 @@ import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
 import { AnimatedBeamMultipleOutputDemo } from '@/components/site/home-animated-beam';
 import { AuroraText } from '@/components/ui/aurora-text';
+import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { FlickeringGrid } from '@/components/ui/flickering-grid';
@@ -11,8 +12,9 @@ import { Label } from '@/components/ui/label';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import autoAnimate from '@formkit/auto-animate';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Masonry from 'react-masonry-css';
+import NewsletterSignup from '@/components/site/newsletter-signup';
 
 export default function Welcome({
     categories,
@@ -122,10 +124,10 @@ export default function Welcome({
                                 className={`grid12 relative cs-12 border-b px-10`}
                             >
                                 <div
-                                    className={`grid12 font-heading relative cs-12 md:cs-10 md:col-start-2 min-h-[200px] px-10`}
+                                    className={`grid12 font-heading relative cs-12 min-h-[200px] px-10 md:cs-10 md:col-start-2`}
                                 >
                                     <p
-                                        className={`font-heading fc cs-12 h-full flex-col items-start md:items-center text-2xl sm:text-3xl font-bold md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
+                                        className={`font-heading fc cs-12 h-full flex-col items-start text-2xl font-bold sm:text-3xl md:items-center md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
                                     >
                                         <AuroraText
                                             className={`mr-4`}
@@ -151,6 +153,7 @@ export default function Welcome({
                                 </div>
                             </div>
                         </div>
+                        <NewsletterSignup className={`cs-12`}/>
                         <div className={`cs-12 px-9`}>
                             <FieldGroup>
                                 <Field orientation={'vertical'}>
@@ -189,7 +192,7 @@ export default function Welcome({
                                 1024: 2,
                                 640: 1,
                             }}
-                            className="cs-12 flex w-full gap-5 px-9"
+                            className="cs-12 flex w-full gap-5 px-9 pb-12"
                             columnClassName="flex flex-col gap-5"
                         >
                             {Object.keys(filteredResourcesByCategory)
@@ -237,6 +240,7 @@ export default function Welcome({
                     </main>
                 </div>
 
+                <NewsletterSignup className={`cs-12 mb-5`}/>
                 <Footer className={`flex-1 grow`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>

@@ -1,4 +1,4 @@
-.PHONY=migrate rollback status todo
+.PHONY=migrate rollback status todo slides
 
 status:
 	php artisan migrate:status
@@ -11,3 +11,8 @@ rollback:
 
 todo:
 	vim todo.md
+
+
+# Usage is like: make slides resource=22
+slides:
+	node scripts/create-slides.js $(resource) $(url)
