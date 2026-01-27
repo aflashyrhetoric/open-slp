@@ -23,13 +23,13 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
             >
                 <AppLogo withVersion /> <span className={`hidden lg:inline text-sm text-neutral-500`}>Bookmark this page! 🤗</span>
                 <div className="flex flex-col items-end font-body">
-                    <span className={`text-sm font-lora ific text-neutral-600 font-medium`}>
+                    <span className={`text-xs text-balance lg:text-sm font-lora ific text-right text-neutral-600 font-medium`}>
                         {/*<CircleCheck className={`h-4`}  />*/}
                         Curated Resources For SLPs
                     </span>
-                    <span className={`text-xs text-neutral-500 italic`}>
-                        {resourceCount} total resources
-                    </span>
+                    {/*<span className={`text-xs text-neutral-500 italic`}>*/}
+                    {/*    {resourceCount} resources*/}
+                    {/*</span>*/}
                 </div>{' '}
                 {/*{auth.user ? (*/}
                 {/*    <Link*/}

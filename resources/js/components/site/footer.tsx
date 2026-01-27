@@ -21,8 +21,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                     <div
                         className={`font-lora mb-8 flex flex-col gap-y-3 text-white`}
                     >
-                        <p className="text-lg">
-                            <span className="mr-1 font-bold">Hello!</span>
+                        <p className="text-lg xl:text-2xl">
+                            <span className="mr-1 font-bold clip-gradient-text-highlight">Hello!</span>
                             <span className={`ific`}>
                                 I&apos;m Kevin!{' '}
                                 <LuSmile
@@ -30,7 +30,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                 />
                             </span>
                         </p>
-                        <p className="text-base">
+                        <p className="text-base xl:text-xl">
                             I'm not an SLP, but{' '}
                             <a
                                 className={`underline`}
@@ -42,14 +42,14 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             . I created OpenSLP to help her and other SLPs have
                             easy access to a variety of quality resources.
                         </p>
-                        <p className="text-base">
+                        <p className="text-base xl:text-xl">
                             This is a curated,{' '}
                             <span className="italic">opinionated</span>{' '}
                             collection. These resources are currently ONLY for
                             pediatric and school-based SLPs, but we plan to
                             expand. We will also explore ways to open up curation to the broader community.
                         </p>
-                        <p className="text-base">
+                        <p className="text-base xl:text-xl">
                             I also developed a website called{' '}
                             <a
                                 className={`ific gap-x-1 font-semibold tracking-tight`}

@@ -12,10 +12,18 @@ class SlideController extends Controller
         // Load the category on the resource
         $resourceWithCategory = $resource->load('category');
 
-        // Return as json
         return Inertia::render('slide', [
             'resource' => $resourceWithCategory,
             'page' => (int) $page,
         ]);
+    }
+
+    public function slideJson(Resource $resource)
+    {
+        // Load the category on the resource
+        $resourceWithCategory = $resource->load('category');
+
+        // Return as json
+        return $resourceWithCategory->toJson();
     }
 }

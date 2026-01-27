@@ -1,13 +1,16 @@
 # Todo
 
 - [ ] Add resource show page
+- [ ] Create Newsletter AI endpoint
+ 
+---
+
 - [ ] Add iframe on hover
 - [ ] Add newsletter signup to buttondown?
-- [ ] Finish slides system and start posting
 - [ ] Add story
 - [ ] Add photos
 - [ ] Add contribution guidelines at the bottom
-- [ ] Update search algorithm to use word-by-word levenstein distance matching rather than simple inclusion
+- [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
 
 ## Resource Types
 
@@ -31,3 +34,4 @@
 - [x] Dynamically link to either Plosive homepage or Plosive discover page
 - [x] Create resource.isPublished (for drafts)
 - [x] Add filtering by type, category, pricing, etc
+- [x] Finish slides system and start posting

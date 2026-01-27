@@ -40,14 +40,91 @@ export default function Story({
 
                         <div className={`cs-12 w-full`}>
                             <div className="font-lora mx-auto prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
-                                <h1>What is this?</h1>
-                                <p className="lead">
-                                    <span className="font-bold">TLDR:</span> This website curates resources that SLPs may find useful.
+                                <h1 className={`tac`}>What is OpenSLP?</h1>
+                                <hr />
+                                {/*<p className="lead">*/}
+                                {/*    <span className="font-bold">TLDR:</span> This website curates resources that SLPs may find useful.*/}
+                                {/*</p>*/}
+                                <p className={`lead xl:text-3xl tac font-bold`}>
+                                    Hello hello! 👋
+                                </p>
+                                <p className={`tac lead`}>
+                                    I'm Kevin. My partner is <a href="https://haerapark.com">Heather</a>.
+                                    <br/>
+                                    I'm the software engineer. She's the SLP.
+                                    <br/>
+                                    Together, we co-created OpenSLP.
+                                    <br/>
+                                    ❤️🫰
+                                </p>
+                                <h2>The Story</h2>
+                                <p>
+                                    Over the years, and by virtue of my
+                                    proximity to Heather and her work, I've come
+                                    to learn and appreciate more about what it
+                                    takes to be an SLP: a keenly diagnostic
+                                    mind, sharpened by a thousand hours of
+                                    selective study across linguistics, phonetics,
+                                    sociology, psychology, and anatomy. A
+                                    compassionate heart. A deep reserve of
+                                    patience and the ability to wear a dozen
+                                    hats while juggling a hundred plates.{' '}
                                 </p>
                                 <p>
-                                    Hello! I'm Kevin. I'm not an SLP, but my
-                                    partner is. I'm a software engineer.
+                                    Of course, this can vary by clinician and
+                                    setting, but I've noticed that there seems to be a near-universal quality shared by
+                                    all SLPs:{" "}
+                                    <span className="italic">
+                                        resourcefulness
+                                    </span>
+                                    . An ability to make <span className="italic">more</span> from <span className="italic">less</span>, to eke value out of the margins.
                                 </p>
+                                <p className={`lead`}>
+                                    And resourcefulness is a virtue, to be sure - but I've always found it bittersweet.
+                                </p>
+                                <p>
+                                    It is often an adaptation to scarcity.
+                                </p>
+                                <p>
+                                    To wit, I have heard her say dozens of
+                                    times:
+                                </p>
+                                <blockquote>
+                                    I don't know,{' '}
+                                    <span className="font-bold">
+                                        but I'll figure it out.
+                                    </span>
+                                </blockquote>
+                                <p>
+                                    From using dollar-store baubles as tokens
+                                    for external motivation, to using torn
+                                    pieces of paper as a makeshift visual aid to
+                                    assist with pronunciation. From repurposing
+                                    a board-game (anyone down for some Pop The
+                                    Pig? 🐷) to creating a completely new game
+                                    out of thin air. All for her students.
+                                </p>
+                                <p>
+                                    But of course, this very resourcefulness
+                                    comes at a cost - a financial and time-consuming cost that many SLPs know
+                                    all too well. From dusting off forgotten
+                                    games pulled from the forgotten corner of
+                                    the forgotten bookshelf, to scouring the
+                                    internet for TPT deals, printable PDFs,
+                                    flash cards. Sifting through ad-ridden blogs, template packs, and more - all to find something usable.
+                                </p>
+
+                                <h2>The Insight</h2>
+                                <p>As a software engineer, I'm privileged to say that I've never had to endure this issue.</p>
+
+                                <h2>Our Hope</h2>
+                                <p></p>
+                                <p>
+                                    I created OpenSLP to help Heather and other
+                                    SLPs/CFYs have access to all the great stuff
+                                    that's out there.
+                                </p>
+                                <p></p>
                                 {/*<p>We need more community.</p>*/}
                                 {/*<p><span className="font-bold">So, what is OpenSLP?</span></p>*/}
                                 {/*<blockquote>"So, you just get all of that for free?"</blockquote>*/}
