@@ -23,6 +23,15 @@ Route::post('/resource/{id}/increment-clicked-count', [HomeController::class, 'i
 //    ]);
 //})->name('home');
 
+Route::get('/team', function () {
+    $resources = Resource::all();
+    $resourceCount = $resources->count();
+    return Inertia::render('team', [
+        'resources' => $resources,
+        'resourceCount' => $resourceCount,
+    ]);
+})->name('team');
+
 Route::get('/story', function () {
     $resources = Resource::all();
     $resourceCount = $resources->count();

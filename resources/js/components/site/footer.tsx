@@ -1,11 +1,13 @@
 import AppLogo from '@/components/app-logo';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { story } from '@/routes';
+import { story, team } from '@/routes';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 import { LuExternalLink, LuHandHelping, LuSmile } from 'react-icons/lu';
 import AppLogoIcon from '@/components/app-logo-icon';
 import NewsletterSignup from '@/components/site/newsletter-signup';
+import { IoLogoDiscord } from 'react-icons/io5';
+import { AiOutlineDiscord } from 'react-icons/ai';
 
 type Props = {
     className?: string;
@@ -94,16 +96,22 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                     </Alert>
                 </div>
                 <div className="cs-12 md:cs-1" />
-                <div className="grid12 cs-12 md:cs-6">
+                <div className="grid12 cs-12 md:cs-6 text-xl font-medium">
                     <div className="cs-12 md:cs-6">
-                        <ul className={`space-y-2`}>
+                        <ul className={`flex flex-col gap-y-2`}>
                             <li
                                 className={`font-bold tracking-tight text-neutral-200`}
                             >
                                 About
                             </li>
-                            <li className={`ific gap-x-2 pointer-events-none text-neutral-300`}>
-                                <Link prefetch disabled href={story()}>What is OpenSLP?</Link>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                <Link prefetch disabled href={story()}>About OpenSLP & Roadmap</Link>
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                <Link prefetch href={team()}>Team</Link>
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                Contribution Guidelines
                                 <span
                                     className={`text-sm font-light tracking-tight opacity-50`}
                                 >
@@ -111,7 +119,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                 </span>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
-                                How do we pick resources?
+                                Join The Discord <AiOutlineDiscord />
                                 <span
                                     className={`text-sm font-light tracking-tight opacity-50`}
                                 >
