@@ -1,8 +1,9 @@
 import AppLogo from '@/components/app-logo';
+import { home } from '@/routes';
 import type { SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 import React from 'react';
-import { BadgeCheckIcon, CircleCheck } from 'lucide-react';
+import { LuBookmark } from 'react-icons/lu';
 
 type Props = {
     className?: string;
@@ -13,17 +14,27 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
         .props;
 
     return (
-        <header className={`w-full px-5 pt-5 text-sm not-has-[nav]:hidden ${className}`}>
-            <nav className="flex z-10 items-center justify-between gap-4 rounded-lg py-4 px-5 outline"
-                 style={{
-                     background: 'rgba(255, 255, 255, 0.3)',
-                     backdropFilter: 'blur(1px)',
-
-                 }}
+        <header
+            className={`w-full px-5 pt-5 text-sm not-has-[nav]:hidden ${className}`}
+        >
+            <nav
+                className="z-10 flex items-center justify-between gap-4 rounded-lg px-5 py-4 outline"
+                style={{
+                    background: 'rgba(255, 255, 255, 0.3)',
+                    backdropFilter: 'blur(1px)',
+                }}
             >
-                <AppLogo withVersion /> <span className={`hidden lg:inline text-sm text-neutral-500`}>Bookmark this page! 🤗</span>
-                <div className="flex flex-col items-end font-body">
-                    <span className={`text-xs text-balance lg:text-sm font-lora ific text-right text-neutral-600 font-medium`}>
+                <a href={home.url()}>
+                    <AppLogo withVersion />
+                </a>
+                <p className={`ific hidden text-sm text-neutral-500 lg:inline`}>
+                    <LuBookmark className={`mr-1 inline`} />
+                    <span>Add OpenSLP to your bookmarks! </span>
+                </p>
+                <div className="font-body flex flex-col items-end">
+                    <span
+                        className={`font-lora ific text-right text-xs font-medium text-balance text-neutral-600 lg:text-sm`}
+                    >
                         {/*<CircleCheck className={`h-4`}  />*/}
                         Curated Resources For SLPs
                     </span>

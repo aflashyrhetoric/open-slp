@@ -1,9 +1,18 @@
 import AppLogo from '@/components/app-logo';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { story, team } from '@/routes';
+import { home, story, team } from '@/routes';
 import { Link } from '@inertiajs/react';
 import React from 'react';
-import { LuExternalLink, LuHandHelping, LuSmile } from 'react-icons/lu';
+import {
+    LuAppWindowMac,
+    LuCoffee,
+    LuExternalLink,
+    LuHandHelping,
+    LuHeart,
+    LuHouse,
+    LuPalette,
+    LuSmile,
+} from 'react-icons/lu';
 import AppLogoIcon from '@/components/app-logo-icon';
 import NewsletterSignup from '@/components/site/newsletter-signup';
 import { IoLogoDiscord } from 'react-icons/io5';
@@ -105,12 +114,19 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                 About
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
+                                <LuHouse />
+                                <Link prefetch disabled href={home()}>Home</Link>
+                            </li>
+                            <li className={`ific gap-x-2 text-neutral-300`}>
+                                <LuCoffee />
                                 <Link prefetch disabled href={story()}>About Us & Roadmap</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
+                                <LuHeart />
                                 <Link prefetch href={team()}>Team</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
+                                <LuHandHelping />
                                 Contribution Guidelines
                                 <span
                                     className={`text-sm font-light tracking-tight opacity-50`}
@@ -119,7 +135,8 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                 </span>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
-                                Join The Discord <AiOutlineDiscord />
+                                <AiOutlineDiscord />
+                                Join The Discord
                                 <span
                                     className={`text-sm font-light tracking-tight opacity-50`}
                                 >
@@ -142,6 +159,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                     rel={'noopener'}
                                     href="https://plosive.app/discover"
                                 >
+                                    <LuAppWindowMac className={`inline mr-2`}/>
                                     Plosive - App For SLPs
                                 </a>
                             </li>

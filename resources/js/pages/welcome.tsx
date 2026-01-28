@@ -140,7 +140,7 @@ export default function Welcome({
                                         >
                                             Curated
                                         </AuroraText>
-                                        resources for SLPs
+                                        <span className="text-neutral-700">resources for SLPs</span>
                                     </p>
                                     <div
                                         className={`relative hidden lg:cs-6 lg:block`}
