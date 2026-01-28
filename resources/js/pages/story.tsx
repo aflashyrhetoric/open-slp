@@ -27,8 +27,8 @@ export default function Story({
             <HeadTag />
             <div className="flex min-h-screen flex-col">
                 <Header />
-                <div className={`p-9`}>
-                    <main className="grid12 mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-12 lg:max-w-4xl lg:px-8 lg:py-16 xl:max-w-6xl">
+                <div className={`p-5 sm:p-7 md:p-9`}>
+                    <main className="grid12 mx-auto max-w-3xl px-0 py-10 sm:px-6 sm:py-12 lg:max-w-4xl lg:px-8 lg:py-16 xl:max-w-6xl">
                         {/*<Alert className={`cs-12`}>*/}
                         {/*    <LuCircleHelp />*/}
                         {/*    <AlertTitle>What is OpenSLP?</AlertTitle>*/}
@@ -40,7 +40,7 @@ export default function Story({
                         {/*</Alert>*/}
 
                         <div className={`cs-12 w-full`}>
-                            <div className="font-lora mx-auto prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
+                            <div className="font-lora mx-auto prose prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
                                 <h1 className={`tac`}>What is OpenSLP?</h1>
                                 <p className={`tac text-neutral-400 italic`}>About us and our plan/roadmap.</p>
                                 <hr />
@@ -51,7 +51,9 @@ export default function Story({
                                     Hello hello! 👋
                                 </p>
                                 <p className={`tac lead`}>
-                                    I'm Kevin. My partner is{' '}
+                                    I'm Kevin.{" "}
+                                    <br className={`sm:hidden`}/>
+                                    My partner is{' '}
                                     <a
                                         target={'_blank'}
                                         rel={'nofollow noopener'}

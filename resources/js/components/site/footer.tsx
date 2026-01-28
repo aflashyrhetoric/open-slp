@@ -15,7 +15,7 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ className = '' }: Props) => {
     return (
-        <div className={`w-full bg-gray-900 px-12 py-12 lg:px-24 ${className}`}>
+        <div className={`w-full bg-gray-900 px-5 md:px-12 py-12 lg:px-24 ${className}`}>
             <div className={`grid12 gap-y-5 md:gap-y-0`}>
                 <div className="cs-12 md:cs-5">
                     <AppLogoIcon className={`size-36 mb-8`}/>
@@ -96,16 +96,16 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                     </Alert>
                 </div>
                 <div className="cs-12 md:cs-1" />
-                <div className="grid12 cs-12 md:cs-6 text-xl font-medium">
+                <div className="grid12 cs-12 md:cs-6 gap-x-5 gap-y-10 md:gap-y-0 text-sm md:text-base lg:text-lg font-medium">
                     <div className="cs-12 md:cs-6">
-                        <ul className={`flex flex-col gap-y-2`}>
+                        <ul className={`flex flex-col gap-y-4`}>
                             <li
                                 className={`font-bold tracking-tight text-neutral-200`}
                             >
                                 About
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
-                                <Link prefetch disabled href={story()}>About OpenSLP & Roadmap</Link>
+                                <Link prefetch disabled href={story()}>About Us & Roadmap</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
                                 <Link prefetch href={team()}>Team</Link>
