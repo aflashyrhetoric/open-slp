@@ -2,15 +2,19 @@
 
 - [ ] Add resource show page
 - [ ] Create Newsletter AI endpoint
+  
+# Later
+- [ ] Add contribution guidelines at the bottom
+- [ ] Add proper sorts/filters
+- [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
+- [ ] Create Discord room
+
+# Maybe
+- [ ] Add iframe on hover
+- [ ] Add AI search
  
 ---
 
-- [ ] Add iframe on hover
-- [ ] Add newsletter signup to buttondown?
-- [ ] Add story
-- [ ] Add photos
-- [ ] Add contribution guidelines at the bottom
-- [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
 
 ## Resource Types
 
@@ -35,3 +39,6 @@
 - [x] Create resource.isPublished (for drafts)
 - [x] Add filtering by type, category, pricing, etc
 - [x] Finish slides system and start posting
+- [x] Add newsletter signup to buttondown?
+- [x] Add story
+- [x] Add photos

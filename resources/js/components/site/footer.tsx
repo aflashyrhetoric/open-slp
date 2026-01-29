@@ -9,7 +9,7 @@ import {
     LuExternalLink,
     LuHandHelping,
     LuHeart,
-    LuHouse,
+    LuHouse, LuMap,
     LuPalette,
     LuSmile,
 } from 'react-icons/lu';
@@ -118,7 +118,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                                 <Link prefetch disabled href={home()}>Home</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
-                                <LuCoffee />
+                                <LuMap />
                                 <Link prefetch disabled href={story()}>About Us & Roadmap</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
