@@ -8,6 +8,15 @@ export type PricingModel =
     | 'paid_trial'
     | 'mixed';
 
+export const ALL_PRICING_MODELS: PricingModel[] = [
+    'free',
+    'freemium',
+    'paid',
+    // 'paid_with_drops',
+    'paid_trial',
+    'mixed',
+]
+
 export type ResourceCategory = IdAndTimestamps & {
     name: string;
     icon: string | null;

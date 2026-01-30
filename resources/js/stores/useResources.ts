@@ -3,6 +3,7 @@ import {
     Resource,
     ResourceCategory,
 } from '@/types/openslp/resource';
+import Fuse, { IFuseOptions } from 'fuse.js';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
@@ -52,10 +53,26 @@ const initialFiltersState: Pick<State, 'pricing' | 'audience' | 'features'> = {
     },
 };
 
-function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[] {
-    const { resources, searchQuery, pricing, audience, features } = state;
+const fuseOptions: IFuseOptions<Resource> = {
+    keys: [
+        { name: 'target_audience', weight: 5 },
+        { name: 'pricing_model', weight: 9 },
+        { name: 'name', weight: 3 },
+        { name: 'author', weight: 1.5 },
+        { name: 'keywords', weight: 1.5 },
+        { name: 'notes', weight: 1 },
+        // { name: 'og_title', weight: 1 },
+        // { name: 'og_description', weight: 0.8 },
+        { name: 'category.name', weight: 0.8 },
+    ],
+    threshold: 0.38,
+    ignoreLocation: true,
+};
 
-    const filtered = resources.filter((r) => {
+function applyDiscreteFilters(resources: Resource[], state: State): Resource[] {
+    const { pricing, audience, features } = state;
+
+    return resources.filter((r) => {
         if (pricing && r.pricing_model !== pricing) return false;
 
         if (audience && r.target_audience !== audience && r.target_audience !== 'all') {
@@ -66,18 +83,14 @@ function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[]
         if (features.usesAi && !r.uses_ai) return false;
         if (features.updatesRegularly && !r.updates_regularly) return false;
 
-        if (searchQuery) {
-            const query = searchQuery.toLowerCase();
-            const searchableText = `${r.name} ${r.author} ${r.keywords} ${r.notes}`.toLowerCase();
-            if (!searchableText.includes(query)) return false;
-        }
-
         return true;
     });
+}
 
+function groupByCategory(resources: Resource[]): ResourcesByCategory[] {
     const categoryMap = new Map<number, ResourcesByCategory>();
 
-    for (const resource of filtered) {
+    for (const resource of resources) {
         const categoryId = resource.category.id;
 
         if (!categoryMap.has(categoryId)) {
@@ -93,6 +106,19 @@ function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[]
     return Array.from(categoryMap.values()).sort(
         (a, b) => a.category.position - b.category.position,
     );
+}
+
+function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[] {
+    const discreteFiltered = applyDiscreteFilters(state.resources, state);
+
+    if (!state.searchQuery.trim()) {
+        return groupByCategory(discreteFiltered);
+    }
+
+    const fuse = new Fuse(discreteFiltered, fuseOptions);
+    const fuseResults = fuse.search(state.searchQuery).map((result) => result.item);
+
+    return groupByCategory(fuseResults);
 }
 
 export const useResources = create<ResourcesState>()(

@@ -90,7 +90,7 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                                 1024: 2,
                                 640: 1,
                             }}
-                            className="cs-12 flex w-full gap-5 px-9 pb-12"
+                            className="cs-12 flex w-full gap-5 px-9 pt-4 pb-12"
                             columnClassName="flex flex-col gap-5"
                         >
                             {filteredResourcesByCategory.map(

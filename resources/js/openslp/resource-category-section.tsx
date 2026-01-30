@@ -22,7 +22,7 @@ const ResourceCategorySection: React.FC<Props> = ({
     return (
         <div className={`cs-12 fade-in ${className}`}>
             <div
-                className={`py-4 text-2xl font-medium text-neutral-800`}
+                className={`mb-3 text-2xl font-medium text-neutral-800`}
                 // style={{
                 //     background: category.bg_color ?? '#374151',
                 // }}
@@ -33,7 +33,7 @@ const ResourceCategorySection: React.FC<Props> = ({
                 </h2>
             </div>
             <div
-                className={`gradient-highlight-lightest rounded-xl pb-[1px] border border-neutral-500 fade-in`}
+                className={`gradient-highlight-lightest rounded pb-[1px] border border-amber-900 fade-in`}
             >
                 <div>
                     <div className="p-4 mb-1">
