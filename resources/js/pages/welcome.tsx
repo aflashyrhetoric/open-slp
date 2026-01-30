@@ -1,103 +1,30 @@
+import ResourceFilterBar from '@/components/resource-filter-bar';
 import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
 import { AnimatedBeamMultipleOutputDemo } from '@/components/site/home-animated-beam';
-import { AuroraText } from '@/components/ui/aurora-text';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
-import { FlickeringGrid } from '@/components/ui/flickering-grid';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import ResourceCategorySection from '@/openslp/resource-category-section';
-import { Resource, ResourceCategory } from '@/types/openslp/resource';
-import autoAnimate from '@formkit/auto-animate';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import Masonry from 'react-masonry-css';
 import NewsletterSignup from '@/components/site/newsletter-signup';
+import { AuroraText } from '@/components/ui/aurora-text';
+import { FlickeringGrid } from '@/components/ui/flickering-grid';
+import ResourceCategorySection from '@/openslp/resource-category-section';
+import { useResources } from '@/stores/useResources';
+import { Resource } from '@/types/openslp/resource';
+import Masonry from 'react-masonry-css';
 
-export default function Welcome({
-    categories,
-    // canRegister = true,
-    resourcesByCategory,
-    resources,
-    resourceCount = 0,
-}: {
-    categories: ResourceCategory[];
-    // canRegister?: boolean;
-    resources: Resource[];
-    resourcesByCategory: Record<string, Resource[]>;
-    resourceCount: number;
-}) {
-    // const { auth } = usePage<SharedData>().props;
+export default function Welcome({ resources }: { resources: Resource[] }) {
+    const {
+        resources: resourcesFromStore,
+        setResources,
+        filteredResourcesByCategory,
+    } = useResources();
 
-    const [searchQuery, setSearchQuery] = useState<string>('');
+    if (resources !== resourcesFromStore) {
+        setResources(resources);
+    }
 
-    const [onlyDownloadables, setOnlyDownloadables] = useState<boolean>(false);
-
-    const filteredResourcesByCategory = useMemo(() => {
-        // if (!searchQuery.trim()) {
-        //     return resourcesByCategory;
-        // }
-        //
-        const query = searchQuery.toLowerCase();
-        const result: Record<string, Resource[]> = {};
-
-        for (const [categoryName, categoryResources] of Object.entries(
-            resourcesByCategory,
-        )) {
-            const filtered = categoryResources.filter((resource) => {
-                const searchable = [
-                    resource.name,
-                    resource.author,
-                    resource.keywords,
-                    resource.target_audience,
-                    resource.notes,
-                ]
-                    .filter(Boolean)
-                    .join(' ')
-                    .toLowerCase();
-
-                const includesQuery = searchable.includes(query);
-
-                function checkIfSatisfiesFilters(): boolean {
-                    if (onlyDownloadables) {
-                        return resource.has_downloadables;
-                    }
-
-                    return true;
-                }
-
-                const satisfiesAdditionalFilters = checkIfSatisfiesFilters();
-
-                if (searchQuery.length === 0) {
-                    return satisfiesAdditionalFilters;
-                }
-
-                return includesQuery && satisfiesAdditionalFilters;
-            });
-
-            if (filtered.length > 0) {
-                result[categoryName] = filtered;
-            }
-        }
-
-        return result;
-    }, [searchQuery, resourcesByCategory, onlyDownloadables]);
-
-    const parent = useRef(null);
-
-    useEffect(() => {
-        if (parent.current) {
-            autoAnimate(parent.current);
-        }
-    }, [parent]);
-
-    const allOgImages = resources.map((resource) => {
-        if (resource !== null && resource.og_image) {
-            return resource.og_image;
-        }
-    });
+    const allOgImages = resources
+        .filter((resource) => resource !== null && resource.og_image)
+        .map((resource) => resource.og_image);
 
     const images =
         allOgImages.length > 0
@@ -131,7 +58,6 @@ export default function Welcome({
                                     >
                                         <AuroraText
                                             className={`mr-4`}
-                                            // less-saturated, sunset-esque colors
                                             colors={[
                                                 '#FF6F91',
                                                 '#FF9671',
@@ -140,51 +66,23 @@ export default function Welcome({
                                         >
                                             Curated
                                         </AuroraText>
-                                        <span className="text-neutral-700">resources for SLPs</span>
+                                        <span className="text-neutral-700">
+                                            resources for SLPs
+                                        </span>
                                     </p>
                                     <div
                                         className={`relative hidden lg:cs-6 lg:block`}
                                     >
                                         {/*<IconCloud images={images} />*/}
                                         <AnimatedBeamMultipleOutputDemo
-                                            circleImages={[images]}
+                                            circleImages={[]}
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <NewsletterSignup className={`cs-12`}/>
-                        <div className={`cs-12 px-9`}>
-                            <FieldGroup>
-                                <Field orientation={'vertical'}>
-                                    <FieldLabel htmlFor="search-query-input">
-                                        Search Resources
-                                    </FieldLabel>
-                                    <Input
-                                        value={searchQuery}
-                                        onChange={(e) =>
-                                            setSearchQuery(e.target.value)
-                                        }
-                                        placeholder="Calendar..."
-                                        id="search-query-input"
-                                    />
-                                </Field>
-                                <Field orientation={'horizontal'}>
-                                    <Checkbox
-                                        id="only-downloadables"
-                                        checked={onlyDownloadables}
-                                        onCheckedChange={(checked) =>
-                                            setOnlyDownloadables(
-                                                Boolean(checked),
-                                            )
-                                        }
-                                    />
-                                    <Label htmlFor="only-downloadables">
-                                        Only show resources with downloadables
-                                    </Label>
-                                </Field>
-                            </FieldGroup>
-                        </div>
+                        <NewsletterSignup className={`cs-12`} />
+                        <ResourceFilterBar />
                         <Masonry
                             breakpointCols={{
                                 default: 3,
@@ -195,52 +93,21 @@ export default function Welcome({
                             className="cs-12 flex w-full gap-5 px-9 pb-12"
                             columnClassName="flex flex-col gap-5"
                         >
-                            {Object.keys(filteredResourcesByCategory)
-                                .map((categoryName) => {
-                                    const resourcesForCategory =
-                                        filteredResourcesByCategory[
-                                            categoryName
-                                        ];
-
-                                    const category = categories.find(
-                                        (cat) => cat.name === categoryName,
-                                    );
-
-                                    return {
-                                        categoryName,
-                                        category,
-                                        resourcesForCategory,
-                                    };
-                                })
-                                .sort((a, b) => {
-                                    const { category: categoryA } = a;
-                                    const { category: categoryB } = b;
-                                    if (!categoryA || !categoryB) return 0;
-                                    return (
-                                        categoryA.position - categoryB.position
-                                    );
-                                })
-                                .map((categoryBlob, key) => {
-                                    const {
-                                        category,
-                                        categoryName,
-                                        resourcesForCategory,
-                                    } = categoryBlob;
-                                    if (!category) return null;
-                                    return (
-                                        <ResourceCategorySection
-                                            key={`category-${categoryName}-${key}`}
-                                            category={category}
-                                            categoryName={categoryName}
-                                            resources={resourcesForCategory}
-                                        />
-                                    );
-                                })}
+                            {filteredResourcesByCategory.map(
+                                ({ category, resourcesInCategory }) => (
+                                    <ResourceCategorySection
+                                        key={`category-${category.id}`}
+                                        category={category}
+                                        categoryName={category.name}
+                                        resources={resourcesInCategory}
+                                    />
+                                ),
+                            )}
                         </Masonry>{' '}
                     </main>
                 </div>
 
-                <NewsletterSignup className={`cs-12 mb-5`}/>
+                <NewsletterSignup className={`cs-12 mb-5`} />
                 <Footer className={`flex-1 grow`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>

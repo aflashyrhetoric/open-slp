@@ -30,7 +30,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
             <div className={`ific gap-x-1`}>
                 <div className={`ific`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="max-w-[230px] text-sm leading-5 font-semibold sm:max-w-[220px] sm:text-base md:max-w-[300px] md:text-lg lg:max-w-[400px]">
+                    <h3 className="max-w-[230px] text-sm leading-5 font-semibold sm:max-w-[220px] sm:text-base md:max-w-[300px] md:text-lg lg:max-w-[400px] xl:max-w-[410px]">
                         <a
                             className={`block overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
                             onClick={incrementClickedCount}
@@ -39,7 +39,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                             href={resource.href}
                         >
                             <span
-                                className={`font-sans text-black underline opacity-100`}
+                                className={`font-sans text-neutral-700 underline opacity-100`}
                             >
                                 {resource.name}
                             </span>
@@ -59,7 +59,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     </p>
                 )}
             </div>
-            <div className={`fic space-x-1`}>
+            <div className={`fic my-1 space-x-1`}>
                 <PricingPill pricingModel={resource.pricing_model} />
                 <span
                     className={`hidden text-xs tracking-tight text-neutral-500 italic lg:inline`}
@@ -74,18 +74,6 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                         {!resource.author_page_href && (
                             <span> via {resource.author}</span>
                         )}
-                        {/*{resource.author_page_href && (*/}
-                        {/*    <span>*/}
-                        {/*        <a*/}
-                        {/*            target={`_blank`}*/}
-                        {/*            rel={`noopener noreferrer`}*/}
-                        {/*            className={`underline`}*/}
-                        {/*            href={resource.author_page_href}*/}
-                        {/*        >*/}
-                        {/*            via {resource.author}*/}
-                        {/*        </a>{' '}*/}
-                        {/*    </span>*/}
-                        {/*)}*/}
                     </span>
                 )}
 
@@ -94,7 +82,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     <LanguagePill resource={resource} />
                 </div>
             </div>
-            <p className={`font-body mt-1 text-sm text-neutral-600`}>
+            <p className={`font-body text-sm text-neutral-600`}>
                 {resource.notes}
             </p>
 

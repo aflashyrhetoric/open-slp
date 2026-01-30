@@ -84,33 +84,47 @@ export function AnimatedBeamMultipleOutputDemo({
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div6Ref}
+                pathColor={"#FF6F91"}
+                pathOpacity={0.5}
+
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div2Ref}
                 toRef={div6Ref}
+                pathColor={"#FF9671"}
+                pathOpacity={0.5}
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div6Ref}
+                pathColor={"#FFC75F"}
+                pathOpacity={0.5}
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div4Ref}
                 toRef={div6Ref}
+                pathColor={"#FF9671"}
+                pathOpacity={0.5}
                 reverse
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div5Ref}
                 toRef={div6Ref}
+                pathColor={"#FF6F91"}
+                pathOpacity={0.5}
                 reverse
             />
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
                 toRef={div6Ref}
+                // blue pathColor
+                pathColor={"#ff9999"}
+                pathOpacity={0.5}
                 reverse
             />
         </div>
