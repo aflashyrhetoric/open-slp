@@ -88,9 +88,9 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                         <ResourceFilterBar />
                         <Masonry
                             breakpointCols={{
-                                default: 4,
-                                1440: 4,
-                                1280: 3,
+                                default: 3,
+                                2560: 4,
+                                1512: 3,
                                 1024: 2,
                                 768: 1,
                             }}

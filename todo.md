@@ -1,6 +1,5 @@
 # Todo
 
-- [ ] Add proper sorts/filters
 - [ ] Add resource show page
 - [ ] Create Newsletter AI endpoint
   
@@ -42,3 +41,4 @@
 - [x] Add newsletter signup to buttondown?
 - [x] Add story
 - [x] Add photos
+- [x] Add proper sorts/filters
