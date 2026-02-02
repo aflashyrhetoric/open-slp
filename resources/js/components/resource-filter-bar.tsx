@@ -58,7 +58,7 @@ export default function ResourceFilterBar({ className = '' }: Props) {
             <FieldGroup className={`!grid grid-cols-12 gap-3 lg:gap-5`}>
                 <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
                     <FieldLabel htmlFor="search-query-input">
-                        Pricing
+                        Filter by pricing
                     </FieldLabel>
                     <Combobox items={ALL_PRICING_MODELS}>
                         <Combobox
@@ -98,7 +98,7 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                     </Combobox>
                 </Field>
                 <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">Type</FieldLabel>
+                    <FieldLabel htmlFor="search-query-input">Filter by area</FieldLabel>
                     <Combobox items={ALL_SLP_TYPES}>
                         <Combobox
                             multiple
@@ -151,7 +151,7 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                     </Field>
                 </Field>
                 <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
-                    <FieldLabel>Hide Info</FieldLabel>
+                    <FieldLabel>Condensed view</FieldLabel>
                     <Field orientation={'horizontal'}>
                         <Switch
                             id="collapse-extra-data"

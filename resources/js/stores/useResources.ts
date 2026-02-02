@@ -98,10 +98,7 @@ function applyDiscreteFilters(resources: Resource[], state: State): Resource[] {
         }
 
         if (audienceFilters.length > 0 && !audienceFilters.includes('all')) {
-            const match =
-                audienceFilters.includes(r.target_audience) ||
-                r.target_audience === 'all';
-            if (!match) {
+            if (!audienceFilters.includes(r.target_audience)) {
                 return false;
             }
         }
