@@ -1,4 +1,3 @@
-import { Checkbox } from '@/components/ui/checkbox';
 import {
     Combobox,
     ComboboxChip,
@@ -6,25 +5,17 @@ import {
     ComboboxChipsInput,
     ComboboxContent,
     ComboboxEmpty,
-    ComboboxInput,
     ComboboxItem,
     ComboboxList,
     ComboboxValue,
-    useComboboxAnchor,
+    useComboboxAnchor
 } from '@/components/ui/combobox';
-import {
-    Field,
-    FieldDescription,
-    FieldGroup,
-    FieldLabel,
-    FieldLegend,
-    FieldSet,
-} from '@/components/ui/field';
+import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import { useResources } from '@/stores/useResources';
+import { ALL_PRICING_MODELS, ALL_SLP_TYPES } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
-import { ALL_PRICING_MODELS } from '@/types/openslp/resource';
 
 type Props = {
     className?: string;
@@ -32,9 +23,17 @@ type Props = {
 
 export default function ResourceFilterBar({ className = '' }: Props) {
     // import searchQuery from useResources store
-    const { searchQuery, setSearchQuery } = useResources();
+    const {
+        searchQuery,
+        setSearchQuery,
+        setPricing,
+        setAudience,
+        toggleFeature,
+        featuresFilters
+    } = useResources();
 
-    const anchor = useComboboxAnchor()
+    const anchor = useComboboxAnchor();
+    const anchor2 = useComboboxAnchor();
 
     return (
         <FieldSet className={`cs-12 px-9 ${className}`}>
@@ -55,17 +54,18 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                     />
                 </Field>
             </FieldGroup>
-            <FieldGroup className={`!grid grid-cols-12 gap-5`}>
-                <Field orientation={'vertical'} className={`cs-4`}>
+            <FieldGroup className={`!grid grid-cols-12 gap-3 lg:gap-5`}>
+                <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
                     <FieldLabel htmlFor="search-query-input">
                         Pricing
                     </FieldLabel>
-                    <Combobox
-                        items={ALL_PRICING_MODELS}
-                    >
+                    <Combobox items={ALL_PRICING_MODELS}>
                         <Combobox
                             multiple
                             autoHighlight
+                            onValueChange={(values) => {
+                                setPricing(values as typeof ALL_PRICING_MODELS);
+                            }}
                             items={ALL_PRICING_MODELS}
                             defaultValue={ALL_PRICING_MODELS}
                         >
@@ -74,7 +74,9 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                                     {(values) => (
                                         <>
                                             {values.map((value: string) => (
-                                                <ComboboxChip key={value}>{humanize(value)}</ComboboxChip>
+                                                <ComboboxChip key={value}>
+                                                    {humanize(value)}
+                                                </ComboboxChip>
                                             ))}
                                             <ComboboxChipsInput />
                                         </>
@@ -94,32 +96,33 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                         </Combobox>
                     </Combobox>
                 </Field>
-                <Field orientation={'vertical'} className={`cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">
-                        Pricing
-                    </FieldLabel>
-                    <Combobox
-                        items={ALL_PRICING_MODELS}
-                    >
+                <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
+                    <FieldLabel htmlFor="search-query-input">Type</FieldLabel>
+                    <Combobox items={ALL_SLP_TYPES}>
                         <Combobox
                             multiple
                             autoHighlight
-                            items={ALL_PRICING_MODELS}
-                            defaultValue={ALL_PRICING_MODELS}
+                            onValueChange={(values) => {
+                                setAudience(values as typeof ALL_SLP_TYPES);
+                            }}
+                            items={ALL_SLP_TYPES}
+                            defaultValue={ALL_SLP_TYPES}
                         >
-                            <ComboboxChips ref={anchor} className="w-full">
+                            <ComboboxChips ref={anchor2} className="w-full">
                                 <ComboboxValue>
                                     {(values) => (
                                         <>
                                             {values.map((value: string) => (
-                                                <ComboboxChip key={value}>{humanize(value)}</ComboboxChip>
+                                                <ComboboxChip key={value}>
+                                                    {humanize(value)}
+                                                </ComboboxChip>
                                             ))}
                                             <ComboboxChipsInput />
                                         </>
                                     )}
                                 </ComboboxValue>
                             </ComboboxChips>
-                            <ComboboxContent anchor={anchor}>
+                            <ComboboxContent anchor={anchor2}>
                                 <ComboboxEmpty>No items found.</ComboboxEmpty>
                                 <ComboboxList>
                                     {(item) => (
@@ -132,44 +135,32 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                         </Combobox>
                     </Combobox>
                 </Field>
-                <Field orientation={'vertical'} className={`cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">
-                        Pricing
+                <Field orientation={'vertical'} className={`cs-6 lg:cs-4`}>
+                    <FieldLabel htmlFor={"includes-downloadables"}>
+                        Must include downloadables
                     </FieldLabel>
-                    <Combobox
-                        items={ALL_PRICING_MODELS}
-                    >
-                        <Combobox
-                            multiple
-                            autoHighlight
-                            items={ALL_PRICING_MODELS}
-                            defaultValue={ALL_PRICING_MODELS}
-                        >
-                            <ComboboxChips ref={anchor} className="w-full">
-                                <ComboboxValue>
-                                    {(values) => (
-                                        <>
-                                            {values.map((value: string) => (
-                                                <ComboboxChip key={value}>{humanize(value)}</ComboboxChip>
-                                            ))}
-                                            <ComboboxChipsInput />
-                                        </>
-                                    )}
-                                </ComboboxValue>
-                            </ComboboxChips>
-                            <ComboboxContent anchor={anchor}>
-                                <ComboboxEmpty>No items found.</ComboboxEmpty>
-                                <ComboboxList>
-                                    {(item) => (
-                                        <ComboboxItem key={item} value={item}>
-                                            {humanize(item)}
-                                        </ComboboxItem>
-                                    )}
-                                </ComboboxList>
-                            </ComboboxContent>
-                        </Combobox>
-                    </Combobox>
+                    <Field orientation={'horizontal'}>
+                        <Switch
+                            id="includes-downloadables"
+                            checked={featuresFilters.hasDownloadables}
+                            onCheckedChange={() => {
+                                toggleFeature('hasDownloadables');
+                            }}
+                        />
+                    </Field>
                 </Field>
+                {/*<Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>*/}
+                {/*    <FieldLabel></FieldLabel>*/}
+                {/*    <Field orientation={'horizontal'}>*/}
+                {/*        <Switch*/}
+                {/*            id="includes-downloadables"*/}
+                {/*            checked={featuresFilters.hasDownloadables}*/}
+                {/*            onCheckedChange={() => {*/}
+                {/*                toggleFeature('hasDownloadables');*/}
+                {/*            }}*/}
+                {/*        />*/}
+                {/*    </Field>*/}
+                {/*</Field>*/}
             </FieldGroup>
         </FieldSet>
     );

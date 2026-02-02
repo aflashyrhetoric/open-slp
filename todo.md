@@ -1,11 +1,11 @@
 # Todo
 
+- [ ] Add proper sorts/filters
 - [ ] Add resource show page
 - [ ] Create Newsletter AI endpoint
   
 # Later
 - [ ] Add contribution guidelines at the bottom
-- [ ] Add proper sorts/filters
 - [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
 - [ ] Create Discord room
 

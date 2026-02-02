@@ -10,12 +10,16 @@ export type PricingModel =
 
 export const ALL_PRICING_MODELS: PricingModel[] = [
     'free',
-    'freemium',
+    // 'freemium',
     'paid',
     // 'paid_with_drops',
     'paid_trial',
     'mixed',
 ]
+
+export type SLPType = 'pediatric' | 'medical' | 'all'
+
+export const ALL_SLP_TYPES: SLPType[] = ['pediatric', 'medical', 'all'];
 
 export type ResourceCategory = IdAndTimestamps & {
     name: string;
@@ -40,7 +44,7 @@ export type Resource = IdAndTimestamps & {
     has_downloadables: boolean;
 
     pricing_model: PricingModel;
-    target_audience: 'pediatric' | 'medical' | 'all';
+    target_audience: SLPType;
 
     uses_ai: boolean;
 

@@ -2,6 +2,7 @@ import {
     PricingModel,
     Resource,
     ResourceCategory,
+    SLPType,
 } from '@/types/openslp/resource';
 import Fuse, { IFuseOptions } from 'fuse.js';
 import { create } from 'zustand';
@@ -21,9 +22,9 @@ type State = {
     filteredResourcesByCategory: ResourcesByCategory[];
 
     // Filters
-    pricing: PricingModel | null;
-    audience: TargetAudience | null;
-    features: {
+    pricingFilters: PricingModel[];
+    audienceFilters: SLPType[];
+    featuresFilters: {
         hasDownloadables: boolean;
         usesAi: boolean;
         updatesRegularly: boolean;
@@ -34,19 +35,27 @@ type Actions = {
     setResources: (resources: Resource[]) => void;
     setSearchQuery: (query: string) => void;
 
-    setPricing: (pricing: PricingModel | null) => void;
-    setAudience: (audience: TargetAudience | null) => void;
-    toggleFeature: (feature: keyof State['features']) => void;
+    setPricing: (pricing: PricingModel[]) => void;
+    setAudience: (audience: TargetAudience[]) => void;
+    toggleFeature: (feature: keyof State['featuresFilters']) => void;
 
     clearFilters: () => void;
 };
 
 type ResourcesState = State & Actions;
 
-const initialFiltersState: Pick<State, 'pricing' | 'audience' | 'features'> = {
-    pricing: null,
-    audience: null,
-    features: {
+const initialFiltersState: {
+    pricingFilters: PricingModel[];
+    audienceFilters: SLPType[];
+    featuresFilters: {
+        hasDownloadables: boolean;
+        usesAi: boolean;
+        updatesRegularly: boolean;
+    };
+} = {
+    pricingFilters: [],
+    audienceFilters: [],
+    featuresFilters: {
         hasDownloadables: false,
         usesAi: false,
         updatesRegularly: false,
@@ -70,18 +79,30 @@ const fuseOptions: IFuseOptions<Resource> = {
 };
 
 function applyDiscreteFilters(resources: Resource[], state: State): Resource[] {
-    const { pricing, audience, features } = state;
+    const { pricingFilters, audienceFilters, featuresFilters } = state;
 
     return resources.filter((r) => {
-        if (pricing && r.pricing_model !== pricing) return false;
-
-        if (audience && r.target_audience !== audience && r.target_audience !== 'all') {
+        if (
+            pricingFilters.length > 0 &&
+            !pricingFilters.includes(r.pricing_model)
+        ) {
             return false;
         }
 
-        if (features.hasDownloadables && !r.has_downloadables) return false;
-        if (features.usesAi && !r.uses_ai) return false;
-        if (features.updatesRegularly && !r.updates_regularly) return false;
+        if (audienceFilters.length > 0 && !audienceFilters.includes('all')) {
+            const match =
+                audienceFilters.includes(r.target_audience) ||
+                r.target_audience === 'all';
+            if (!match) {
+                return false;
+            }
+        }
+
+        if (featuresFilters.hasDownloadables && !r.has_downloadables)
+            return false;
+        if (featuresFilters.usesAi && !r.uses_ai) return false;
+        if (featuresFilters.updatesRegularly && !r.updates_regularly)
+            return false;
 
         return true;
     });
@@ -108,7 +129,9 @@ function groupByCategory(resources: Resource[]): ResourcesByCategory[] {
     );
 }
 
-function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[] {
+function computeFilteredResourcesByCategory(
+    state: State,
+): ResourcesByCategory[] {
     const discreteFiltered = applyDiscreteFilters(state.resources, state);
 
     if (!state.searchQuery.trim()) {
@@ -116,7 +139,9 @@ function computeFilteredResourcesByCategory(state: State): ResourcesByCategory[]
     }
 
     const fuse = new Fuse(discreteFiltered, fuseOptions);
-    const fuseResults = fuse.search(state.searchQuery).map((result) => result.item);
+    const fuseResults = fuse
+        .search(state.searchQuery)
+        .map((result) => result.item);
 
     return groupByCategory(fuseResults);
 }
@@ -132,39 +157,48 @@ export const useResources = create<ResourcesState>()(
             setResources: (resources) =>
                 set((state) => {
                     state.resources = resources;
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
 
             setSearchQuery: (query) =>
                 set((state) => {
                     state.searchQuery = query;
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
 
             setPricing: (pricing) =>
                 set((state) => {
-                    state.pricing = pricing;
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.pricingFilters = pricing;
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
 
             setAudience: (audience) =>
                 set((state) => {
-                    state.audience = audience;
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.audienceFilters = audience;
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
 
             toggleFeature: (feature) =>
                 set((state) => {
-                    state.features[feature] = !state.features[feature];
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.featuresFilters[feature] =
+                        !state.featuresFilters[feature];
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
 
             clearFilters: () =>
                 set((state) => {
-                    state.pricing = initialFiltersState.pricing;
-                    state.audience = initialFiltersState.audience;
-                    state.features = { ...initialFiltersState.features };
-                    state.filteredResourcesByCategory = computeFilteredResourcesByCategory(state);
+                    state.pricingFilters = initialFiltersState.pricingFilters;
+                    state.audienceFilters = initialFiltersState.audienceFilters;
+                    state.featuresFilters = {
+                        ...initialFiltersState.featuresFilters,
+                    };
+                    state.filteredResourcesByCategory =
+                        computeFilteredResourcesByCategory(state);
                 }),
         })),
         { name: 'resources' },
