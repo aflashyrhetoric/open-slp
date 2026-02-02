@@ -8,6 +8,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
 import { getDomainFromUrl } from '@/utils/string-utils';
 import axios from 'axios';
@@ -20,6 +21,17 @@ type Props = {
 };
 
 const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
+    const {
+        searchQuery,
+        setSearchQuery,
+        setPricing,
+        setAudience,
+        toggleFeature,
+        featuresFilters,
+        collapseExtraData,
+        toggleCollapseExtraData,
+    } = useResources();
+
     async function incrementClickedCount() {
         const route = incrementClickedCountRoute(resource.id);
         await axios.post(route.url);
@@ -59,42 +71,36 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                     </p>
                 )}
             </div>
-            <div className={`fic my-1 space-x-1`}>
-                <PricingPill pricingModel={resource.pricing_model} />
-                <span
-                    className={`hidden text-xs tracking-tight text-neutral-500 italic lg:inline`}
-                >
-                    {getDomainFromUrl(resource.href)}
-                </span>
-                {!resource.author && <span />}
-                {resource.author && (
+            {!collapseExtraData && (
+                <div className={`fic my-1 space-x-1`}>
+                    <PricingPill pricingModel={resource.pricing_model} />
                     <span
-                        className={`text-xs tracking-tight text-neutral-500 italic`}
+                        className={`hidden text-xs tracking-tight text-neutral-500 italic lg:inline`}
                     >
-                        {!resource.author_page_href && (
-                            <span> via {resource.author}</span>
-                        )}
+                        {getDomainFromUrl(resource.href)}
                     </span>
-                )}
+                    {!resource.author && <span />}
+                    {resource.author && (
+                        <span
+                            className={`text-xs tracking-tight text-neutral-500 italic`}
+                        >
+                            {!resource.author_page_href && (
+                                <span> via {resource.author}</span>
+                            )}
+                        </span>
+                    )}
 
-                <div className={`fic gap-x-2`}>
-                    <TargetAudiencePill resource={resource} />
-                    <LanguagePill resource={resource} />
+                    <div className={`fic gap-x-2`}>
+                        <TargetAudiencePill resource={resource} />
+                        <LanguagePill resource={resource} />
+                    </div>
                 </div>
-            </div>
-            <p className={`font-body text-sm text-neutral-600`}>
-                {resource.notes}
-            </p>
-
-            {/*{resource.notes && (*/}
-            {/*    <div*/}
-            {/*        className={`absolute pointer-events-none left-full min-w-[275px] max-w-[500px] top-0 z-10 rounded-md translate-y-2 bg-black text-white p-3 border opacity-0 shadow-xl transition-all group-hover:translate-y-0 group-hover:opacity-100`}*/}
-            {/*    >*/}
-            {/*        <p className={`text-base leading-5`}>*/}
-            {/*            {resource.notes}*/}
-            {/*        </p>*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            )}
+            {!collapseExtraData && (
+                <p className={`font-body text-sm text-neutral-600`}>
+                    {resource.notes}
+                </p>
+            )}
         </div>
     );
 };

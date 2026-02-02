@@ -4,12 +4,15 @@ import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
 import { AnimatedBeamMultipleOutputDemo } from '@/components/site/home-animated-beam';
 import NewsletterSignup from '@/components/site/newsletter-signup';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AuroraText } from '@/components/ui/aurora-text';
 import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
+import { CheckCircle2Icon } from 'lucide-react';
 import Masonry from 'react-masonry-css';
+import { LuGhost } from 'react-icons/lu';
 
 export default function Welcome({ resources }: { resources: Resource[] }) {
     const {
@@ -104,6 +107,17 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                                 ),
                             )}
                         </Masonry>{' '}
+                        {Object.keys(filteredResourcesByCategory).length === 0 && (
+                            <div className={`cs-12 px-9`}>
+                                <Alert>
+                                    <LuGhost />
+                                    <AlertTitle>No results found</AlertTitle>
+                                    <AlertDescription>
+                                        It seems we do not have resources that match your filters. Hopefully we will have more resources soon!
+                                    </AlertDescription>
+                                </Alert>
+                            </div>
+                        )}
                     </main>
                 </div>
 

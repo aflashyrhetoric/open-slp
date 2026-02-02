@@ -22,14 +22,15 @@ type Props = {
 };
 
 export default function ResourceFilterBar({ className = '' }: Props) {
-    // import searchQuery from useResources store
     const {
         searchQuery,
         setSearchQuery,
         setPricing,
         setAudience,
         toggleFeature,
-        featuresFilters
+        featuresFilters,
+        collapseExtraData,
+        toggleCollapseExtraData,
     } = useResources();
 
     const anchor = useComboboxAnchor();
@@ -135,7 +136,7 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                         </Combobox>
                     </Combobox>
                 </Field>
-                <Field orientation={'vertical'} className={`cs-6 lg:cs-4`}>
+                <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
                     <FieldLabel htmlFor={"includes-downloadables"}>
                         Must include downloadables
                     </FieldLabel>
@@ -149,18 +150,18 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                         />
                     </Field>
                 </Field>
-                {/*<Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>*/}
-                {/*    <FieldLabel></FieldLabel>*/}
-                {/*    <Field orientation={'horizontal'}>*/}
-                {/*        <Switch*/}
-                {/*            id="includes-downloadables"*/}
-                {/*            checked={featuresFilters.hasDownloadables}*/}
-                {/*            onCheckedChange={() => {*/}
-                {/*                toggleFeature('hasDownloadables');*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </Field>*/}
-                {/*</Field>*/}
+                <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
+                    <FieldLabel>Hide Info</FieldLabel>
+                    <Field orientation={'horizontal'}>
+                        <Switch
+                            id="collapse-extra-data"
+                            checked={collapseExtraData}
+                            onCheckedChange={() => {
+                                toggleCollapseExtraData();
+                            }}
+                        />
+                    </Field>
+                </Field>
             </FieldGroup>
         </FieldSet>
     );

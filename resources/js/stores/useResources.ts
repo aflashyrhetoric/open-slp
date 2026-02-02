@@ -29,6 +29,10 @@ type State = {
         usesAi: boolean;
         updatesRegularly: boolean;
     };
+
+    // UI Preferences
+    collapseExtraData: boolean
+
 };
 
 type Actions = {
@@ -40,6 +44,8 @@ type Actions = {
     toggleFeature: (feature: keyof State['featuresFilters']) => void;
 
     clearFilters: () => void;
+
+    toggleCollapseExtraData: () => void;
 };
 
 type ResourcesState = State & Actions;
@@ -52,6 +58,7 @@ const initialFiltersState: {
         usesAi: boolean;
         updatesRegularly: boolean;
     };
+    collapseExtraData: boolean;
 } = {
     pricingFilters: [],
     audienceFilters: [],
@@ -60,6 +67,7 @@ const initialFiltersState: {
         usesAi: false,
         updatesRegularly: false,
     },
+    collapseExtraData: false
 };
 
 const fuseOptions: IFuseOptions<Resource> = {
@@ -199,6 +207,11 @@ export const useResources = create<ResourcesState>()(
                     };
                     state.filteredResourcesByCategory =
                         computeFilteredResourcesByCategory(state);
+                }),
+
+            toggleCollapseExtraData: () =>
+                set((state) => {
+                    state.collapseExtraData = !state.collapseExtraData;
                 }),
         })),
         { name: 'resources' },
