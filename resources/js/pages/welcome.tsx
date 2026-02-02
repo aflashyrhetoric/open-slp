@@ -88,12 +88,13 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                         <ResourceFilterBar />
                         <Masonry
                             breakpointCols={{
-                                default: 3,
+                                default: 4,
+                                1440: 4,
                                 1280: 3,
                                 1024: 2,
-                                640: 1,
+                                768: 1,
                             }}
-                            className="cs-12 flex w-full gap-5 px-9 pt-4 pb-12"
+                            className="cs-12 flex w-full gap-5 px-4 md:px-9 pt-4 pb-12"
                             columnClassName="flex flex-col gap-5"
                         >
                             {filteredResourcesByCategory.map(

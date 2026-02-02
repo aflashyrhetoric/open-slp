@@ -38,13 +38,13 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     }
 
     return (
-        <div className={`group relative px-3 py-1`}>
-            <div className={`ific gap-x-1`}>
-                <div className={`ific`}>
+        <div className={`w-full group relative px-3 py-1`}>
+            <div className={`fic overflow-hidden gap-x-1`}>
+                <div className={`fic w-full justify-start min-w-0`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="max-w-[230px] text-sm leading-5 font-semibold sm:max-w-[220px] sm:text-base md:max-w-[300px] md:text-lg lg:max-w-[400px] xl:max-w-[410px]">
+                    <h3 className="md:max-w-[89%] text-sm leading-5 font-semibold sm:text-base md:text-lg">
                         <a
-                            className={`block overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer`}
+                            className={`block overflow-hidden text-ellipsis hover:cursor-pointer`}
                             onClick={incrementClickedCount}
                             target={'_blank'}
                             rel={'noopener noreferrer'}
