@@ -1,3 +1,4 @@
+import TagsHeader from '@/components/tags-header';
 import {
     Combobox,
     ComboboxChip,
@@ -8,7 +9,7 @@ import {
     ComboboxItem,
     ComboboxList,
     ComboboxValue,
-    useComboboxAnchor
+    useComboboxAnchor,
 } from '@/components/ui/combobox';
 import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
@@ -37,11 +38,13 @@ export default function ResourceFilterBar({ className = '' }: Props) {
     const anchor2 = useComboboxAnchor();
 
     return (
-        <FieldSet className={`cs-12 px-9 ${className}`}>
+        <FieldSet className={`min-w-0 ${className}`} style={{ minInlineSize: 0 }}>
+
             {/*<FieldLegend>Filter Resources</FieldLegend>*/}
             {/*<FieldDescription>*/}
             {/*    Filter resources by search, paid vs free, etc.*/}
             {/*</FieldDescription>*/}
+            <TagsHeader className={`w-full`}/>
             <FieldGroup>
                 <Field orientation={'vertical'}>
                     <FieldLabel htmlFor="search-query-input">
@@ -98,7 +101,9 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                     </Combobox>
                 </Field>
                 <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">Filter by area</FieldLabel>
+                    <FieldLabel htmlFor="search-query-input">
+                        Filter by area
+                    </FieldLabel>
                     <Combobox items={ALL_SLP_TYPES}>
                         <Combobox
                             multiple
@@ -137,7 +142,7 @@ export default function ResourceFilterBar({ className = '' }: Props) {
                     </Combobox>
                 </Field>
                 <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
-                    <FieldLabel htmlFor={"includes-downloadables"}>
+                    <FieldLabel htmlFor={'includes-downloadables'}>
                         Must include downloadables
                     </FieldLabel>
                     <Field orientation={'horizontal'}>

@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Resource extends Model
 {
+    protected $with = ['category','tags'];
     protected $fillable = [
         'name',
         'href',
@@ -47,5 +49,22 @@ class Resource extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ResourceCategory::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'resource_resource_tag', 'resource_id', 'resource_tag_id');
+    }
+
+    // query scope for only published ones
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    // query scope for category
+    public function scopeOfCategory($query, $categoryId)
+    {
+        return $query->where('category_id', $categoryId);
     }
 }

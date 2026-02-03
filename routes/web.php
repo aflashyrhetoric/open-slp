@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\TagsController;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -9,6 +10,7 @@ use Laravel\Fortify\Features;
 
 // Proper named route using controller syntax
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/tags/{slug}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/resource/{resource}/slide/{page?}', [SlideController::class, 'renderSlide'])->name('slide.index');
 Route::get('/resource/{resource}/json', [SlideController::class, 'slideJson'])->name('slide.json');
 Route::post('/resource/{id}/increment-clicked-count', [HomeController::class, 'incrementClickedCount'])->name('incrementClickedCount');

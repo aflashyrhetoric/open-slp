@@ -16,7 +16,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
 use Filament\Resources\Resource as ResourcesResource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -54,7 +53,7 @@ class ResourceResource extends ResourcesResource
                         $r = ResourceCategory::query()
                             ->pluck('name')
                             ->toArray();
-//
+                        //
                         $r = ResourceCategory::query()
                             ->orderBy('name', 'asc')
                             ->pluck('name', 'id')
@@ -63,11 +62,11 @@ class ResourceResource extends ResourcesResource
                         return $r;
                     }),
 
-//                Select::make('category_id')
-//                    ->label('Category')
-//                    ->relationship('category', 'name')
-//                    ->searchable()
-//                    ->preload(),
+                //                Select::make('category_id')
+                //                    ->label('Category')
+                //                    ->relationship('category', 'name')
+                //                    ->searchable()
+                //                    ->preload(),
 
                 TextInput::make('author'),
 
@@ -105,6 +104,18 @@ class ResourceResource extends ResourcesResource
 
                 TextInput::make('keywords')
                     ->required(),
+
+                Select::make('tags')
+                    ->relationship('tags', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required(),
+                        TextInput::make('slug')
+                            ->required(),
+                    ]),
 
                 Checkbox::make('supports_english')->default(true),
                 Checkbox::make('supports_spanish'),
@@ -151,5 +162,3 @@ class ResourceResource extends ResourcesResource
         return [];
     }
 }
-
-

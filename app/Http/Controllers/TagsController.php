@@ -7,11 +7,17 @@ use App\Models\ResourceCategory;
 use App\Models\Tag;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class TagsController extends Controller
 {
     public function index()
     {
-        $resources = Resource::published()->get();
+
+    }
+
+    public function show(string $slug)
+    {
+        $tag = Tag::where('slug', $slug)->firstOrFail();
+        $resources = $tag->resources()->published()->get();
         $flat = $resources;
         $groupedByCategory = $resources->groupBy(function ($resource) {
             return $resource->category->name;
@@ -19,26 +25,16 @@ class HomeController extends Controller
 
         $categories = ResourceCategory::all();
         $allTags = Tag::withResources()->get();
-        $allTags = Tag::all();
 
         $resourceCount = $resources->count();
-        return Inertia::render('welcome', [
-//        'canRegister' => Features::enabled(Features::registration()),
+        return Inertia::render('tag-show', [
             'allTags' => $allTags,
+            'tag' => $tag,
             'categories' => $categories,
             'resources' => $flat,
             'resourcesByCategory' => $groupedByCategory,
             'resourceCount' => $resourceCount,
         ]);
-    }
 
-    public function incrementClickedCount($id)
-    {
-        $resource = Resource::find($id);
-        if ($resource) {
-            $resource->increment('clicked_count');
-            return response()->json(['success' => true]);
-        }
-        return response()->json(['success' => false], 404);
     }
 }

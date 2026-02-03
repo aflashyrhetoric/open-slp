@@ -21,6 +21,13 @@ export type SLPType = 'pediatric' | 'medical' | 'all'
 
 export const ALL_SLP_TYPES: SLPType[] = ['pediatric', 'medical', 'all'];
 
+export type ResourceTag = {
+    id: number,
+    name: string,
+    slug: string,
+    description?: string
+}
+
 export type ResourceCategory = IdAndTimestamps & {
     name: string;
     icon: string | null;

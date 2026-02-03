@@ -1,12 +1,15 @@
 # Todo
 
+- [ ] Create tags
+- [ ] Create TPT
+  - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add resource show page
 - [ ] Create Newsletter AI endpoint
   
 # Later
 - [ ] Add contribution guidelines at the bottom
 - [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
-- [ ] Create Discord room
+ - [ ] Create Discord room
 
 # Maybe
 - [ ] Add iframe on hover

@@ -9,12 +9,12 @@ import { AuroraText } from '@/components/ui/aurora-text';
 import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { useResources } from '@/stores/useResources';
-import { Resource } from '@/types/openslp/resource';
+import { Resource, ResourceTag } from '@/types/openslp/resource';
 import { CheckCircle2Icon } from 'lucide-react';
 import Masonry from 'react-masonry-css';
 import { LuGhost } from 'react-icons/lu';
 
-export default function Welcome({ resources }: { resources: Resource[] }) {
+export default function TagShow({ tag, resources }: { tag: ResourceTag, resources: Resource[] }) {
     const {
         resources: resourcesFromStore,
         setResources,
@@ -44,9 +44,9 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                     <main className="grid12 w-full max-w-full gap-5">
                         <div className="grid12 relative cs-12">
                             <FlickeringGrid
-                                maxOpacity={0.03}
-                                squareSize={16}
-                                gridGap={16}
+                                maxOpacity={0.05}
+                                squareSize={4}
+                                gridGap={8}
                                 className={`absolute inset-0 z-0 size-full`}
                             />
                             <Header className={`z-10 cs-12`} />
@@ -54,11 +54,14 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                                 className={`grid12 relative cs-12 border-b px-10`}
                             >
                                 <div
-                                    className={`grid12 font-heading relative cs-12 min-h-[200px] px-10 md:cs-10 md:col-start-2`}
+                                    className={`fc flex-col relative cs-12 min-h-[200px] px-10 md:cs-10 md:col-start-2`}
                                 >
                                     <p
-                                        className={`font-heading fc cs-12 h-full flex-col items-start text-2xl font-bold sm:text-3xl md:items-center md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
+                                        className={`font-heading text-2xl font-bold sm:text-3xl md:items-center md:text-4xl lg:items-start lg:text-5xl xl:text-6xl`}
                                     >
+                                        <span className="text-neutral-500">
+                                            Resources / {" "}
+                                        </span>
                                         <AuroraText
                                             className={`mr-4`}
                                             colors={[
@@ -67,24 +70,15 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                                                 '#FFC75F',
                                             ]}
                                         >
-                                            Curated
+                                            {tag.name}
                                         </AuroraText>
-                                        <span className="text-neutral-700">
-                                            resources for SLPs
-                                        </span>
                                     </p>
-                                    <div
-                                        className={`relative hidden lg:cs-6 lg:block`}
-                                    >
-                                        {/*<IconCloud images={images} />*/}
-                                        <AnimatedBeamMultipleOutputDemo
-                                            circleImages={[]}
-                                        />
-                                    </div>
+                                    {tag.description && (
+                                        <p className={`mt-5 text-neutral-600 text-xl font-lora`}>{tag.description}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>
-                        <NewsletterSignup className={`cs-12`} />
                         <ResourceFilterBar className={`cs-12 overflow-hidden px-9`} />
                         <Masonry
                             breakpointCols={{
