@@ -1,7 +1,8 @@
 # Todo
 
-- [ ] Turn "supports_english" and other bools into tags
-- [ ] Add "is dedicated page" to prevent some tags from being included in the search, it should default false,
+- [x] Add "is collection" to prevent some tags from being included in the search, it should default false,
+- [ ] Add "OpenSLP Verified" for things that are first-hand verified!
+- [ ] Add optional "pricing_starts_at" for paid resources!!!
 - [ ] Add requirement for collection tags to have at least 2 resources
 - [ ] Create TPT
   - https://www.teacherspayteachers.com/My-Account/Basics/edit
@@ -9,6 +10,7 @@
 - [ ] Create Newsletter AI endpoint
   
 # Later
+- [ ] Turn "supports_english" and other bools into tags
 - [ ] Add contribution guidelines at the bottom
 - [ ] Update search algorithm to use word-by-word Levenshtein distance matching rather than simple inclusion
  - [ ] Create Discord room

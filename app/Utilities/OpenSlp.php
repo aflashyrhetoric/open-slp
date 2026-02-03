@@ -111,4 +111,79 @@ class OpenSlp
 
         return $result;
     }
+
+    public static function getFaviconUrl(string $url): ?string
+    {
+        $isLocal = App::environment('local');
+        $parsed = parse_url($url);
+        $origin = ($parsed['scheme'] ?? 'https') . '://' . ($parsed['host'] ?? '');
+
+        // 1. Check /favicon.ico at the root
+        try {
+            $response = Http::timeout(5)
+                ->connectTimeout(3)
+                ->withOptions(['verify' => ! $isLocal])
+                ->get($origin . '/favicon.ico');
+
+            if ($response->successful()) {
+                $contentType = $response->header('Content-Type') ?? '';
+
+                if (str_contains($contentType, 'image')) {
+                    return $origin . '/favicon.ico';
+                }
+            }
+        } catch (\Exception $e) {
+            Log::info('Failed to fetch /favicon.ico', ['url' => $origin, 'error' => $e->getMessage()]);
+        }
+
+        // 2. Parse the page markup for favicon declarations
+        try {
+            $response = Http::timeout(5)
+                ->connectTimeout(3)
+                ->withOptions(['verify' => ! $isLocal])
+                ->get($url);
+
+            if ($response->failed()) {
+                return null;
+            }
+
+            $contentType = $response->header('Content-Type') ?? '';
+
+            if (! str_contains($contentType, 'text/html')) {
+                return null;
+            }
+
+            $dom = new DOMDocument('1.0', 'UTF-8');
+            @$dom->loadHTML($response->body());
+
+            foreach ($dom->getElementsByTagName('link') as $node) {
+                $rel = strtolower($node->getAttribute('rel'));
+
+                if (! in_array($rel, ['icon', 'shortcut icon', 'apple-touch-icon', 'apple-touch-icon-precomposed'])) {
+                    continue;
+                }
+
+                $href = $node->getAttribute('href');
+
+                if (empty($href)) {
+                    continue;
+                }
+
+                // Resolve relative URLs
+                if (str_starts_with($href, '//')) {
+                    $href = ($parsed['scheme'] ?? 'https') . ':' . $href;
+                } elseif (str_starts_with($href, '/')) {
+                    $href = $origin . $href;
+                } elseif (! str_starts_with($href, 'http')) {
+                    $href = rtrim($origin, '/') . '/' . $href;
+                }
+
+                return $href;
+            }
+        } catch (\Exception $e) {
+            Log::info('Failed to parse page for favicon', ['url' => $url, 'error' => $e->getMessage()]);
+        }
+
+        return null;
+    }
 }

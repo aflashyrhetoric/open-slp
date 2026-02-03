@@ -40,7 +40,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     return (
         <div className={`w-full group relative px-3 py-1`}>
             <div className={`fic overflow-hidden gap-x-1`}>
-                <div className={`fic w-full justify-start min-w-0`}>
+                <div className={`flex w-full justify-start min-w-0`}>
                     <ResourceImage resource={resource} className={`mr-1`} />
                     <h3 className="md:max-w-[89%] text-sm leading-5 font-semibold sm:text-base md:text-lg">
                         <a

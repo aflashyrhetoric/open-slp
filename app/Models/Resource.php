@@ -30,6 +30,7 @@ class Resource extends Model
         'supports_spanish',
         'supports_korean',
         'published',
+        'favicon_href',
     ];
 
     protected function casts(): array
@@ -42,6 +43,7 @@ class Resource extends Model
             'supports_english' => 'boolean',
             'supports_spanish' => 'boolean',
             'supports_korean' => 'boolean',
+            'published' => 'boolean',
         ];
     }
 

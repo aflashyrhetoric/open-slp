@@ -40,6 +40,7 @@ export type ResourceCategory = IdAndTimestamps & {
 export type Resource = IdAndTimestamps & {
     name: string;
     href: string;
+    favicon_href: string | null;
 
     author: string;
     author_page_href: string;
