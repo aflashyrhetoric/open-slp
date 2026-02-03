@@ -23,6 +23,10 @@ type Props = {
 export default function TagsHeader({ className = '' }: Props) {
     const { allTags } = usePage<{ allTags: ResourceTag[] }>().props;
 
+    if(allTags.length === 0) {
+        return null;
+    }
+
     const { isLarge } = useMediaQuery();
 
     return (
@@ -31,7 +35,7 @@ export default function TagsHeader({ className = '' }: Props) {
                 <FieldLabel>Navigate by tag</FieldLabel>
                 {
                     <div className="hidden pb-0 lg:block min-w-0">
-                        <div className="flex items-center justify-start gap-x-3 overflow-x-auto px-1">
+                        <div className="flex items-center justify-start gap-x-3 overflow-x-auto px-1 pb-2">
                             {allTags.map((tag: ResourceTag) => (
                                 <TagCardSmall key={`tag-${tag.id}`} tag={tag} />
                             ))}
@@ -54,13 +58,13 @@ export default function TagsHeader({ className = '' }: Props) {
                                     Swipe to navigate. Click to view resources grouped by tag.
                                 </DrawerDescription>
                             </DrawerHeader>
-                            <div className="px-8 pt-5 pb-4">
-                                <div className="grid12 gap-5">
+                            <div className="px-3 pt-5 pb-4">
+                                <div className="grid12 gap-3">
                                     {allTags.map((tag: ResourceTag) => (
                                         <TagCard
                                             key={`tag-${tag.id}`}
                                             tag={tag}
-                                            className={`cs-6`}
+                                            className={`cs-12 sm:cs-6 md:cs-4`}
                                         />
                                     ))}
                                 </div>

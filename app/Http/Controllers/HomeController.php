@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         $categories = ResourceCategory::all();
         $allTags = Tag::withResources()->get();
-        $allTags = Tag::all();
+//        $allTags = Tag::all();
 
         $resourceCount = $resources->count();
         return Inertia::render('welcome', [
