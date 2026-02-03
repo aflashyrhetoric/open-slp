@@ -8,6 +8,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -43,6 +44,10 @@ class TagResource extends Resource
                     ->rows(3)
                     ->placeholder('A brief description of the tag for internal use only.')
                     ->columnSpanFull(),
+
+                // checkbox for "is_collection" field
+                Checkbox::make('is_collection'),
+
 
             ]);
     }

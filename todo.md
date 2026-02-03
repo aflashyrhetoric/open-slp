@@ -1,6 +1,8 @@
 # Todo
 
-- [ ] Create tags
+- [ ] Turn "supports_english" and other bools into tags
+- [ ] Add "is dedicated page" to prevent some tags from being included in the search, it should default false,
+- [ ] Add requirement for collection tags to have at least 2 resources
 - [ ] Create TPT
   - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add resource show page
@@ -45,3 +47,4 @@
 - [x] Add story
 - [x] Add photos
 - [x] Add proper sorts/filters
+- [x] Create tags

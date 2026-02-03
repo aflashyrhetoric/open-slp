@@ -24,7 +24,7 @@ class TagsController extends Controller
         });
 
         $categories = ResourceCategory::all();
-        $allTags = Tag::withResources()->get();
+        $allTags = Tag::withResources()->isCollection()->get();
 
         $resourceCount = $resources->count();
         return Inertia::render('tag-show', [

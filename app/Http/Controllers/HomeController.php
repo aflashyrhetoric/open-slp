@@ -18,7 +18,7 @@ class HomeController extends Controller
         });
 
         $categories = ResourceCategory::all();
-        $allTags = Tag::withResources()->get();
+        $allTags = Tag::withResources()->isCollection()->get();
 //        $allTags = Tag::all();
 
         $resourceCount = $resources->count();
