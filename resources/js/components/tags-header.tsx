@@ -22,12 +22,11 @@ type Props = {
 
 export default function TagsHeader({ className = '' }: Props) {
     const { allTags } = usePage<{ allTags: ResourceTag[] }>().props;
+    const { isLarge } = useMediaQuery();
 
     if(allTags.length === 0) {
         return null;
     }
-
-    const { isLarge } = useMediaQuery();
 
     return (
         <div className={`w-full overflow-hidden ${className}`}>
