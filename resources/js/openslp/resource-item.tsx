@@ -51,7 +51,7 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
                             href={resource.href}
                         >
                             <span
-                                className={`font-sans text-neutral-700 underline opacity-100`}
+                                className={`font-sans text-neutral-700 hover:underline opacity-100`}
                             >
                                 {resource.name}
                             </span>

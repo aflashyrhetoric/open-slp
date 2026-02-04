@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { CrossIcon } from 'lucide-react';
 import { LuX } from 'react-icons/lu';
+import useMediaQuery from '@/hooks/use-media-query';
 
 type Props = {
     className?: string;
@@ -11,6 +12,8 @@ type Props = {
 
 export default function NewsletterSignup({ className = '' }: Props) {
     const [temporarilyHidden, setTemporarilyHidden] = useState(false);
+
+    const {isMedium} = useMediaQuery();
 
     return (
         <>
@@ -38,7 +41,7 @@ export default function NewsletterSignup({ className = '' }: Props) {
                         method="post"
                         className="embeddable-buttondown-form"
                     >
-                        <Field orientation={'horizontal'}>
+                        <Field orientation={isMedium ? 'horizontal' : 'vertical'}>
                             <Input
                                 className={`min-w-[190px] text-xs md:w-[300px] md:text-base`}
                                 placeholder={'amazingslp@youremail.com'}

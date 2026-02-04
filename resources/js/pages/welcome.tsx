@@ -10,9 +10,8 @@ import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
-import { CheckCircle2Icon } from 'lucide-react';
-import Masonry from 'react-masonry-css';
 import { LuGhost } from 'react-icons/lu';
+import Masonry from 'react-masonry-css';
 
 export default function Welcome({ resources }: { resources: Resource[] }) {
     const {
@@ -85,36 +84,45 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                             </div>
                         </div>
                         <NewsletterSignup className={`cs-12`} />
-                        <ResourceFilterBar className={`cs-12 overflow-hidden px-9`} />
-                        <Masonry
-                            breakpointCols={{
-                                default: 3,
-                                2560: 4,
-                                1512: 3,
-                                1024: 2,
-                                768: 1,
-                            }}
-                            className="cs-12 flex w-full gap-5 px-4 md:px-9 pt-4 pb-12"
-                            columnClassName="flex flex-col gap-5"
-                        >
-                            {filteredResourcesByCategory.map(
-                                ({ category, resourcesInCategory }) => (
-                                    <ResourceCategorySection
-                                        key={`category-${category.id}`}
-                                        category={category}
-                                        categoryName={category.name}
-                                        resources={resourcesInCategory}
-                                    />
-                                ),
-                            )}
-                        </Masonry>{' '}
-                        {Object.keys(filteredResourcesByCategory).length === 0 && (
+                        <ResourceFilterBar
+                            className={`cs-12 overflow-hidden px-4 md:px-9`}
+                        />
+                        <div className="cs-12 px-4 md:px-9">
+                            <Masonry
+                                breakpointCols={{
+                                    // default: 3,
+                                    2560: 4,
+                                    1536: 3,
+                                    1280: 3,
+                                    1024: 3,
+                                    768: 2,
+                                    640: 1,
+                                }}
+                                className="cs-12 mr-auto flex w-full md:gap-x-4 md:ml-[-7px] lg:ml-[-15px] 2xl:ml-0 pt-4 pb-12"
+                                columnClassName="flex flex-col gap-5"
+                            >
+                                {filteredResourcesByCategory.map(
+                                    ({ category, resourcesInCategory }) => (
+                                        <ResourceCategorySection
+                                            key={`category-${category.id}`}
+                                            category={category}
+                                            categoryName={category.name}
+                                            resources={resourcesInCategory}
+                                        />
+                                    ),
+                                )}
+                            </Masonry>
+                        </div>
+                        {Object.keys(filteredResourcesByCategory).length ===
+                            0 && (
                             <div className={`cs-12 px-9`}>
                                 <Alert>
                                     <LuGhost />
                                     <AlertTitle>No results found</AlertTitle>
                                     <AlertDescription>
-                                        It seems we do not have resources that match your filters. Hopefully we will have more resources soon!
+                                        It seems we do not have resources that
+                                        match your filters. Hopefully we will
+                                        have more resources soon!
                                     </AlertDescription>
                                 </Alert>
                             </div>

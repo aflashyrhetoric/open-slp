@@ -12,7 +12,7 @@ export const ALL_PRICING_MODELS: PricingModel[] = [
     'free',
     // 'freemium',
     'paid',
-    // 'paid_with_drops',
+    'paid_with_drops',
     'paid_trial',
     'mixed',
 ]
