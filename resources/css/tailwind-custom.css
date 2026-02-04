@@ -294,7 +294,7 @@ textarea {
     }
 
     .gradient-grayscale {
-        @apply bg-gradient-to-br from-white to-gray-100;
+        @apply bg-gradient-to-br from-white to-neutral-100/50;
     }
 
     .gradient-ai {

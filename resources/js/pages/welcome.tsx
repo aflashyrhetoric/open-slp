@@ -2,11 +2,9 @@ import ResourceFilterBar from '@/components/resource-filter-bar';
 import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
-import { AnimatedBeamMultipleOutputDemo } from '@/components/site/home-animated-beam';
 import NewsletterSignup from '@/components/site/newsletter-signup';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AuroraText } from '@/components/ui/aurora-text';
-import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import ResourceCategorySection from '@/openslp/resource-category-section';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
@@ -41,49 +39,54 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
             <div className="flex min-h-screen flex-col">
                 <div className={``}>
                     <main className="grid12 w-full max-w-full gap-5">
-                        <div className="grid12 relative cs-12">
-                            <FlickeringGrid
-                                maxOpacity={0.03}
-                                squareSize={16}
-                                gridGap={16}
-                                className={`absolute inset-0 z-0 size-full`}
+                        <div className="grid12 gradient-highlight relative cs-12">
+                            <div
+                                className={`absolute inset-0 z-0 hidden size-full bg-cover bg-[position:50%_50%] bg-no-repeat lg:block lg:bg-[position:50%_50%] xl:bg-[position:50%_60%]`}
+                                style={{
+                                    backgroundImage: `url('/img/hero.png')`,
+                                }}
+                            />
+                            <div
+                                className={`absolute top-0 z-10 hidden size-full h-36 lg:block lg:h-24`}
+                                style={{
+                                    // Background should be a gradient from translucent at top to white at bottom
+                                    background: `linear-gradient(to top, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 1) 90%)`,
+                                }}
+                            />
+                            <div
+                                className={`absolute bottom-0 z-10 hidden size-full lg:block lg:h-12`}
+                                style={{
+                                    // Background should be a gradient from translucent at top to white at bottom
+                                    background: `linear-gradient(to bottom, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 1) 90%)`,
+                                }}
                             />
                             <Header className={`z-10 cs-12`} />
                             <div
-                                className={`grid12 relative cs-12 border-b px-10`}
+                                className={`relative cs-12 flex min-h-[120px] items-center justify-center border-b px-10 md:min-h-[150px] lg:min-h-[75vh] lg:items-baseline lg:justify-end xl:min-h-[75vh]`}
                             >
-                                <div
-                                    className={`grid12 font-heading relative cs-12 min-h-[200px] px-10 md:cs-10 md:col-start-2`}
+                                <p
+                                    className={`font-heading tac relative flex flex-col text-2xl font-bold sm:text-3xl md:text-4xl lg:top-32 lg:right-28 lg:text-right lg:text-5xl xl:top-40 xl:right-40 2xl:text-6xl`}
                                 >
-                                    <p
-                                        className={`font-heading fc cs-12 h-full flex-col items-start text-2xl font-bold sm:text-3xl md:items-center md:text-4xl lg:cs-6 lg:items-start lg:text-5xl xl:text-6xl`}
+                                    <AuroraText
+                                        className={`mr-4`}
+                                        speed={4}
+                                        colors={[
+                                            '#FF6F91',
+                                            '#FF9671',
+                                            '#FFC75F',
+                                            '#FF9671',
+                                            '#FF6F91',
+                                        ]}
                                     >
-                                        <AuroraText
-                                            className={`mr-4`}
-                                            colors={[
-                                                '#FF6F91',
-                                                '#FF9671',
-                                                '#FFC75F',
-                                            ]}
-                                        >
-                                            Curated
-                                        </AuroraText>
-                                        <span className="text-neutral-700">
-                                            resources for SLPs
-                                        </span>
-                                    </p>
-                                    <div
-                                        className={`relative hidden lg:cs-6 lg:block`}
-                                    >
-                                        {/*<IconCloud images={images} />*/}
-                                        <AnimatedBeamMultipleOutputDemo
-                                            circleImages={[]}
-                                        />
-                                    </div>
-                                </div>
+                                        High-Quality
+                                    </AuroraText>
+                                    <span className="text-neutral-700">
+                                        resources for SLPs
+                                    </span>
+                                </p>
                             </div>
                         </div>
-                        <NewsletterSignup className={`cs-12`} />
+                        <NewsletterSignup className={`hidden lg:flex cs-12`} />
                         <ResourceFilterBar
                             className={`cs-12 overflow-hidden px-4 md:px-9`}
                         />
@@ -91,14 +94,14 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                             <Masonry
                                 breakpointCols={{
                                     // default: 3,
-                                    2560: 4,
+                                    2560: 3,
                                     1536: 3,
                                     1280: 3,
                                     1024: 3,
                                     768: 2,
                                     640: 1,
                                 }}
-                                className="cs-12 mr-auto flex w-full md:gap-x-4 md:ml-[-7px] lg:ml-[-15px] 2xl:ml-0 pt-4 pb-12"
+                                className="cs-12 mr-auto flex w-full pt-4 pb-12 md:ml-[-7px] gap-4 md:gap-x-4 lg:ml-[-15px] xl:ml-[-7px] 2xl:ml-0"
                                 columnClassName="flex flex-col gap-5"
                             >
                                 {filteredResourcesByCategory.map(

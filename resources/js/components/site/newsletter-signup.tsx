@@ -52,7 +52,7 @@ export default function NewsletterSignup({ className = '' }: Props) {
                             <Button
                                 type={'submit'}
                                 value={'Subscribe'}
-                                className={`font-bold`}
+                                className={`font-bold gradient-highlight text-neutral-700 border border-neutral-500`}
                             >
                                 Subscribe
                             </Button>

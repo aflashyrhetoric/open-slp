@@ -1,173 +1,65 @@
-import TagsHeader from '@/components/tags-header';
+import ResourceFilterBarInner from '@/components/resource-filter-bar-inner';
+import { Button } from '@/components/ui/button';
 import {
-    Combobox,
-    ComboboxChip,
-    ComboboxChips,
-    ComboboxChipsInput,
-    ComboboxContent,
-    ComboboxEmpty,
-    ComboboxItem,
-    ComboboxList,
-    ComboboxValue,
-    useComboboxAnchor,
-} from '@/components/ui/combobox';
-import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
-import { Switch } from '@/components/ui/switch';
-import { useResources } from '@/stores/useResources';
-import { ALL_PRICING_MODELS, ALL_SLP_TYPES } from '@/types/openslp/resource';
-import { humanize } from '@/utils/string-utils';
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from '@/components/ui/drawer';
+import useMediaQuery from '@/hooks/use-media-query';
+import { LuChevronDown } from 'react-icons/lu';
+import TagsHeader from '@/components/tags-header';
+import { FieldLabel } from '@/components/ui/field';
 
 type Props = {
     className?: string;
 };
 
 export default function ResourceFilterBar({ className = '' }: Props) {
-    const {
-        searchQuery,
-        setSearchQuery,
-        setPricing,
-        setAudience,
-        toggleFeature,
-        featuresFilters,
-        collapseExtraData,
-        toggleCollapseExtraData,
-    } = useResources();
-
-    const anchor = useComboboxAnchor();
-    const anchor2 = useComboboxAnchor();
+    const { isLarge } = useMediaQuery();
 
     return (
-        <FieldSet className={`min-w-0 ${className}`} style={{ minInlineSize: 0 }}>
-
-            {/*<FieldLegend>Filter Resources</FieldLegend>*/}
-            {/*<FieldDescription>*/}
-            {/*    Filter resources by search, paid vs free, etc.*/}
-            {/*</FieldDescription>*/}
-            <TagsHeader className={`w-full`}/>
-            <FieldGroup>
-                <Field orientation={'vertical'}>
-                    <FieldLabel htmlFor="search-query-input">
-                        Search Resources
-                    </FieldLabel>
-                    <Input
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search by name, free or paid, etc"
-                        id="search-query-input"
-                    />
-                </Field>
-            </FieldGroup>
-            <FieldGroup className={`!grid grid-cols-12 gap-3 lg:gap-5`}>
-                <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">
-                        Filter by pricing
-                    </FieldLabel>
-                    <Combobox items={ALL_PRICING_MODELS}>
-                        <Combobox
-                            multiple
-                            autoHighlight
-                            onValueChange={(values) => {
-                                setPricing(values as typeof ALL_PRICING_MODELS);
-                            }}
-                            items={ALL_PRICING_MODELS}
-                            defaultValue={ALL_PRICING_MODELS}
-                        >
-                            <ComboboxChips ref={anchor} className="w-full">
-                                <ComboboxValue>
-                                    {(values) => (
-                                        <>
-                                            {values.map((value: string) => (
-                                                <ComboboxChip key={value}>
-                                                    {humanize(value)}
-                                                </ComboboxChip>
-                                            ))}
-                                            <ComboboxChipsInput />
-                                        </>
-                                    )}
-                                </ComboboxValue>
-                            </ComboboxChips>
-                            <ComboboxContent anchor={anchor}>
-                                <ComboboxEmpty>No items found.</ComboboxEmpty>
-                                <ComboboxList>
-                                    {(item) => (
-                                        <ComboboxItem key={item} value={item}>
-                                            {humanize(item)}
-                                        </ComboboxItem>
-                                    )}
-                                </ComboboxList>
-                            </ComboboxContent>
-                        </Combobox>
-                    </Combobox>
-                </Field>
-                <Field orientation={'vertical'} className={`cs-12 lg:cs-4`}>
-                    <FieldLabel htmlFor="search-query-input">
-                        Filter by area
-                    </FieldLabel>
-                    <Combobox items={ALL_SLP_TYPES}>
-                        <Combobox
-                            multiple
-                            autoHighlight
-                            onValueChange={(values) => {
-                                setAudience(values as typeof ALL_SLP_TYPES);
-                            }}
-                            items={ALL_SLP_TYPES}
-                            defaultValue={ALL_SLP_TYPES}
-                        >
-                            <ComboboxChips ref={anchor2} className="w-full">
-                                <ComboboxValue>
-                                    {(values) => (
-                                        <>
-                                            {values.map((value: string) => (
-                                                <ComboboxChip key={value}>
-                                                    {humanize(value)}
-                                                </ComboboxChip>
-                                            ))}
-                                            <ComboboxChipsInput />
-                                        </>
-                                    )}
-                                </ComboboxValue>
-                            </ComboboxChips>
-                            <ComboboxContent anchor={anchor2}>
-                                <ComboboxEmpty>No items found.</ComboboxEmpty>
-                                <ComboboxList>
-                                    {(item) => (
-                                        <ComboboxItem key={item} value={item}>
-                                            {humanize(item)}
-                                        </ComboboxItem>
-                                    )}
-                                </ComboboxList>
-                            </ComboboxContent>
-                        </Combobox>
-                    </Combobox>
-                </Field>
-                <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
-                    <FieldLabel htmlFor={'includes-downloadables'}>
-                        Must include downloadables
-                    </FieldLabel>
-                    <Field orientation={'horizontal'}>
-                        <Switch
-                            id="includes-downloadables"
-                            checked={featuresFilters.hasDownloadables}
-                            onCheckedChange={() => {
-                                toggleFeature('hasDownloadables');
-                            }}
-                        />
-                    </Field>
-                </Field>
-                <Field orientation={'vertical'} className={`cs-6 lg:cs-2`}>
-                    <FieldLabel>Condensed view</FieldLabel>
-                    <Field orientation={'horizontal'}>
-                        <Switch
-                            id="collapse-extra-data"
-                            checked={collapseExtraData}
-                            onCheckedChange={() => {
-                                toggleCollapseExtraData();
-                            }}
-                        />
-                    </Field>
-                </Field>
-            </FieldGroup>
-        </FieldSet>
+        <>
+            <TagsHeader className={`w-full ${className}`} />
+            {isLarge && <ResourceFilterBarInner className={`${className}`} />}
+            {!isLarge && (
+                <Drawer>
+                    <DrawerTrigger asChild>
+                        <div className={` ${className}`}>
+                            <FieldLabel>Filters</FieldLabel>
+                            <Button variant="outline" className={`w-full mt-3`}>
+                                Adjust Filters <LuChevronDown />{' '}
+                            </Button>
+                        </div>
+                    </DrawerTrigger>
+                    <DrawerContent>
+                        <div className="relative mx-auto w-full overflow-y-scroll">
+                            <DrawerHeader
+                                className={`sticky top-0 border-b border-neutral-600 bg-white`}
+                            >
+                                <DrawerTitle>
+                                    Filter Resources
+                                </DrawerTitle>
+                                <DrawerDescription>
+                                    Adjust filters to refine your search.
+                                </DrawerDescription>
+                            </DrawerHeader>
+                            <div className="px-3 pt-5 pb-4">
+                                <ResourceFilterBarInner />
+                            </div>
+                            <DrawerFooter>
+                                {/*<Button>Submit</Button>*/}
+                                {/*<DrawerClose asChild>*/}
+                                {/*    <Button variant="outline">Cancel</Button>*/}
+                                {/*</DrawerClose>*/}
+                            </DrawerFooter>
+                        </div>
+                    </DrawerContent>
+                </Drawer>
+            )}
+        </>
     );
 }

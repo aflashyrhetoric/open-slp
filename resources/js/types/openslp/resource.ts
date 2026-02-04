@@ -64,4 +64,5 @@ export type Resource = IdAndTimestamps & {
     supports_spanish: boolean;
     supports_korean: boolean;
     category: ResourceCategory;
+    tags: ResourceTag[];
 };

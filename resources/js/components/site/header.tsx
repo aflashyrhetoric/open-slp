@@ -1,7 +1,7 @@
 import AppLogo from '@/components/app-logo';
-import { home } from '@/routes';
+import { home, story } from '@/routes';
 import type { SharedData } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import React from 'react';
 import { LuBookmark } from 'react-icons/lu';
 
@@ -18,10 +18,10 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
             className={`w-full px-5 pt-5 text-sm not-has-[nav]:hidden ${className}`}
         >
             <nav
-                className="z-10 flex items-center justify-between gap-4 rounded-lg px-5 py-4 outline"
+                className="z-10 flex items-center justify-between shadow-md gap-4 rounded-lg px-5 py-4 outline"
                 style={{
-                    background: 'rgba(255, 255, 255, 0.3)',
-                    backdropFilter: 'blur(1px)',
+                    background: 'rgba(255, 255, 255, 0.75)',
+                    backdropFilter: 'blur(4px)',
                 }}
             >
                 <a href={home.url()}>
@@ -32,12 +32,13 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
                     <span>Add OpenSLP to your bookmarks! </span>
                 </p>
                 <div className="font-body flex flex-col items-end">
-                    <span
+                    <Link
+                        href={story()}
                         className={`font-lora ific text-right text-xs font-medium text-balance text-neutral-600 lg:text-sm`}
                     >
                         {/*<CircleCheck className={`h-4`}  />*/}
-                        Curated Resources For SLPs
-                    </span>
+                        About Us
+                    </Link>
                     {/*<span className={`text-xs text-neutral-500 italic`}>*/}
                     {/*    {resourceCount} resources*/}
                     {/*</span>*/}

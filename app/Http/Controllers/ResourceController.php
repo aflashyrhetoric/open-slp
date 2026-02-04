@@ -41,6 +41,11 @@ class ResourceController extends Controller
         $data['og_title'] = $data['og_title'] ?? ($ogTags['og:title'] ?? null);
         $data['og_description'] = $data['og_description'] ?? ($ogTags['og:description'] ?? null);
 
+        $faviconHref = OpenSlp::getFaviconUrl($data['href']);
+        if ($faviconHref) {
+            $data['favicon_href'] = $faviconHref;
+        }
+
         return Resource::create($data);
     }
 

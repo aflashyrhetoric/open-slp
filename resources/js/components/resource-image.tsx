@@ -1,3 +1,4 @@
+import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
 import React from 'react';
 
@@ -11,12 +12,16 @@ const ResourceImage: React.FC<Props> = ({
     resource,
 }: Props) => {
     const { og_description, favicon_href } = resource;
+    const { collapseExtraData } = useResources();
     const hasValidFavicon = !!favicon_href;
     const hasValidOgDescription = og_description && og_description !== '';
+
     return (
         <>
             {hasValidFavicon && (
-                <div className={`fc bg-white/50 rounded h-5 w-5 ${className}`}>
+                <div
+                    className={`fc rounded bg-white/50 shadow ${collapseExtraData ? 'size-4' : 'size-12'} ${className}`}
+                >
                     <img
                         src={favicon_href}
                         alt={hasValidOgDescription ? og_description : ''}
@@ -24,7 +29,11 @@ const ResourceImage: React.FC<Props> = ({
                 </div>
             )}
 
-            {!hasValidFavicon && <div className={`fc h-5 w-5 bg-neutral-200 rounded ${className}`} />}
+            {!hasValidFavicon && (
+                <div
+                    className={`fc ${collapseExtraData ? 'size-4' : 'size-12'} rounded bg-neutral-200 ${className}`}
+                />
+            )}
         </>
     );
 };

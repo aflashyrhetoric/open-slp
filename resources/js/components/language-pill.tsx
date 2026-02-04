@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { Resource } from '@/types/openslp/resource';
 import React from 'react';
 
@@ -9,29 +10,23 @@ const LanguagePill: React.FC<Props> = ({ resource }: Props) => {
     const { supports_english, supports_korean, supports_spanish } = resource;
 
     return (
-        <div className={`flex gap-1 text-xs`}>
+        <>
             {supports_english && (
-                <div
-                    className={`bg-neutral-200 rounded py-[1px] px-[2px] text-[10px] text-neutral-800`}
-                >
+                <Badge className="flex gap-1 text-xs" variant="secondary">
                     EN
-                </div>
+                </Badge>
             )}
             {supports_spanish && (
-                <div
-                    className={`bg-neutral-200 rounded py-[1px] px-[2px] text-[10px] text-neutral-800`}
-                >
+                <Badge className="flex gap-1 text-xs" variant="secondary">
                     ES
-                </div>
+                </Badge>
             )}
             {supports_korean && (
-                <div
-                    className={`bg-neutral-200 rounded py-[1px] px-[2px] text-[10px] text-neutral-800`}
-                >
+                <Badge className="flex gap-1 text-xs" variant="secondary">
                     KR
-                </div>
+                </Badge>
             )}
-        </div>
+        </>
     );
 };
 

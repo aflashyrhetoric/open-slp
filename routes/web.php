@@ -43,6 +43,15 @@ Route::get('/story', function () {
     ]);
 })->name('story');
 
+Route::get('/curation-guidelines', function () {
+//    $resources = Resource::all();
+//    $resourceCount = $resources->count();
+    return Inertia::render('curation-guidelines', [
+//        'resources' => $resources,
+//        'resourceCount' => $resourceCount,
+    ]);
+})->name('curation-guidelines');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

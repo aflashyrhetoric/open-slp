@@ -3,6 +3,7 @@ import LanguagePill from '@/components/language-pill';
 import PricingPill from '@/components/pricing-pill';
 import ResourceImage from '@/components/resource-image';
 import TargetAudiencePill from '@/components/target-audience-pill';
+import { Badge } from '@/components/ui/badge';
 import {
     Tooltip,
     TooltipContent,
@@ -10,17 +11,16 @@ import {
 } from '@/components/ui/tooltip';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
-import { getDomainFromUrl } from '@/utils/string-utils';
 import axios from 'axios';
 import React from 'react';
-import { LuDownload } from 'react-icons/lu';
+import { LuDownload, LuExternalLink } from 'react-icons/lu';
 
 type Props = {
     className?: string;
     resource: Resource;
 };
 
-const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
+const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
     const {
         searchQuery,
         setSearchQuery,
@@ -38,68 +38,76 @@ const ResourceItem: React.FC<Props> = ({ resource }: Props) => {
     }
 
     return (
-        <div className={`w-full group relative px-3 py-1`}>
-            <div className={`fic overflow-hidden gap-x-1`}>
-                <div className={`flex w-full justify-start min-w-0`}>
-                    <ResourceImage resource={resource} className={`mr-1`} />
-                    <h3 className="md:max-w-[89%] text-sm leading-5 font-semibold sm:text-base md:text-lg">
+        <div
+            className={`group relative w-full ${collapseExtraData ? 'p-3 hover:bg-neutral-100 ' : 'rounded-xl p-5 gradient-grayscale hover:bg-neutral-100 shadow-sm ring ring-neutral-400/50'} ${className}`}
+        >
+            <div className={`fic gap-x-1 overflow-hidden`}>
+                <div
+                    className={`flex w-full min-w-0 justify-start gap-3 ${collapseExtraData ? 'flex-row items-center' : 'mb-3 flex-col'}`}
+                >
+                    <ResourceImage
+                        resource={resource}
+                    />
+                    <h3 className="gap-x-1 text-sm leading-6 font-semibold text-pretty sm:text-base md:max-w-[89%] md:text-lg">
                         <a
-                            className={`block overflow-hidden text-ellipsis hover:cursor-pointer`}
+                            className={`inline hover:cursor-pointer`}
                             onClick={incrementClickedCount}
                             target={'_blank'}
                             rel={'noopener noreferrer'}
                             href={resource.href}
                         >
                             <span
-                                className={`font-sans text-neutral-700 hover:underline opacity-100`}
+                                className={`font-sans text-neutral-700 opacity-100 hover:underline ${collapseExtraData ? 'underline' : ''}`}
                             >
                                 {resource.name}
                             </span>
                         </a>
+                        {resource.has_downloadables && (
+                            <span className={`ml-1 inline-flex text-sm`}>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <LuDownload />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p className={`text-base`}>
+                                            This resource offers downloadables.
+                                        </p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </span>
+                        )}
                     </h3>
                 </div>
-                {resource.has_downloadables && (
-                    <p className={`fc text-sm`}>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <LuDownload />
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>This resource offers downloadables.</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </p>
-                )}
             </div>
+            {/*{!collapseExtraData && (*/}
+            <p className={`font-body text-sm text-neutral-600`}>
+                {resource.notes}
+            </p>
+            {/*)}*/}
             {!collapseExtraData && (
-                <div className={`fic my-1 space-x-1`}>
-                    <PricingPill pricingModel={resource.pricing_model} />
-                    <span
-                        className={`hidden text-xs tracking-tight text-neutral-500 italic lg:inline`}
-                    >
-                        {getDomainFromUrl(resource.href)}
-                    </span>
-                    {!resource.author && <span />}
-                    {resource.author && (
-                        <span
-                            className={`text-xs tracking-tight text-neutral-500 italic`}
-                        >
-                            {!resource.author_page_href && (
-                                <span> via {resource.author}</span>
-                            )}
-                        </span>
-                    )}
-
-                    <div className={`fic gap-x-2`}>
+                <div className={`fic mt-4 justify-between border-t pt-4`}>
+                    <div className={`fic flex-wrap gap-1`}>
+                        <PricingPill pricingModel={resource.pricing_model} />
                         <TargetAudiencePill resource={resource} />
                         <LanguagePill resource={resource} />
+                        {resource.tags.map((tag) => (
+                            <Badge
+                                key={`resource-tag-${tag.id}`}
+                                variant="secondary"
+                            >
+                                {tag.name}
+                            </Badge>
+                        ))}
                     </div>
+                    <a
+                        href={resource.href}
+                        target={'_blank'}
+                        rel={'noopener noreferrer'}
+                        className={`cursor-pointer hover:text-blue-500`}
+                    >
+                        <LuExternalLink />
+                    </a>
                 </div>
-            )}
-            {!collapseExtraData && (
-                <p className={`font-body text-sm text-neutral-600`}>
-                    {resource.notes}
-                </p>
             )}
         </div>
     );

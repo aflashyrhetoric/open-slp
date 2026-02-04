@@ -7,7 +7,7 @@ import {
 import { PricingModel } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
-import { LuDot, LuSlash } from 'react-icons/lu';
+import { LuDivide, LuDot, LuSlash } from 'react-icons/lu';
 
 type Props = {
     pricingModel: PricingModel;
@@ -19,7 +19,7 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
             case 'paid':
                 return 'text-cyan-600';
             default:
-                return 'text-neutral-500';
+                return 'text-neutral-700';
         }
     }
 
@@ -35,12 +35,12 @@ const PricingPill: React.FC<Props> = ({ pricingModel }: Props) => {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <span className={`tracking-tight italic ific text-xs font-light ${getTextColor(pricingModel)}`}>
-                    {humanize(pricingModel)}<LuDot className={`text-neutral-300 text-xs inline`} />
-                </span>
+                <Badge className={`tracking-tight`}>
+                    $<LuDot />{humanize(pricingModel)}
+                </Badge>
             </TooltipTrigger>
             <TooltipContent>
-                <p>{pricingModelToExplanation[pricingModel]}</p>
+                <p className={`text-base`}>{pricingModelToExplanation[pricingModel]}</p>
             </TooltipContent>
         </Tooltip>
     );

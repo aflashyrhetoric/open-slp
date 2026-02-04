@@ -13,8 +13,8 @@ import { FieldLabel, FieldSet } from '@/components/ui/field';
 import useMediaQuery from '@/hooks/use-media-query';
 import { ResourceTag } from '@/types/openslp/resource';
 import { usePage } from '@inertiajs/react';
-import { Button } from './ui/button';
 import { LuChevronDown } from 'react-icons/lu';
+import { Button } from './ui/button';
 
 type Props = {
     className?: string;
@@ -24,16 +24,16 @@ export default function TagsHeader({ className = '' }: Props) {
     const { allTags } = usePage<{ allTags: ResourceTag[] }>().props;
     const { isLarge } = useMediaQuery();
 
-    if(allTags.length === 0) {
+    if (allTags.length === 0) {
         return null;
     }
 
     return (
         <div className={`w-full overflow-hidden ${className}`}>
             <FieldSet className="min-w-0" style={{ minInlineSize: 0 }}>
-                <FieldLabel>Navigate by tag</FieldLabel>
+                <FieldLabel>Browse Tags</FieldLabel>
                 {
-                    <div className="hidden pb-0 lg:block min-w-0">
+                    <div className="hidden min-w-0 pb-0 lg:block">
                         <div className="flex items-center justify-start gap-x-3 overflow-x-auto px-1 pb-2">
                             {allTags.map((tag: ResourceTag) => (
                                 <TagCardSmall key={`tag-${tag.id}`} tag={tag} />
@@ -45,16 +45,21 @@ export default function TagsHeader({ className = '' }: Props) {
             {!isLarge && (
                 <Drawer>
                     <DrawerTrigger asChild>
-                        <Button variant="outline" className={`mt-3 w-full`}>Click To View <LuChevronDown /> </Button>
+                        <Button variant="outline" className={`mt-3 w-full`}>
+                            View Tags <LuChevronDown />{' '}
+                        </Button>
                     </DrawerTrigger>
                     <DrawerContent className={``}>
-                        <div className="mx-auto w-full relative overflow-y-scroll">
-                            <DrawerHeader className={`sticky top-0 bg-white border-b border-neutral-600`}>
+                        <div className="relative mx-auto w-full overflow-y-scroll">
+                            <DrawerHeader
+                                className={`sticky top-0 border-b border-neutral-600 bg-white`}
+                            >
                                 <DrawerTitle>
                                     Browse By Tagged Collections
                                 </DrawerTitle>
                                 <DrawerDescription>
-                                    Swipe to navigate. Click to view resources grouped by tag.
+                                    Swipe to navigate. <br /> Click or tap to view
+                                    resources for a tag.
                                 </DrawerDescription>
                             </DrawerHeader>
                             <div className="px-3 pt-5 pb-4">

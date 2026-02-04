@@ -1,10 +1,10 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import ResourceItem from '@/openslp/resource-item';
+import { useResources } from '@/stores/useResources';
 import { Resource, ResourceCategory } from '@/types/openslp/resource';
 import { humanize } from '@/utils/string-utils';
 import React from 'react';
-import { LuDiamond, LuGhost } from 'react-icons/lu';
-import Divider from '@/openslp/divider';
+import { LuGhost } from 'react-icons/lu';
 
 type Props = {
     category: ResourceCategory;
@@ -19,10 +19,12 @@ const ResourceCategorySection: React.FC<Props> = ({
     resources,
     className = '',
 }: Props) => {
+    const { collapseExtraData } = useResources();
+
     return (
         <div className={`cs-12 fade-in ${className}`}>
             <div
-                className={`mb-3 text-2xl font-medium text-neutral-800`}
+                className={`fc px-4 text-2xl font-medium text-neutral-800`}
                 // style={{
                 //     background: category.bg_color ?? '#374151',
                 // }}
@@ -32,23 +34,22 @@ const ResourceCategorySection: React.FC<Props> = ({
                     {humanize(categoryName)}
                 </h2>
             </div>
-            <div
-                className={`gradient-highlight-lightest rounded pb-[1px] border border-amber-900 fade-in`}
-            >
+            <div className={`rounded pb-[1px] fade-in`}>
                 <div>
-                    <div className="p-4 mb-1">
+                    <div className="mb-1 p-4">
                         <div className={`fc font-lora flex-col`}>
-                            <span className={`tac mb-4`}>
+                            <span className={`tac`}>
                                 {category.description}
                             </span>
-                            <Divider />
                         </div>
                     </div>
 
                     <div className="mb-4 flex flex-col">
-                        <div className="flex flex-col gap-1">
+                        <div
+                            className={`grid12 ${collapseExtraData ? 'gradient-grayscale  ring ring-neutral-300 rounded-md shadow-sm gap-0' : 'gap-5'}`}
+                        >
                             {resources.length === 0 && (
-                                <Alert>
+                                <Alert className={`cs-12`}>
                                     <LuGhost />
                                     <AlertTitle>No resources found.</AlertTitle>
                                     <AlertDescription>
@@ -60,6 +61,7 @@ const ResourceCategorySection: React.FC<Props> = ({
                                 <ResourceItem
                                     key={`resource-item-${categoryName}-${resource.id}`}
                                     resource={resource}
+                                    className={`cs-12`}
                                 />
                             ))}
                         </div>

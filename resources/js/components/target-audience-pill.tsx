@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
     Tooltip,
     TooltipContent,
@@ -31,21 +32,22 @@ const TargetAudiencePill: React.FC<Props> = ({ resource }: Props) => {
         all: 'Relevant to all SLPs.',
     };
 
+    // ${targetAudienceToColor[target_audience]}
+
     return (
-        <span
-            className={`rounded py-[1px] px-1 text-[10px] tracking-tight ${targetAudienceToColor[target_audience]}`}
-        >
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <span className={`ific font-light tracking-tight`}>
-                        {resolvedText}
-                    </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>{targetAudienceToDescription[target_audience]}</p>
-                </TooltipContent>
-            </Tooltip>
-        </span>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <Badge
+                    className={`ific tracking-tight`}
+                    variant={"secondary"}
+                >
+                    {resolvedText}
+                </Badge>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p className={`text-base`}>{targetAudienceToDescription[target_audience]}</p>
+            </TooltipContent>
+        </Tooltip>
     );
 };
 
