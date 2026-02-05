@@ -10,6 +10,7 @@ import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
 import { LuGhost } from 'react-icons/lu';
 import Masonry from 'react-masonry-css';
+import MasonryWrapper from '@/components/masonry-wrapper';
 
 export default function Welcome({ resources }: { resources: Resource[] }) {
     const {
@@ -90,32 +91,7 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                         <ResourceFilterBar
                             className={`cs-12 overflow-hidden px-4 md:px-9`}
                         />
-                        <div className="cs-12 px-4 md:px-9">
-                            <Masonry
-                                breakpointCols={{
-                                    // default: 3,
-                                    2560: 3,
-                                    1536: 3,
-                                    1280: 3,
-                                    1024: 3,
-                                    768: 2,
-                                    640: 1,
-                                }}
-                                className="cs-12 mr-auto flex w-full pt-4 pb-12 md:ml-[-7px] gap-4 md:gap-x-4 lg:ml-[-15px] xl:ml-[-7px] 2xl:ml-0"
-                                columnClassName="flex flex-col gap-5"
-                            >
-                                {filteredResourcesByCategory.map(
-                                    ({ category, resourcesInCategory }) => (
-                                        <ResourceCategorySection
-                                            key={`category-${category.id}`}
-                                            category={category}
-                                            categoryName={category.name}
-                                            resources={resourcesInCategory}
-                                        />
-                                    ),
-                                )}
-                            </Masonry>
-                        </div>
+                        <MasonryWrapper filteredResourcesByCategory={filteredResourcesByCategory} />
                         {Object.keys(filteredResourcesByCategory).length ===
                             0 && (
                             <div className={`cs-12 px-9`}>

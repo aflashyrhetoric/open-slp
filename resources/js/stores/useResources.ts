@@ -11,7 +11,7 @@ import { immer } from 'zustand/middleware/immer';
 
 type TargetAudience = 'pediatric' | 'medical' | 'all';
 
-type ResourcesByCategory = {
+export type ResourcesByCategory = {
     category: ResourceCategory;
     resourcesInCategory: Resource[];
 };

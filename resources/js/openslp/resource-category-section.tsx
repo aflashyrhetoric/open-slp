@@ -46,7 +46,7 @@ const ResourceCategorySection: React.FC<Props> = ({
 
                     <div className="mb-4 flex flex-col">
                         <div
-                            className={`grid12 ${collapseExtraData ? 'gradient-grayscale  ring ring-neutral-300 rounded-md shadow-sm gap-0' : 'gap-5'}`}
+                            className={`grid12 ${collapseExtraData ? 'gradient-grayscale gap-0 rounded-md shadow-sm ring ring-neutral-300' : 'gap-5'}`}
                         >
                             {resources.length === 0 && (
                                 <Alert className={`cs-12`}>

@@ -1,3 +1,4 @@
+import MasonryWrapper from '@/components/masonry-wrapper';
 import ResourceFilterBar from '@/components/resource-filter-bar';
 import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
@@ -6,13 +7,11 @@ import NewsletterSignup from '@/components/site/newsletter-signup';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AuroraText } from '@/components/ui/aurora-text';
 import { FlickeringGrid } from '@/components/ui/flickering-grid';
-import ResourceCategorySection from '@/openslp/resource-category-section';
+import { home } from '@/routes';
 import { useResources } from '@/stores/useResources';
 import { Resource, ResourceTag } from '@/types/openslp/resource';
 import { Link } from '@inertiajs/react';
 import { LuGhost } from 'react-icons/lu';
-import Masonry from 'react-masonry-css';
-import { home } from '@/routes';
 
 export default function TagShow({
     tag,
@@ -66,10 +65,14 @@ export default function TagShow({
                                         className={`font-heading text-2xl sm:text-3xl md:items-center md:text-4xl lg:items-start lg:text-5xl xl:text-6xl`}
                                     >
                                         <span className="text-neutral-600">
-                                            <Link prefetch href={home()} className={`hover:underline`}>
+                                            <Link
+                                                prefetch
+                                                href={home()}
+                                                className={`hover:underline`}
+                                            >
                                                 Resources
-                                            </Link>
-                                            {" "}/{' '}
+                                            </Link>{' '}
+                                            /{' '}
                                         </span>
                                         <AuroraText
                                             className={`mr-4`}
@@ -95,32 +98,11 @@ export default function TagShow({
                         <ResourceFilterBar
                             className={`cs-12 overflow-hidden px-9`}
                         />
-                        <div className="cs-12 px-4 md:px-9">
-                            <Masonry
-                                breakpointCols={{
-                                    // default: 3,
-                                    2560: 4,
-                                    1536: 3,
-                                    1280: 3,
-                                    1024: 3,
-                                    768: 2,
-                                    640: 1,
-                                }}
-                                className="cs-12 mr-auto flex w-full pt-4 pb-12 md:ml-[-7px] md:gap-x-4 lg:ml-[-15px] 2xl:ml-0"
-                                columnClassName="flex flex-col gap-5"
-                            >
-                                {filteredResourcesByCategory.map(
-                                    ({ category, resourcesInCategory }) => (
-                                        <ResourceCategorySection
-                                            key={`category-${category.id}`}
-                                            category={category}
-                                            categoryName={category.name}
-                                            resources={resourcesInCategory}
-                                        />
-                                    ),
-                                )}
-                            </Masonry>{' '}
-                        </div>
+                        <MasonryWrapper
+                            filteredResourcesByCategory={
+                                filteredResourcesByCategory
+                            }
+                        />
                         {Object.keys(filteredResourcesByCategory).length ===
                             0 && (
                             <div className={`cs-12 px-9`}>

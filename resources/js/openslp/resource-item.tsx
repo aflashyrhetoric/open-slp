@@ -95,7 +95,7 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
                                 key={`resource-tag-${tag.id}`}
                                 href={show(tag.slug)}
                             >
-                                <Badge variant="secondary">{tag.name}</Badge>
+                                <Badge variant="secondary">#{tag.name}</Badge>
                             </Link>
                         ))}
                     </div>

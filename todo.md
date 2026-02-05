@@ -1,5 +1,5 @@
 # Todo
-- [ ] Fix masonry
+- [x] Fix masonry
 - [ ] Make ALL tags clickable on individual resources
 - [ ] Add "OpenSLP Verified" for things that are first-hand verified!
 - [ ] Add optional "pricing_starts_at" for paid resources!!!
