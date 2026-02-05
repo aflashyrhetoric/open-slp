@@ -7,7 +7,7 @@ import { Resource } from '@/types/openslp/resource';
 import { usePage } from '@inertiajs/react';
 import { unique } from 'radash';
 
-export default function Story({
+export default function About({
     canRegister = true,
     resources,
     resourceCount = 0,
@@ -24,7 +24,7 @@ export default function Story({
 
     return (
         <>
-            <HeadTag />
+            <HeadTag title={"About"} />
             <div className="flex min-h-screen flex-col">
                 <Header />
                 <div className={`p-5 sm:p-7 md:p-9`}>

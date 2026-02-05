@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * THIS COMMMAND HAS BEEN USED AND SHOULD NOT BE USED AGAIN
+ */
+
 namespace App\Console\Commands;
 
 use App\Models\Resource;
@@ -10,7 +14,7 @@ class SetFaviconForAllResources extends Command
 {
     protected $signature = 'resources:refresh-favicons';
 
-    protected $description = 'Command description';
+    protected $description = 'Iterates through resources and sets their favicons';
 
     public function handle(): void
     {

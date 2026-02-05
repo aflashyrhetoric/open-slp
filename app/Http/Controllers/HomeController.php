@@ -19,7 +19,6 @@ class HomeController extends Controller
 
         $categories = ResourceCategory::all();
         $allTags = Tag::withResources()->isCollection()->get();
-//        $allTags = Tag::all();
 
         $resourceCount = $resources->count();
         return Inertia::render('welcome', [

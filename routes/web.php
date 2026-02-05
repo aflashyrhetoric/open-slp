@@ -34,14 +34,17 @@ Route::get('/team', function () {
     ]);
 })->name('team');
 
-Route::get('/story', function () {
+Route::get('/about', function () {
     $resources = Resource::all();
     $resourceCount = $resources->count();
-    return Inertia::render('story', [
+    return Inertia::render('about', [
         'resources' => $resources,
         'resourceCount' => $resourceCount,
     ]);
-})->name('story');
+})->name('about');
+
+// Create a redirect from /story to /about
+Route::redirect('/story', '/about');
 
 Route::get('/curation-guidelines', function () {
 //    $resources = Resource::all();

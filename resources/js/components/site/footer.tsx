@@ -1,6 +1,6 @@
 import AppLogo from '@/components/app-logo';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { home, story, team } from '@/routes';
+import { about, home, story, team } from '@/routes';
 import { Link } from '@inertiajs/react';
 import React from 'react';
 import {
@@ -119,7 +119,7 @@ const Footer: React.FC<Props> = ({ className = '' }: Props) => {
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
                                 <LuMap />
-                                <Link prefetch disabled href={story()}>About Us & Roadmap</Link>
+                                <Link prefetch disabled href={about()}>About Us & Roadmap</Link>
                             </li>
                             <li className={`ific gap-x-2 text-neutral-300`}>
                                 <LuHeart />

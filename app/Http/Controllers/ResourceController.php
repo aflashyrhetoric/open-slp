@@ -41,18 +41,25 @@ class ResourceController extends Controller
         $data['og_title'] = $data['og_title'] ?? ($ogTags['og:title'] ?? null);
         $data['og_description'] = $data['og_description'] ?? ($ogTags['og:description'] ?? null);
 
-        $faviconHref = OpenSlp::getFaviconUrl($data['href']);
-        if ($faviconHref) {
-            $data['favicon_href'] = $faviconHref;
+        $resource = Resource::create($data);
+
+        // Fetch and store favicon to cloud storage
+        $faviconUrl = OpenSlp::getFaviconUrl($data['href']);
+        if ($faviconUrl) {
+            $storedFaviconUrl = OpenSlp::downloadAndStoreFavicon($faviconUrl, $resource->id);
+            if ($storedFaviconUrl) {
+                $resource->favicon_href = $storedFaviconUrl;
+                $resource->save();
+            }
         }
 
-        return Resource::create($data);
-    }
-
-    public function show(Resource $resource)
-    {
         return $resource;
     }
+
+//    public function show(Resource $resource)
+//    {
+//        return $resource;
+//    }
 
     public function update(Request $request, Resource $resource)
     {

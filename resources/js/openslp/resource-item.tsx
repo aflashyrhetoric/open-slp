@@ -9,11 +9,13 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { show } from '@/routes/tags';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
 import axios from 'axios';
 import React from 'react';
 import { LuDownload, LuExternalLink } from 'react-icons/lu';
+import { Link } from '@inertiajs/react';
 
 type Props = {
     className?: string;
@@ -39,15 +41,13 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
 
     return (
         <div
-            className={`group relative w-full ${collapseExtraData ? 'p-3 hover:bg-neutral-100 ' : 'rounded-xl p-5 gradient-grayscale hover:bg-neutral-100 shadow-sm ring ring-neutral-400/50'} ${className}`}
+            className={`group relative w-full ${collapseExtraData ? 'p-3 hover:bg-neutral-100' : 'gradient-grayscale rounded-xl p-5 shadow-sm ring ring-neutral-400/50 hover:bg-neutral-100'} ${className}`}
         >
             <div className={`fic gap-x-1 overflow-hidden`}>
                 <div
                     className={`flex w-full min-w-0 justify-start gap-3 ${collapseExtraData ? 'flex-row items-center' : 'mb-3 flex-col'}`}
                 >
-                    <ResourceImage
-                        resource={resource}
-                    />
+                    <ResourceImage resource={resource} />
                     <h3 className="gap-x-1 text-sm leading-6 font-semibold text-pretty sm:text-base md:max-w-[89%] md:text-lg">
                         <a
                             className={`inline hover:cursor-pointer`}
@@ -91,12 +91,12 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
                         <TargetAudiencePill resource={resource} />
                         <LanguagePill resource={resource} />
                         {resource.tags.map((tag) => (
-                            <Badge
+                            <Link
                                 key={`resource-tag-${tag.id}`}
-                                variant="secondary"
+                                href={show(tag.slug)}
                             >
-                                {tag.name}
-                            </Badge>
+                                <Badge variant="secondary">{tag.name}</Badge>
+                            </Link>
                         ))}
                     </div>
                     <a

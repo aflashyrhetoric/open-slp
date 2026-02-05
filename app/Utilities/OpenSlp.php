@@ -6,6 +6,7 @@ use DOMDocument;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class OpenSlp
 {
@@ -116,20 +117,20 @@ class OpenSlp
     {
         $isLocal = App::environment('local');
         $parsed = parse_url($url);
-        $origin = ($parsed['scheme'] ?? 'https') . '://' . ($parsed['host'] ?? '');
+        $origin = ($parsed['scheme'] ?? 'https').'://'.($parsed['host'] ?? '');
 
         // 1. Check /favicon.ico at the root
         try {
             $response = Http::timeout(5)
                 ->connectTimeout(3)
                 ->withOptions(['verify' => ! $isLocal])
-                ->get($origin . '/favicon.ico');
+                ->get($origin.'/favicon.ico');
 
             if ($response->successful()) {
                 $contentType = $response->header('Content-Type') ?? '';
 
                 if (str_contains($contentType, 'image')) {
-                    return $origin . '/favicon.ico';
+                    return $origin.'/favicon.ico';
                 }
             }
         } catch (\Exception $e) {
@@ -171,11 +172,11 @@ class OpenSlp
 
                 // Resolve relative URLs
                 if (str_starts_with($href, '//')) {
-                    $href = ($parsed['scheme'] ?? 'https') . ':' . $href;
+                    $href = ($parsed['scheme'] ?? 'https').':'.$href;
                 } elseif (str_starts_with($href, '/')) {
-                    $href = $origin . $href;
+                    $href = $origin.$href;
                 } elseif (! str_starts_with($href, 'http')) {
-                    $href = rtrim($origin, '/') . '/' . $href;
+                    $href = rtrim($origin, '/').'/'.$href;
                 }
 
                 return $href;
@@ -185,5 +186,51 @@ class OpenSlp
         }
 
         return null;
+    }
+
+    /**
+     * Downloads a favicon from a remote URL and uploads it to cloud storage.
+     * Returns the public URL of the stored favicon, or null on failure.
+     */
+    public static function downloadAndStoreFavicon(string $faviconUrl, int $resourceId): ?string
+    {
+        $maxSize = 100 * 1024; // 100KB cap
+
+        try {
+            $response = Http::timeout(10)->get($faviconUrl);
+
+            if ($response->failed()) {
+                Log::info('Failed to download favicon', ['url' => $faviconUrl, 'status' => $response->status()]);
+
+                return null;
+            }
+
+            $bytes = $response->body();
+
+            if (strlen($bytes) > $maxSize) {
+                Log::info('Favicon too large', ['url' => $faviconUrl, 'size' => strlen($bytes)]);
+
+                return null;
+            }
+
+            $contentType = $response->header('Content-Type') ?? '';
+            $extension = match (true) {
+                str_contains($contentType, 'png') => 'png',
+                str_contains($contentType, 'svg') => 'svg',
+                str_contains($contentType, 'gif') => 'gif',
+                str_contains($contentType, 'webp') => 'webp',
+                default => 'ico',
+            };
+
+            $filename = 'favicons/'.$resourceId.'-'.md5($faviconUrl).'.'.$extension;
+
+            Storage::disk('openslp-public')->put($filename, $bytes);
+
+            return Storage::disk('openslp-public')->url($filename);
+        } catch (\Exception $e) {
+            Log::info('Error downloading favicon', ['url' => $faviconUrl, 'error' => $e->getMessage()]);
+
+            return null;
+        }
     }
 }

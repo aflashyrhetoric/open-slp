@@ -1,9 +1,8 @@
 # Todo
-
-- [x] Add "is collection" to prevent some tags from being included in the search, it should default false,
+- [ ] Fix masonry
+- [ ] Make ALL tags clickable on individual resources
 - [ ] Add "OpenSLP Verified" for things that are first-hand verified!
 - [ ] Add optional "pricing_starts_at" for paid resources!!!
-- [ ] Add requirement for collection tags to have at least 2 resources
 - [ ] Create TPT
   - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add resource show page
@@ -50,3 +49,6 @@
 - [x] Add photos
 - [x] Add proper sorts/filters
 - [x] Create tags
+- [x] Add "is collection" to prevent some tags from being included in the search, it should default false,
+- [x] Rework favicon.ico approach - too slow!
+- [x] Add requirement for collection tags to have at least 2 resources

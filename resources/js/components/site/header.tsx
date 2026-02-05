@@ -1,5 +1,5 @@
 import AppLogo from '@/components/app-logo';
-import { home, story } from '@/routes';
+import { about, home, story } from '@/routes';
 import type { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import React from 'react';
@@ -33,7 +33,7 @@ const Header: React.FC<Props> = ({ className = '' }: Props) => {
                 </p>
                 <div className="font-body flex flex-col items-end">
                     <Link
-                        href={story()}
+                        href={about()}
                         className={`font-lora ific text-right text-xs font-medium text-balance text-neutral-600 lg:text-sm`}
                     >
                         {/*<CircleCheck className={`h-4`}  />*/}
