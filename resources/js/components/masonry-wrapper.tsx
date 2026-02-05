@@ -37,7 +37,7 @@ export default function MasonryWrapper({
             <Masonic
                 items={filteredResourcesByCategory}
                 columnCount={columnCount}
-                columnGutter={32}
+                columnGutter={24}
                 render={ResourceCategorySectionWrapperInner}
             />
         </div>
