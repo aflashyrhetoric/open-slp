@@ -15,18 +15,18 @@ export const ALL_PRICING_MODELS: PricingModel[] = [
     'paid_with_drops',
     'paid_trial',
     'mixed',
-]
+];
 
-export type SLPType = 'pediatric' | 'medical' | 'all'
+export type SLPType = 'pediatric' | 'medical' | 'all';
 
 export const ALL_SLP_TYPES: SLPType[] = ['pediatric', 'medical', 'all'];
 
 export type ResourceTag = {
-    id: number,
-    name: string,
-    slug: string,
-    description?: string
-}
+    id: number;
+    name: string;
+    slug: string;
+    description?: string;
+};
 
 export type ResourceCategory = IdAndTimestamps & {
     name: string;
@@ -65,4 +65,6 @@ export type Resource = IdAndTimestamps & {
     supports_korean: boolean;
     category: ResourceCategory;
     tags: ResourceTag[];
+
+    verified: boolean;
 };

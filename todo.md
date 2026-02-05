@@ -1,10 +1,11 @@
 # Todo
+
+- [ ] Create TPT
+    - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [x] Fix masonry
 - [x] Make ALL tags clickable on individual resources
-- [ ] Add "OpenSLP Verified" for things that are first-hand verified!
+- [x] Add "OpenSLP Verified" for things that are first-hand verified!
 - [ ] Add optional "pricing_starts_at" for paid resources!!!
-- [ ] Create TPT
-  - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add resource show page
 - [ ] Create Newsletter AI endpoint
   

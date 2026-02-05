@@ -38,6 +38,7 @@ class ResourceResource extends ResourcesResource
         return $schema
             ->columns(1)
             ->components([
+                Checkbox::make('verified'),
                 TextInput::make('name')
                     ->required(),
                 Toggle::make('published')

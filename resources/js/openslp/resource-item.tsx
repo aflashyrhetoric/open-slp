@@ -12,10 +12,11 @@ import {
 import { show } from '@/routes/tags';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
+import { Link } from '@inertiajs/react';
 import axios from 'axios';
 import React from 'react';
 import { LuDownload, LuExternalLink } from 'react-icons/lu';
-import { Link } from '@inertiajs/react';
+import VerifiedBadge from '@/components/verified-badge';
 
 type Props = {
     className?: string;
@@ -24,14 +25,14 @@ type Props = {
 
 const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
     const {
-        searchQuery,
-        setSearchQuery,
-        setPricing,
-        setAudience,
-        toggleFeature,
-        featuresFilters,
+        // searchQuery,
+        // setSearchQuery,
+        // setPricing,
+        // setAudience,
+        // toggleFeature,
+        // featuresFilters,
         collapseExtraData,
-        toggleCollapseExtraData,
+        // toggleCollapseExtraData,
     } = useResources();
 
     async function incrementClickedCount() {
@@ -47,7 +48,14 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
                 <div
                     className={`flex w-full min-w-0 justify-start gap-3 ${collapseExtraData ? 'flex-row items-center' : 'mb-3 flex-col'}`}
                 >
-                    <ResourceImage resource={resource} />
+                    <div className={`flex justify-between`}>
+                        <ResourceImage resource={resource} />
+                        {!collapseExtraData && resource.verified && (
+                            <div className={`p-1`}>
+                                <VerifiedBadge />
+                            </div>
+                        )}
+                    </div>
                     <h3 className="gap-x-1 text-sm leading-6 font-semibold text-pretty sm:text-base md:max-w-[89%] md:text-lg">
                         <a
                             className={`inline hover:cursor-pointer`}
