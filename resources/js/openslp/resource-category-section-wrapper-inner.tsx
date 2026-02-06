@@ -1,6 +1,6 @@
 import ResourceCategorySection from '@/openslp/resource-category-section';
-import { Resource, ResourceCategory } from '@/types/openslp/resource';
-import { ResourcesByCategory } from '@/stores/useResources';
+import { ResourcesByCategory, useResources } from '@/stores/useResources';
+import ResourceCategoryCTA from '@/openslp/resource-category-cta';
 
 type Props = {
     index?: number;
@@ -9,17 +9,28 @@ type Props = {
 };
 
 export default function ResourceCategorySectionWrapperInner({
-    // index,
+    index,
     data,
     // width,
 }: Props) {
     const { category, resourcesInCategory } = data;
+    const { filteredResourcesByCategory } = useResources();
+
+    const numberOfCategories = filteredResourcesByCategory.length;
+
+    const indexOfMidpoint = Math.floor((numberOfCategories / 4) * 1);
+
     return (
-        <ResourceCategorySection
-            category={category}
-            categoryName={category.name}
-            resources={resourcesInCategory}
-            // className={className}
-        />
+        <>
+            {index === indexOfMidpoint && (
+                <ResourceCategoryCTA  />
+            )}
+            <ResourceCategorySection
+                category={category}
+                categoryName={category.name}
+                resources={resourcesInCategory}
+                // className={className}
+            />
+        </>
     );
 }

@@ -26,6 +26,28 @@ textarea {
     font-style: normal;
 }
 
+@utility fic {
+    @apply flex items-center;
+}
+
+@utility ific {
+    @apply inline-flex items-center;
+}
+
+@utility ifc {
+    @apply inline-flex justify-center items-center;
+}
+
+/* Flex center all*/
+@utility fc {
+    @apply flex items-center justify-center;
+}
+
+@utility ic {
+    @apply items-center;
+}
+
+
 /* Note: this file is imported and used in `resources/css/app.css` */
 @layer components {
 
@@ -33,26 +55,6 @@ textarea {
         @apply opacity-100 transition-opacity duration-750 starting:opacity-0
     }
 
-    .fic {
-        @apply flex items-center;
-    }
-
-    .ific {
-        @apply inline-flex items-center;
-    }
-
-    .ifc {
-        @apply inline-flex justify-center items-center;
-    }
-
-    /* Flex center all*/
-    .fc {
-        @apply flex items-center justify-center;
-    }
-
-    .ic {
-        @apply items-center;
-    }
 
     .jb {
         @apply justify-between;
@@ -281,7 +283,7 @@ textarea {
     }
 
     .gradient-orange {
-        @apply bg-gradient-to-br from-orange-800 to-orange-900;
+        @apply bg-gradient-to-r from-yellow-100 via-amber-100 to-orange-100;
     }
 
     .gradient-purple {
@@ -321,11 +323,6 @@ textarea {
 
     .linkify {
         @apply text-blue-500 underline hover:text-blue-600;
-    }
-
-    .bg-office-gray {
-        --tw-bg-opacity: 1;
-        background-color: #e3e0dc;
     }
 
     /* Debugging class */
