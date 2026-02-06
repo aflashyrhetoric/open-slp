@@ -4,11 +4,13 @@ import PricingPill from '@/components/pricing-pill';
 import ResourceImage from '@/components/resource-image';
 import TargetAudiencePill from '@/components/target-audience-pill';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import VerifiedBadge from '@/components/verified-badge';
 import { show } from '@/routes/tags';
 import { useResources } from '@/stores/useResources';
 import { Resource } from '@/types/openslp/resource';
@@ -16,7 +18,6 @@ import { Link } from '@inertiajs/react';
 import axios from 'axios';
 import React from 'react';
 import { LuDownload, LuExternalLink } from 'react-icons/lu';
-import VerifiedBadge from '@/components/verified-badge';
 
 type Props = {
     className?: string;
@@ -93,7 +94,7 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
             </p>
             {/*)}*/}
             {!collapseExtraData && (
-                <div className={`fic mt-4 justify-between border-t pt-4`}>
+                <div className={`mt-4 fic justify-between border-t pt-4`}>
                     <div className={`fic flex-wrap gap-1`}>
                         <PricingPill pricingModel={resource.pricing_model} />
                         <TargetAudiencePill resource={resource} />
@@ -111,9 +112,14 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
                         href={resource.href}
                         target={'_blank'}
                         rel={'noopener noreferrer'}
-                        className={`cursor-pointer hover:text-blue-500`}
+                        className={`ific cursor-pointer hover:text-blue-500`}
                     >
-                        <LuExternalLink />
+                        <Button variant={"outline"}>
+                            <span className={`text-xs text-normal text-neutral-800`}>
+                                Open
+                            </span>
+                            <LuExternalLink />
+                        </Button>
                     </a>
                 </div>
             )}

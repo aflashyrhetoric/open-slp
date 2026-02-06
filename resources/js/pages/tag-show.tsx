@@ -12,6 +12,7 @@ import { useResources } from '@/stores/useResources';
 import { Resource, ResourceTag } from '@/types/openslp/resource';
 import { Link } from '@inertiajs/react';
 import { LuGhost } from 'react-icons/lu';
+import { useEffect, useRef } from 'react';
 
 export default function TagShow({
     tag,
@@ -26,9 +27,16 @@ export default function TagShow({
         filteredResourcesByCategory,
     } = useResources();
 
-    if (resources !== resourcesFromStore) {
+    const hydratedKeyRef = useRef<string | null>(null);
+
+    useEffect(() => {
+        // Never set Zustand state during render; hydrate once per page/key.
+        const key = tag?.slug ?? String(tag?.id ?? 'tag');
+        if (hydratedKeyRef.current === key) return;
+
         setResources(resources);
-    }
+        hydratedKeyRef.current = key;
+    }, [setResources, resources, tag]);
 
     const allOgImages = resources
         .filter((resource) => resource !== null && resource.og_image)
@@ -74,16 +82,20 @@ export default function TagShow({
                                             </Link>{' '}
                                             /{' '}
                                         </span>
-                                        <AuroraText
-                                            className={`mr-4`}
-                                            colors={[
-                                                '#FF6F91',
-                                                '#FF9671',
-                                                '#FFC75F',
-                                            ]}
-                                        >
-                                            {tag.name}
-                                        </AuroraText>
+                                        {tag.name ? (
+                                            <AuroraText
+                                                className={`mr-4`}
+                                                colors={[
+                                                    '#FF6F91',
+                                                    '#FF9671',
+                                                    '#FFC75F',
+                                                ]}
+                                            >
+                                                {tag.name}
+                                            </AuroraText>
+                                        ) : (
+                                            <span>{tag.name}</span>
+                                        )}
                                     </p>
                                     {tag.description && (
                                         <p

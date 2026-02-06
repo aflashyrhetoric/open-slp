@@ -10,7 +10,7 @@ type Props = {
 
 export default function TagCardSmall({ tag, className = '' }: Props) {
     return (
-        <Link href={show(tag.slug)} className={`fc group flex-col`}>
+        <Link href={show(tag.slug)} prefetch className={`fc group flex-col`}>
             <p
                 className={`fc flex-col gap-y-5 rounded border border-neutral-500 hover:bg-neutral-100 px-2 py-1 transition-transform hover:scale-[1.02] ${className}`}
             >

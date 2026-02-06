@@ -1,7 +1,6 @@
 # Todo
 
-- [ ] Add "share" button at the top!!!
-- [ ] 
+- [x] Add "share" button at the top!!!
 - [ ] Ideate TPT Account Strategy
     - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add optional "pricing_starts_at" for paid resources!!!
