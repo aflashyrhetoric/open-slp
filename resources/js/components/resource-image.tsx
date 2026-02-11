@@ -20,21 +20,22 @@ const ResourceImage: React.FC<Props> = ({
 
     return (
         <>
-            {hasValidFavicon && (
+            {hasValidFavicon && !validityOverride && (
                 <div
                     className={`fc rounded bg-white/50 shadow ${collapseExtraData ? 'size-4' : 'size-12 max-h-12 max-w-12'} ${className}`}
                 >
                     <img
+                        loading={'lazy'}
                         src={favicon_href}
-                        alt={``}
-                        onError={(e) => {
+                        alt=""
+                        onError={() => {
                             setValidityOverride(true);
                         }}
                     />
                 </div>
             )}
 
-            {validityOverride || !hasValidFavicon && (
+            {(validityOverride || !hasValidFavicon) && (
                 <div
                     className={`fc ${collapseExtraData ? 'size-4' : 'size-12 max-h-12 max-w-12'} rounded bg-neutral-900 ${className}`}
                 >

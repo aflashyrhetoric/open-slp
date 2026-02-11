@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(vendor/bin/pint:*)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:github.com)"
     ]
   },
   "enableAllProjectMcpServers": true,

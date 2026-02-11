@@ -5,9 +5,10 @@ import { Head } from '@inertiajs/react';
 type Props = {
   className?: string;
   title?: string
+    children?: React.ReactNode;
 }
 
-const HeadTag: React.FC<Props> = ({ title="OpenSLP", className = '' }: Props) => {
+const HeadTag: React.FC<Props> = ({ title="OpenSLP", children = null, className = '' }: Props) => {
     return (
         <Head title={title}>
             <link rel="preconnect" href="https://fonts.bunny.net" />
@@ -15,6 +16,7 @@ const HeadTag: React.FC<Props> = ({ title="OpenSLP", className = '' }: Props) =>
                 href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700|inter:100,300,300i,500,700,900|lora:400,400i,500,500i,600,600i,700,700i|black-han-sans:400"
                 rel="stylesheet"
             />
+            {children}
         </Head>
     );
 };

@@ -10,7 +10,7 @@ import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import { home } from '@/routes';
 import { useResources } from '@/stores/useResources';
 import { Resource, ResourceTag } from '@/types/openslp/resource';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { LuGhost } from 'react-icons/lu';
 import { useEffect, useRef } from 'react';
 import { Toaster } from '@/components/ui/sonner';
@@ -39,20 +39,45 @@ export default function TagShow({
         hydratedKeyRef.current = key;
     }, [setResources, resources, tag]);
 
-    const allOgImages = resources
-        .filter((resource) => resource !== null && resource.og_image)
-        .map((resource) => resource.og_image);
+    // const allOgImages = resources
+    //     .filter((resource) => resource !== null && resource.og_image)
+    //     .map((resource) => resource.og_image);
 
-    const images =
-        allOgImages.length > 0
-            ? [...allOgImages, ...allOgImages, ...allOgImages].filter(
-                  (ogImage) => ogImage !== null && ogImage !== undefined,
-              )
-            : [];
+    // const images =
+    //     allOgImages.length > 0
+    //         ? [...allOgImages, ...allOgImages, ...allOgImages].filter(
+    //               (ogImage) => ogImage !== null && ogImage !== undefined,
+    //           )
+    //         : [];
+
+    const breadcrumbJsonLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Resources',
+                item: home.url(),
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: tag.name,
+            },
+        ],
+    });
 
     return (
         <>
-            <HeadTag title={`${tag.name} Resources`} />
+            <HeadTag title={`${tag.name} Resources`}>
+                <script type="application/ld+json">{breadcrumbJsonLd}</script>
+
+                {/* Add meta description using tag description*/}
+                {tag.description && (
+                    <meta name="description" content={tag.description} />
+                )}
+            </HeadTag>
             <div className="flex min-h-screen flex-col">
                 <div className={``}>
                     <main className="grid12 w-full max-w-full gap-5">
