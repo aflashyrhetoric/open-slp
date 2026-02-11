@@ -18,15 +18,15 @@ export default function Team({
     resources: Resource[];
     resourceCount: number;
 }) {
-    const { auth } = usePage<SharedData>().props;
+    // const { auth } = usePage<SharedData>().props;
 
-    const allResourceCategories = resources.map((r) => r.category);
+    // const allResourceCategories = resources.map((r) => r.category);
 
-    const uniqueArticleCategories = unique(allResourceCategories);
+    // const uniqueArticleCategories = unique(allResourceCategories);
 
     return (
         <>
-            <HeadTag />
+            <HeadTag title={"Meet The Team"} />
             <div className="flex min-h-screen flex-col">
                 <Header />
                 <div className={`p-5 md:p-7 lg:p-9`}>

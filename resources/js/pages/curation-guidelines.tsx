@@ -37,16 +37,6 @@ export default function CurationGuidelines() {
                 <Header />
                 <div className={`p-5 sm:p-7 md:p-9`}>
                     <main className="grid12 mx-auto max-w-3xl px-0 py-10 sm:px-6 sm:py-12 lg:max-w-4xl lg:px-8 lg:py-16 xl:max-w-6xl">
-                        {/*<Alert className={`cs-12`}>*/}
-                        {/*    <LuCircleHelp />*/}
-                        {/*    <AlertTitle>What is OpenSLP?</AlertTitle>*/}
-                        {/*    <AlertDescription>*/}
-                        {/*        Started in 2026, we find useful resources*/}
-                        {/*        across the web for SLPs to use - from*/}
-                        {/*        downloadable goodies to amazing apps.*/}
-                        {/*    </AlertDescription>*/}
-                        {/*</Alert>*/}
-
                         <div className={`cs-12 w-full`}>
                             <div className="font-lora mx-auto prose prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
                                 <h1 className={`tac`}>Curation Guidelines</h1>
@@ -57,9 +47,6 @@ export default function CurationGuidelines() {
                                     Internal Use Only.
                                 </p>
                                 <hr />
-                                {/*<p className="lead">*/}
-                                {/*    <span className="font-bold">TLDR:</span> This website curates resources that SLPs may find useful.*/}
-                                {/*</p>*/}
                                 <p className={`tac lead`}>
                                     Thank you for contributing to OpenSLP!
                                     <br />
@@ -455,7 +442,6 @@ export default function CurationGuidelines() {
                 </div>
 
                 <Footer className={`flex-1 grow`} />
-                {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
         </>
     );

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LinkContributionController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\TagsController;
 use App\Models\Resource;
@@ -14,6 +15,8 @@ Route::get('/tags/{slug}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/resource/{resource}/slide/{page?}', [SlideController::class, 'renderSlide'])->name('slide.index');
 Route::get('/resource/{resource}/json', [SlideController::class, 'slideJson'])->name('slide.json');
 Route::post('/resource/{id}/increment-clicked-count', [HomeController::class, 'incrementClickedCount'])->name('incrementClickedCount');
+
+Route::post('/contributions', [LinkContributionController::class, 'store'])->name('contributions.store');
 
 //Route::get('/', function () {
 //    $resources = Resource::all();
@@ -45,6 +48,15 @@ Route::get('/about', function () {
 
 // Create a redirect from /story to /about
 Route::redirect('/story', '/about');
+
+Route::get('/contribution-guidelines', function () {
+//    $resources = Resource::all();
+//    $resourceCount = $resources->count();
+    return Inertia::render('contribution-guidelines', [
+//        'resources' => $resources,
+//        'resourceCount' => $resourceCount,
+    ]);
+})->name('contribution-guidelines');
 
 Route::get('/curation-guidelines', function () {
 //    $resources = Resource::all();

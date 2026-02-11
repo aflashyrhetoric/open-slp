@@ -1,22 +1,23 @@
 # Todo
 
-- [x] Add "share" button at the top!!!
+- [ ] Check "Strategy - AI" Obsidian document
+- [ ] Add Plosive to OpenSLP with a special tag and a new section?
+- [ ] Plosive demo video?
+- [ ] Find a way to implement print-center functionality for both Plosive and Guides
 - [ ] Ideate TPT Account Strategy
     - https://www.teacherspayteachers.com/My-Account/Basics/edit
 - [ ] Add optional "pricing_starts_at" for paid resources!!!
   
 # Later
-- [ ] Add resource show page ???
-- [ ] Turn "supports_english" and other bools into tags
-- [ ] Add contribution guidelines at the bottom
 - [ ] Create Discord room
 
 # Maybe
+- [ ] Turn "supports_english" and other bools into tags
 - [ ] Add iframe on hover
 - [ ] Add AI search
+- [ ] Add resource show page ???
  
 ---
-
 
 ## Resource Types
 
@@ -53,3 +54,5 @@
 - [x] Make ALL tags clickable on individual resources
 - [x] Add "OpenSLP Verified" for things that are first-hand verified!
 - [x] Create Newsletter AI endpoint
+- [x] Contributions!
+- [x] Add contribution guidelines at the bottom

@@ -13,6 +13,7 @@ import { Resource, ResourceTag } from '@/types/openslp/resource';
 import { Link } from '@inertiajs/react';
 import { LuGhost } from 'react-icons/lu';
 import { useEffect, useRef } from 'react';
+import { Toaster } from '@/components/ui/sonner';
 
 export default function TagShow({
     tag,
@@ -51,7 +52,7 @@ export default function TagShow({
 
     return (
         <>
-            <HeadTag title={'Welcome'} />
+            <HeadTag title={`${tag.name} Resources`} />
             <div className="flex min-h-screen flex-col">
                 <div className={``}>
                     <main className="grid12 w-full max-w-full gap-5">
@@ -67,7 +68,7 @@ export default function TagShow({
                                 className={`grid12 relative cs-12 border-b px-10`}
                             >
                                 <div
-                                    className={`fc relative cs-12 min-h-[200px] flex-col px-10 md:cs-10 md:col-start-2`}
+                                    className={`relative cs-12 fc min-h-[200px] flex-col px-10 md:cs-10 md:col-start-2`}
                                 >
                                     <p
                                         className={`font-heading text-2xl sm:text-3xl md:items-center md:text-4xl lg:items-start lg:text-5xl xl:text-6xl`}
@@ -136,6 +137,7 @@ export default function TagShow({
                 <Footer className={`flex-1 grow`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
+            <Toaster />
         </>
     );
 }

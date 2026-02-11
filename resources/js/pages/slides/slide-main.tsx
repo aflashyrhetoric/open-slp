@@ -18,26 +18,33 @@ export default function SlideMain({ isDev, resource, className = '' }: Props) {
     return (
         <SlideTemplate
             isDev={isDev}
-            className={`gradient-highlight-lightest fc flex-col`}
+            className={`gradient-highlight-lightest fc flex-col justify-start !p-0`}
         >
             {isAPdf && iframeOk && resource.href && (
                 <iframe
                     src={isAPdf ? `${resource.href}#toolbar=0` : resource.href}
-                    className={`mb-10 h-[500px] w-[80%] rounded-xl border-4 border-neutral-200 shadow-lg`}
+                    className={`mb-10 h-1/2 w-full border-4 border-neutral-200 shadow-lg`}
                     onError={() => setIframeOk(false)}
                 />
             )}
             {imgOk && resource.og_image && (
-                <img
-                    src={resource.og_image}
-                    alt=""
-                    className={`min-h-[400px] max-h-[400px] mb-5`}
-                    // style={{ width: '100%', height: 'auto' }}
-                    onError={() => setImgOk(false)}
-                />
+                <div className={`w-full h-[500px] mb-16 bg-white`}>
+                    <div
+                        style={{
+                            backgroundImage: `url(${resource.og_image})`,
+                            backgroundSize: 'contain',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                        }}
+                        // src={resource.og_image}
+                        className={`aspect-video mb-5 h-full mx-auto`}
+                        // style={{ width: '100%', height: 'auto' }}
+                        onError={() => setImgOk(false)}
+                    />
+                </div>
             )}
             {/*<span className={`slide-text-2xl`}>{resource.category?.icon}</span>*/}
-            <span className={`mb-5 font-sans tac slide-text-xl font-bold`}>
+            <span className={`tac mb-5 font-sans slide-text-xl font-bold`}>
                 {resource.name}
             </span>
             <p

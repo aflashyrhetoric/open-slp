@@ -43,7 +43,7 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
 
     return (
         <div
-            className={`group relative w-full ${collapseExtraData ? 'p-3 hover:bg-neutral-100' : 'gradient-grayscale rounded-xl p-5 shadow-sm ring ring-neutral-400/50 hover:bg-neutral-100'} ${className}`}
+            className={`group relative w-full ${collapseExtraData ? 'p-3 hover:bg-neutral-100 rounded-md' : 'gradient-grayscale rounded-xl p-5 shadow-sm ring ring-neutral-400/50 hover:bg-neutral-100'} ${className}`}
         >
             <div className={`fic gap-x-1 overflow-hidden`}>
                 <div

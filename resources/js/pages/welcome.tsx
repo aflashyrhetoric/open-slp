@@ -3,11 +3,14 @@ import ResourceFilterBar from '@/components/resource-filter-bar';
 import Footer from '@/components/site/footer';
 import Header from '@/components/site/header';
 import HeadTag from '@/components/site/HeadTag';
+import LinkContributionForm from '@/components/site/link-contribution-form';
 import NewsletterSignup from '@/components/site/newsletter-signup';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { AuroraText } from '@/components/ui/aurora-text';
+import { Button } from '@/components/ui/button';
 import { Highlighter } from '@/components/ui/highlighter';
+import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import { about } from '@/routes';
 import { useResources } from '@/stores/useResources';
@@ -53,7 +56,7 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                     <main className="grid12 w-full max-w-full gap-5">
                         <div className="grid12 gradient-highlight relative cs-12">
                             <div
-                                className={`absolute inset-0 z-0 hidden size-full bg-cover bg-[position:50%_50%] bg-no-repeat lg:block lg:bg-[position:50%_50%] xl:bg-[position:50%_60%]`}
+                                className={`absolute inset-0 z-0 hidden size-full bg-cover bg-position-[50%_50%] bg-no-repeat lg:block xl:bg-position-[50%_60%]`}
                                 style={{
                                     backgroundImage: `url('/img/hero.png')`,
                                 }}
@@ -127,17 +130,21 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                                         resources for SLPs
                                     </span>
 
-                                    {/*<RainbowButton size={"lg"} className={`w-[250px] font-sans mt-5`}>Browse Resources</RainbowButton>*/}
-                                    <button
-                                        onClick={scrollToResources}
-                                        className={`mt-8 hidden w-[250px] items-center justify-center gap-1 rounded-lg border border-neutral-700 bg-white/70 py-2 font-sans text-base font-medium text-neutral-800 transition-colors hover:bg-white/90 lg:flex`}
-                                        style={{
-                                            backdropFilter: `blur(4px)`,
-                                        }}
+                                    <div
+                                        className={`mt-8 hidden items-center gap-x-2 lg:flex`}
                                     >
-                                        <LuArrowDown />
-                                        Get Started
-                                    </button>
+                                        <LinkContributionForm />
+                                        <Button
+                                            onClick={scrollToResources}
+                                            className={`flex w-[250px] items-center justify-center gap-1 rounded-lg border border-neutral-700 bg-white/70 py-1 font-sans text-base font-medium text-neutral-800 transition-colors hover:bg-white/90`}
+                                            style={{
+                                                backdropFilter: `blur(4px)`,
+                                            }}
+                                        >
+                                            <LuArrowDown />
+                                            Get Started
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -172,6 +179,7 @@ export default function Welcome({ resources }: { resources: Resource[] }) {
                 <Footer className={`flex-1 grow`} />
                 {/*<div className="hidden h-14.5 lg:block"></div>*/}
             </div>
+            <Toaster />
         </>
     );
 }

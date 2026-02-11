@@ -6,6 +6,7 @@ import { type SharedData } from '@/types';
 import { Resource } from '@/types/openslp/resource';
 import { usePage } from '@inertiajs/react';
 import { unique } from 'radash';
+import { LuExternalLink } from 'react-icons/lu';
 
 export default function About({
     canRegister = true,
@@ -24,7 +25,7 @@ export default function About({
 
     return (
         <>
-            <HeadTag title={"About"} />
+            <HeadTag title={'About'} />
             <div className="flex min-h-screen flex-col">
                 <Header />
                 <div className={`p-5 sm:p-7 md:p-9`}>
@@ -42,7 +43,9 @@ export default function About({
                         <div className={`cs-12 w-full`}>
                             <div className="font-lora mx-auto prose prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
                                 <h1 className={`tac`}>What is OpenSLP?</h1>
-                                <p className={`tac text-neutral-400 italic`}>About us and our plan/roadmap.</p>
+                                <p className={`tac text-neutral-400 italic`}>
+                                    About us and our plan/roadmap.
+                                </p>
                                 <hr />
                                 {/*<p className="lead">*/}
                                 {/*    <span className="font-bold">TLDR:</span> This website curates resources that SLPs may find useful.*/}
@@ -51,8 +54,7 @@ export default function About({
                                     Hello hello! 👋
                                 </p>
                                 <p className={`tac lead`}>
-                                    I'm Kevin.{" "}
-                                    <br className={`sm:hidden`}/>
+                                    I'm Kevin. <br className={`sm:hidden`} />
                                     My partner is{' '}
                                     <a
                                         target={'_blank'}
@@ -69,7 +71,7 @@ export default function About({
                                     <br />
                                     🫰
                                 </p>
-                                <div className={`fc w-full mt-8`}>
+                                <div className={`mt-8 fc w-full`}>
                                     <Divider className={`opacity-30`} />
                                 </div>
                                 <h2>The Super Short Version</h2>
@@ -166,8 +168,8 @@ export default function About({
                                     </span>{' '}
                                     At time of writing, we only have 17
                                     resources - and like 5 of them are just
-                                    calendar PDFs. But that's okay - gotta trust
-                                    the process. 🤗
+                                    calendar PDFs. 🤓 But that's okay - gotta
+                                    trust the process.
                                 </p>
                                 <p>
                                     To start, it doesn't make sense to reinvent
@@ -254,9 +256,30 @@ export default function About({
                                 </p>
                                 <p>We'll share more when the time comes.</p>
 
+                                <h3>How Is This Free? 🤔</h3>
+                                <p>
+                                    OpenSLP is free because we also run{' '}
+                                    <a
+                                        className={`ific gap-x-1 font-semibold tracking-tight`}
+                                        target={'_blank'}
+                                        rel={'noopener'}
+                                        href="https://plosive.app"
+                                    >
+                                        Plosive{' '}
+                                        <LuExternalLink className={`inline`} />
+                                    </a>
+                                    , a paid web application to help SLPs manage
+                                    their paperwork, scheduling, and
+                                    report-writing more efficiently. We use the
+                                    revenue from Plosive to fund OpenSLP. To
+                                    that end - we may include mentions of
+                                    Plosive on this site where it's relevant, but we will not
+                                </p>
+
                                 <hr />
                                 <p className={`tac`}>
-                                    Our plan and roadmap is still under construction.
+                                    Our plan and roadmap is still under
+                                    construction.
                                 </p>
                                 <hr />
                                 {/*<p>*/}
