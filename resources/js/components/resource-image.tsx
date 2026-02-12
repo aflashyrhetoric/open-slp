@@ -12,7 +12,7 @@ const ResourceImage: React.FC<Props> = ({
     className = '',
     resource,
 }: Props) => {
-    const { og_description, favicon_href } = resource;
+    const { favicon_href } = resource;
     const { collapseExtraData } = useResources();
     const hasValidFavicon = !!favicon_href;
 
