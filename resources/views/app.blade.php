@@ -16,6 +16,10 @@
         <meta name="twitter:description" content="Curated resources for SLPs from across the web">
         <meta name="twitter:image" content="{{ url('/logo.svg') }}">
 
+        <!-- Fathom - beautiful, simple website analytics -->
+        <script src="https://cdn.usefathom.com/script.js" data-spa="auto" data-site="VTSQFOSZ" defer></script>
+        <!-- / Fathom -->
+
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
             (function() {
