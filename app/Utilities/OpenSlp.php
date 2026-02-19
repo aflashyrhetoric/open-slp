@@ -20,10 +20,16 @@ class OpenSlp
 
         Log::info('getOgTags called', ['url' => $url]);
 
-        $response = Http::timeout(5)
-            ->connectTimeout(3)
-            ->withOptions(['verify' => ! $isLocal])
-            ->get($url);
+        try {
+            $response = Http::timeout(5)
+                ->connectTimeout(3)
+                ->withOptions(['verify' => ! $isLocal])
+                ->get($url);
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            Log::info('getOgTags connection failed', ['url' => $url, 'error' => $e->getMessage()]);
+
+            return [];
+        }
 
         Log::info('HTTP response', [
             'status' => $response->status(),

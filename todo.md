@@ -1,10 +1,7 @@
 # Todo
 
-- [ ] Find list of SLP Communities
-- [ ] Find list of SLP Influencers
-- [ ] Create SLP Facebook Group? 
-- [ ] Create SLP LinkedIn Group?
-- [ ] Post on LinkedIn
+- [ ] Pagination + Load More
+- [ ] Preset clickable filters
 - [ ] Look into Merch
 - [ ] Add Plosive to OpenSLP with a special tag and a new section?
 - [ ] Plosive demo video?
