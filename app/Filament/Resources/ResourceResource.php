@@ -61,7 +61,8 @@ class ResourceResource extends ResourcesResource
                             ->toArray();
 
                         return $r;
-                    }),
+                    })
+                    ->required(),
 
                 //                Select::make('category_id')
                 //                    ->label('Category')

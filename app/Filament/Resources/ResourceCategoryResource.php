@@ -64,8 +64,7 @@ class ResourceCategoryResource extends Resource
 //                    ->label('Background Color')
 //                    ->required(),
                 ColorPicker::make('bg_color')
-                    ->label('Background Color')
-                    ->required(),
+                    ->label('Background Color'),
 
                 Textarea::make('description')
                     ->required(),
