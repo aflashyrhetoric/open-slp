@@ -7,7 +7,7 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
+    DrawerTrigger
 } from '@/components/ui/drawer';
 import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ import {
     SelectGroup,
     SelectItem,
     SelectTrigger,
-    SelectValue,
+    SelectValue
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { store } from '@/routes/contributions';
@@ -26,7 +26,7 @@ import { Link, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { HeartHandshake } from 'lucide-react';
 import { useState } from 'react';
-import { LuCheck } from 'react-icons/lu';
+import { LuCheck, LuRefreshCw } from 'react-icons/lu';
 import { toast } from 'sonner';
 import { contributionGuidelines } from '@/routes';
 
@@ -42,7 +42,7 @@ export default function LinkContributionForm({ className = '' }: Props) {
     const { categories } = usePage<{
         categories: ResourceCategory[];
     }>().props;
-    const [categoryId, setCategoryId] = useState<number|null>(null);
+    const [categoryId, setCategoryId] = useState<number | null>(null);
 
     const isValid = !!href && !loading;
     const isDisabled = !isValid;
@@ -51,19 +51,29 @@ export default function LinkContributionForm({ className = '' }: Props) {
         const payload = {
             href,
             description,
-            category_id: categoryId,
+            category_id: categoryId
         };
         setLoading(true);
         try {
             await axios.post(store().url, payload);
             toast.success(
-                'Thank you for your contribution! We will review it shortly.',
+                'Thank you for your contribution! We will review it shortly.'
             );
             setLoading(false);
             setSubmitted(true);
         } catch (error) {
-            console.error('Error submitting link contribution:', error);
+            setLoading(false);
+            toast.error(
+                'Please ensure you entered a valid URL and try again.'
+            );
         }
+    }
+
+    function resetForm() {
+        setHref('');
+        setDescription('');
+        setCategoryId(null);
+        setSubmitted(false);
     }
 
     return (
@@ -72,7 +82,7 @@ export default function LinkContributionForm({ className = '' }: Props) {
                 asChild
                 className={`hidden items-center justify-center gap-1 rounded-lg border font-sans text-base font-medium transition-colors lg:flex`}
                 style={{
-                    backdropFilter: `blur(4px)`,
+                    backdropFilter: `blur(4px)`
                 }}
             >
                 <Button>
@@ -85,7 +95,9 @@ export default function LinkContributionForm({ className = '' }: Props) {
                     <DrawerTitle>Submit A Resource</DrawerTitle>
                     {!submitted && (
                         <DrawerDescription>
-                            We review submissions according to our <Link className={`underline`} href={contributionGuidelines()}>Contribution Guidelines</Link>.
+                            We review submissions according to our <Link className={`underline`}
+                                                                         href={contributionGuidelines()}>Contribution
+                            Guidelines</Link>.
                         </DrawerDescription>
                     )}
                 </DrawerHeader>
@@ -106,6 +118,13 @@ export default function LinkContributionForm({ className = '' }: Props) {
                                 meets our quality bar and is relevant to our
                                 audience.
                             </p>
+                            <div className={`w-full mt-4 fc`}>
+                                <Button variant={'secondary'} onClick={resetForm} className={`group hover:shadow`}>
+                                    <LuRefreshCw className={`group-hover:rotate-90 transition-all`}/>
+                                    Submit Another?
+                                </Button>
+                            </div>
+
                         </div>
                     )}
                     {!submitted && (
@@ -166,7 +185,7 @@ export default function LinkContributionForm({ className = '' }: Props) {
                                                         value={category.id.toString()}
                                                         onSelect={() =>
                                                             setCategoryId(
-                                                                category.id,
+                                                                category.id
                                                             )
                                                         }
                                                     >
@@ -196,9 +215,11 @@ export default function LinkContributionForm({ className = '' }: Props) {
                         </>
                     )}
                     {submitted && (
-                        <DrawerClose asChild>
-                            <Button>Done</Button>
-                        </DrawerClose>
+                        <>
+                            <DrawerClose asChild>
+                                <Button>Done</Button>
+                            </DrawerClose>
+                        </>
                     )}
                 </DrawerFooter>
             </DrawerContent>
