@@ -62,7 +62,7 @@ const ResourceItem: React.FC<Props> = ({ className = '', resource }: Props) => {
                             className={`inline hover:cursor-pointer`}
                             onClick={incrementClickedCount}
                             target={'_blank'}
-                            rel={'noopener noreferrer'}
+                            rel={'noopener'}
                             href={resource.href}
                         >
                             <span
